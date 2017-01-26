@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">Thai Boxing</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_history_menu">HistoryMenuActivity</string>
+    <string name="title_activity_view_video">ViewVideoActivity</string>
+    <string name="title_activity_view_video_data">ViewVideoDataActivity</string>
+    <string name="title_activity_login_google_account">LoginGoogleAccountActivity</string>
+    <string name="btn_logout_from_google">Logout from Google</string>
+    <string name="btn_revoke_access">Revoke Access</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="title_activity_scrolling_view_video">ScrollingViewVideoActivity</string>
+
+    <string name="history_text">
+
+        "   Muay Thai or Thai Boxing is the national sport and cultural martial art of Thailand. It was developed several hundreds of years ago as a form of close-combat that utilizes the entire body as a weapon.\n"
+        "   Today its definitive origins are debated by modern scholars, as much of the muay thai history was lost when the Burmese ransacked Ayudhaya, Siam’s capital city in Thailand, during the 14th century.\n"
+        "   Most written muya thai history was lost when the Burmese looted the temples and depositories of knowledge held in Ayudhaya, and what volumes were saved are now national treasures that are preserved and protected as documentation for Thai culture and heritage.\n\n"
+
+    </string>
+
+    <string name="history_text_two">
+
+        "   History of Muay Thai and OriginMuay Thai is referred to as “The Art of Eight Limbs”  and using eight points of contact the body mimics weapons of war. The hands become the sword and dagger; the shins and forearms were hardened in training to act as armor against blows, and the elbow to fell opponents like a heavy mace or hammer  the legs and knees became the axe and staff. The body operated as one unit. The knees and elbows constantly searching and testing for an opening while grappling and trying to spin an enemy to the ground for the kill.\n"
+        "   The King of Thailand is an avid fan of Muay Thai. Since being crowned its popularity has grown more than in any other era in history.\n\n"
+
+    </string>
+    <string name="title_activity_scrolling_history">ScrollingHistoryActivity</string>
+    <string name="title_activity_scrolling_tiger_muay_thai">ScrollingTigerMuayThaiActivity</string>
+    <string name="tiger_muay_thai_text">
+
+        "   It all started with humble beginnings. wanting to help my head Muay Thai trainer,I bought a small one ring gym (that ring now sits in the advanced training area at Tiger Muay Thai and MMA) that we called Chalong Muay Thai. The website still exists. One ring and a few bags and I enjoyed coming from my job as Director of the English program at Darasamuth Catholic School near Central Mall and training in the afternoon. With just two trainers, some tires, a few bags, were far from the gym we are today, but you have to start somewhere.\n\n"
+
+        "   Soon, people began to notice the the Muay Thai fighters and Thai flag we had painted on the building, and one day I show up and there are a couple people training. I didn’t mind, as my trainer would make some extra money and it as nice to have some others to work out with at the gym.\n\n"
+
+        "   Few months later as high-season approached I found that each day there were regulars and more people showing up to train. We had added a trainer, and it was then I was approached by my future partners in an offer to open another gym in the area. Being that I had already trained at many gyms from Chiang Mai to Bangkok, Pattaya, and Phuket, I figured OK, lets do something bigger, but also better. It was then I also met our first trainer, now our gym manager, Phet Chaimanee.\n\n"
+
+        "   Learning about partnerships: Lesson One. With three people as partners, often one partner is going to find himself outvoted in decisions about what or how to do something. In the end, one partner left seeing there would not be enough money for himself owning one-third of a gym and my other partner offered to sell his shares and pursue a business in boating and a Mexican restaurant, which I frequent visit to this day.\n\n"
+
+        "   So I now find myself sole owner of Tiger Muay Thai and MMA training camp and he director of the English department at Phuket’s largest Catholic school. A choice had to be made. I had given nearly seven-years of my life to the school and church and was excited about creating something in Tiger Muay Thai and MMA Training Camp that would separate it from all the other gyms in Thailand: not just Muay thai training but MMA or Mixed Martial Arts which as a fight sport was becoming ever more popular.\n\n"
+
+        "   It was tough times in the beginning as we went through several trainers until I finally met the man that would turn MMA Phuket’s training program around: Magical Ray Elbe.\n\n"
+
+        "   So with hard work, determination, and a plan to be different in the way Muay Thai was being taught at the gyms I had trained, I decided that we would promote tradition, culture, respect, and sport for competitiveness. We would be a traditional camp that brought modern standards of training to the sport. Tiger Muay Thai would offer technique classes in a learn first and then practice plan. we would hire quality trainers from Bangkok and Northern Thailand, the heart of Muay Thai and teach Lumpinee style fighting; moving ahead, attacking your opponent and strong belief in conditioning. \n\n"
+
+        "   Five-years later, Tiger Muay Thai has dozens of repeat guests that return every year, World Champion trainers from WMC, Lumpinee, Rajadamnoen, WBC, and Bangkok TV and a detailed, organized, and scheduled training plan that includes training programs for beginners, intermediate, and advanced Muay Thai and beginners and advanced MMA."
+    </string>
+    <string name="title_activity_main2">Main2Activity</string>
+</resources>

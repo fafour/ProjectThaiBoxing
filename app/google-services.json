@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "260723146617",
+    "project_id": "firebase-thaiboxing"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:260723146617:android:8bfc0718900a99c7",
+        "android_client_info": {
+          "package_name": "fafour.projectthaiboxing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "260723146617-l6okvtluhs1th7t7es2gue2uri0d6vkk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fafour.projectthaiboxing",
+            "certificate_hash": "3CF5188DC6705EDFB40BA4F29361FAC6F55897F4"
+          }
+        },
+        {
+          "client_id": "260723146617-3s1b99timtjmp9su3btcqqmtd0bqijqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsgWCKnj7Du-_RNOHdHSD8ewGq_LUfjkY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
