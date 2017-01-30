@@ -26,6 +26,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.common.api.Status;
 
+import java.util.ArrayList;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity
     private TextView txtName, txtEmail;
     private CircleImageView imgProfilePic;
     private GoogleApiClient mGoogleApiClient;
+
+    public static ArrayList<DataBuyItem> listBuy = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -159,12 +163,11 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public void  btnHistory(View view){
-        Intent intent = new Intent(getApplicationContext(), ScrollingHistoryActivity.class);
-        startActivity(intent);
+    public void  btnUpper(View view){
+
     }
 
-    public void  btnViewVideo(View view){
+    public void  btnLower(View view){
         Intent intent = new Intent(getApplicationContext(), ScrollingViewVideoActivity.class);
         startActivity(intent);
     }
@@ -175,6 +178,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void  btnTool(View view){
-
+        Intent intent = new Intent(getApplicationContext(), AccessoriesActivity.class);
+        startActivity(intent);
     }
 }

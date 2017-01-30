@@ -135,12 +135,20 @@
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ScrollingHistoryActivity"
+            android:name=".ScrollingTigerMuayThaiActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ScrollingTigerMuayThaiActivity"
-            android:label=""
+            android:name=".AccessoriesActivity"
+            android:label="@string/title_activity_accessories"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ReviewImageActivity"
+            android:label="@string/title_activity_review_image"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CartActivity"
+            android:label="@string/title_activity_cart"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>
 

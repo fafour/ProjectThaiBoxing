@@ -23,11 +23,8 @@ import android.widget.VideoView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
 
-import ch.halcyon.squareprogressbar.SquareProgressBar;
-
 public class ViewVideoDataActivity extends AppCompatActivity  {
     VideoView videoView;
-    MediaController mediaController;
     private int stopPosition = 0;
     private int position = 0;
 
@@ -41,6 +38,7 @@ public class ViewVideoDataActivity extends AppCompatActivity  {
     // milliseconds
     private long timeBlinkInMilliseconds; // start time of start blinking
     private boolean blink; // controls the blinking .. on and off
+
 
 
 
@@ -81,17 +79,6 @@ public class ViewVideoDataActivity extends AppCompatActivity  {
         int rawVideo = getIntent().getIntExtra("idRaw",0);
         videoView = (VideoView) findViewById(R.id.video_view);
 
-        if (mediaController == null) {
-            mediaController = new MediaController(ViewVideoDataActivity.this);
-
-            // Set the videoView that acts as the anchor for the MediaController.
-            mediaController.setMediaPlayer(videoView);
-            // Set MediaController for VideoView
-
-
-            videoView.setMediaController(mediaController);
-        }
-
 
         videoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + rawVideo));
         videoView.start();
@@ -127,18 +114,6 @@ public class ViewVideoDataActivity extends AppCompatActivity  {
             }
 
         });
-
-        videoView.setMediaController(new MediaController(this) {
-            @Override
-            public void hide()
-            {
-                mediaController.show();
-            }
-
-        });
-
-
-
 
 
     }

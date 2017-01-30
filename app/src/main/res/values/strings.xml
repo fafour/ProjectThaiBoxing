@@ -49,4 +49,8 @@
         "   Five-years later, Tiger Muay Thai has dozens of repeat guests that return every year, World Champion trainers from WMC, Lumpinee, Rajadamnoen, WBC, and Bangkok TV and a detailed, organized, and scheduled training plan that includes training programs for beginners, intermediate, and advanced Muay Thai and beginners and advanced MMA."
     </string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_accessories">AccessoriesActivity</string>
+    <string name="title_activity_review_image">ReviewImageActivity</string>
+    <string name="title_activity_cart">CartActivity</string>
+    <string name="title_activity_select_package">SelectPackageActivity</string>
 </resources>

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="fafour.projectthaiboxing.ScrollingHistoryActivity"
-    tools:showIn="@layout/activity_scrolling_history">
+    tools:showIn="@layout/tab_fragment_accommodation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,34 +15,57 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:textSize="20dp"
+            android:textSize="24dp"
             android:textStyle="bold"
+            android:layout_margin="@dimen/text_margin"
             android:textColor="@android:color/black"
-            android:text="What is Muay Thai or Thai Boxing?" />
+            android:text="Choose Accommodation" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:textColor="@android:color/black"
-            android:text="@string/history_text" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
             android:textSize="20dp"
-            android:textStyle="bold"
+            android:layout_margin="@dimen/text_margin"
             android:textColor="@android:color/black"
-            android:text="History of Muay Thai and Origin " />
+            android:text="  Accommodation:" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="20dp"
             android:layout_margin="@dimen/text_margin"
             android:textColor="@android:color/black"
-            android:text="@string/history_text_two" />
+            android:text="  Duration:" />
+
+        <Spinner
+            android:id="@+id/spinner2"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/booking"
+            android:textSize="20dp"
+            android:padding="20dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/edittext_bg"
+            android:textStyle="bold"
+            android:text="Add to my Booking"/>
 
 
     </LinearLayout>

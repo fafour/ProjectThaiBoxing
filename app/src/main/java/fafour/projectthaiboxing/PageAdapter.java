@@ -20,9 +20,14 @@ public class PageAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
 
         switch (position) {
-            case 0:
-                IndexActivity tab1 = new IndexActivity();
+            case 0:  TabFragmentAllPackage tab1 = new TabFragmentAllPackage();
                 return tab1;
+            case 1:  TabFragmentTraining tab2 = new TabFragmentTraining();
+                return tab2;
+            case 2:  TabFragmentAccommodation tab3 = new TabFragmentAccommodation();
+                return tab3;
+            case 3:  TabFragmentAllPackage tab4 = new TabFragmentAllPackage();
+                return tab4;
             default:
                 return null;
         }

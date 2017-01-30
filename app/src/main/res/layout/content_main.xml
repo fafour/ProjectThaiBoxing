@@ -26,8 +26,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:background="@drawable/history"
-                android:onClick="btnHistory" />
+                android:background="@drawable/upper_part"
+                android:onClick="btnUpper" />
 
         </LinearLayout>
 
@@ -42,8 +42,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:background="@drawable/view_video"
-                android:onClick="btnViewVideo" />
+                android:background="@drawable/lower_part"
+                android:onClick="btnLower" />
 
 
         </LinearLayout>
@@ -66,7 +66,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:background="@drawable/tiger"
+                android:background="@drawable/tigew_muay_thai"
                 android:onClick="btnTiger" />
 
 
@@ -83,7 +83,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:layout_margin="5dp"
-                android:background="@drawable/img_tool"
+                android:background="@drawable/accessories"
                 android:onClick="btnTool" />
 
         </LinearLayout>

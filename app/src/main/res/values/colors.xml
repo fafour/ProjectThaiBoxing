@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorStatus">#000000</color>
     <color name="colorBgVidio">#616161</color>
+    <color name="viewBg">#f1f5f8</color>
 </resources>

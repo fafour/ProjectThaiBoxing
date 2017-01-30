@@ -8,18 +8,20 @@
     android:gravity="center"
     android:weightSum="1">
 
-    <MediaController
-        android:id="@+id/mediaController"
-        android:layout_width="fill_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true" >
-    </MediaController>
+        android:text=""
+        android:textSize="48dp">
+    </TextView>
+
 
     <VideoView
         android:id="@+id/video_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </VideoView>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,15 +34,6 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"  >
-
-        <!--<ProgressBar-->
-        <!--android:id="@+id/progressbar"-->
-        <!--android:layout_width="350dip"-->
-        <!--android:layout_height="350dip"-->
-        <!--android:indeterminate="false"-->
-        <!--style="?android:attr/progressBarStyleHorizontal"-->
-        <!--android:max="60"-->
-        <!--android:progress="0" />-->
 
         <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
             android:id="@+id/progress_1"
@@ -61,5 +54,30 @@
 
 
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="50dp"/>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="60dip"
+        android:orientation="horizontal">
+
+        <Button
+            android:layout_height="wrap_content"
+            android:id="@+id/navViewVideobtn"
+            android:text="Video"
+            android:layout_width="wrap_content" />
+        <Button
+            android:layout_height="wrap_content"
+            android:id="@+id/navStopbtn"
+            android:text="Stop"
+            android:layout_width="wrap_content" />
+
+
+    </LinearLayout>
 
 </LinearLayout>
