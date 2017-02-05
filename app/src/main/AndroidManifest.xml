@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="fafour.projectthaiboxing">
 
+
     <uses-sdk
-        android:maxSdkVersion="10"
-        android:minSdkVersion="8" />
+        android:minSdkVersion="8"
+        android:targetSdkVersion="16" />
 
     <supports-screens
         android:anyDensity="true"
@@ -88,8 +90,7 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <android:uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
 
     <application
         android:allowBackup="true"
@@ -131,7 +132,7 @@
             android:label="@string/title_activity_map"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ScrollingViewVideoActivity"
+            android:name=".ScrollingLowerPartActivity"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -150,6 +151,26 @@
             android:name=".CartActivity"
             android:label="@string/title_activity_cart"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ScrollingSportEquipmentActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ScrollingUpperPartActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShowSkillActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ViewVideoActivity"
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SetTimeActivity"
+            android:label="@string/title_activity_set_time"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

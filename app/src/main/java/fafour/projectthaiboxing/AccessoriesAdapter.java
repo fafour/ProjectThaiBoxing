@@ -2,6 +2,7 @@ package fafour.projectthaiboxing;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -50,7 +51,11 @@ public class AccessoriesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
         AccessoriesAdapter.MyHolder myHolder= (AccessoriesAdapter.MyHolder) holder;
         final DataAccessories current=data.get(position);
         myHolder.nameAccessories.setText(current.accessoriesName);
-        myHolder.priceAccessories.setText(current.accessoriesPrice +" Bath");
+        myHolder.priceAccessories.setText(current.accessoriesSale +" BTH");
+
+        myHolder.txtSale.setPaintFlags(myHolder.txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
+        myHolder.txtSale.setText(current.accessoriesPrice +" BTH" );
+        myHolder.txtSaleData.setText(current.accessoriesSaleData +"%");
 
 //        new DownloadImageFromInternet(myHolder.iconVideo)
 //                .execute(current.videoImage);
@@ -71,6 +76,8 @@ public class AccessoriesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
                 intent.putExtra("name",current.accessoriesName);
                 intent.putExtra("price",current.accessoriesPrice);
 
+                intent.putExtra("sale",current.accessoriesSale);
+                intent.putExtra("saleData",current.accessoriesSaleData);
 
                 context.startActivity(intent);
             }
@@ -90,8 +97,12 @@ public class AccessoriesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
         ImageView iconAccessories;
         CardView cvAccessories;
 
+        TextView txtSale,txtSaleData;
+
         public MyHolder(View itemView) {
             super(itemView);
+            txtSale = (TextView) itemView.findViewById(R.id.txtSale);
+            txtSaleData  = (TextView) itemView.findViewById(R.id.txtSaleData);
             cvAccessories= (CardView) itemView.findViewById(R.id.cvAccessories);
             nameAccessories= (TextView) itemView.findViewById(R.id.nameAccessories);
             priceAccessories= (TextView) itemView.findViewById(R.id.priceAccessories);

@@ -19,7 +19,7 @@
             android:textStyle="bold"
             android:layout_margin="@dimen/text_margin"
             android:textColor="@android:color/black"
-            android:text="Choose Training" />
+            android:text="Choose Add-ons" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,13 +27,18 @@
             android:textSize="20dp"
             android:layout_margin="@dimen/text_margin"
             android:textColor="@android:color/black"
-            android:text="  Training:" />
+            android:text="  Muay Thai Privates:" />
 
         <Spinner
             android:id="@+id/spinner1"
             android:padding="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp" />
 
 
         <Button
@@ -54,7 +59,7 @@
             android:textSize="20dp"
             android:layout_margin="@dimen/text_margin"
             android:textColor="@android:color/black"
-            android:text="  Duration:" />
+            android:text="  Gear Package:" />
 
         <Spinner
             android:id="@+id/spinner2"
@@ -78,6 +83,73 @@
             android:background="@drawable/edittext_bg"
             android:textStyle="bold"
             android:text="Add to my Booking"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_margin="@dimen/text_margin"
+            android:textColor="@android:color/black"
+            android:text="  Prepaid Meal Coupons:" />
+
+        <Spinner
+            android:id="@+id/spinner3"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:padding="20dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/edittext_bg"
+            android:textStyle="bold"
+            android:text="Add to my Booking"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:layout_margin="@dimen/text_margin"
+            android:textColor="@android:color/black"
+            android:text="  Airport Pick-up:" />
+
+        <Spinner
+            android:id="@+id/spinner4"
+            android:padding="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp" />
+
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="20dp"
+            android:padding="20dp"
+            android:textColor="@android:color/white"
+            android:background="@drawable/edittext_bg"
+            android:textStyle="bold"
+            android:text="Add to my Booking"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp" />
 
 
     </LinearLayout>

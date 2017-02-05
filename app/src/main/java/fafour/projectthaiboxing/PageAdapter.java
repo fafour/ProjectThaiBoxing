@@ -26,7 +26,7 @@ public class PageAdapter extends FragmentStatePagerAdapter {
                 return tab2;
             case 2:  TabFragmentAccommodation tab3 = new TabFragmentAccommodation();
                 return tab3;
-            case 3:  TabFragmentAllPackage tab4 = new TabFragmentAllPackage();
+            case 3:  TabFragmentChooseAddOns tab4 = new TabFragmentChooseAddOns();
                 return tab4;
             default:
                 return null;

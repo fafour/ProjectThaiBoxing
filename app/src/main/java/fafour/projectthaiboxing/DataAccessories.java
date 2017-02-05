@@ -9,6 +9,9 @@ public class DataAccessories {
     public int accessoriesPrice;
     public int accessoriesImg;
 
+    public int accessoriesSale;
+    public int accessoriesSaleData;
+
     public int accessoriesImg1;
     public int accessoriesImg2;
     public int accessoriesImg3;

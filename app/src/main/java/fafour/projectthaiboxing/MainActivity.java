@@ -2,10 +2,6 @@ package fafour.projectthaiboxing;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,9 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -38,6 +34,7 @@ public class MainActivity extends AppCompatActivity
     private GoogleApiClient mGoogleApiClient;
 
     public static ArrayList<DataBuyItem> listBuy = new ArrayList<>();
+    public static ArrayList<DataBooking> booking = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +48,13 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
+        }
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View hView =  navigationView.getHeaderView(0);
@@ -164,11 +168,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void  btnUpper(View view){
+        Intent intent = new Intent(getApplicationContext(), ScrollingUpperPartActivity.class);
+        startActivity(intent);
+
+//        Intent intent = new Intent(getApplicationContext(), ShowSkillActivity.class);
+//        startActivity(intent);
 
     }
 
     public void  btnLower(View view){
-        Intent intent = new Intent(getApplicationContext(), ScrollingViewVideoActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ScrollingLowerPartActivity.class);
         startActivity(intent);
     }
 

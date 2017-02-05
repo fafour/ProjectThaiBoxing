@@ -6,11 +6,6 @@
             <solid android:color="#80CBC4"></solid>
         </shape>
     </item>
-
-    <item >
-        <shape>
-            <solid android:color="@android:color/white"></solid>
-        </shape>
-    </item>
+    
 
 </selector>

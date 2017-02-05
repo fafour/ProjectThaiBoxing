@@ -18,4 +18,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name = "cust_dialog" parent="@android:style/Theme.Light.NoTitleBar.Fullscreen" >
+    </style>
+
 </resources>

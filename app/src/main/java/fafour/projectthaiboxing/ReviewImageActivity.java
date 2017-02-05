@@ -3,6 +3,7 @@ package fafour.projectthaiboxing;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +18,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -88,8 +91,17 @@ public class ReviewImageActivity extends AppCompatActivity {
             }
         });
 
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
+        }
+
         int price = getIntent().getIntExtra("price",0);
         String name = getIntent().getStringExtra("name");
+        int sale = getIntent().getIntExtra("sale",0);
+        int saleData = getIntent().getIntExtra("saleData",0);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         final ImagePagerAdapter adapter = new ImagePagerAdapter();
@@ -100,8 +112,14 @@ public class ReviewImageActivity extends AppCompatActivity {
 
         final TextView tvTextName = (TextView) findViewById(R.id.textName);
         final TextView tvTextPrice = (TextView) findViewById(R.id.textPrice);
+        final TextView txtSale = (TextView) findViewById(R.id.txtSale);
+        final TextView txtSaleData = (TextView) findViewById(R.id.txtSaleData);
+
         tvTextName.setText(name);
-        tvTextPrice.setText(price +"  Bath");
+        tvTextPrice.setText(sale +"  BTH");
+        txtSale.setText(price +"  BTH");
+        txtSaleData.setText(saleData +"%");
+        txtSale.setPaintFlags(txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
         final Button addCart = (Button) findViewById(R.id.addCart);
 
@@ -116,10 +134,13 @@ public class ReviewImageActivity extends AppCompatActivity {
                         int img = getIntent().getIntExtra("img",0);
                         String name = getIntent().getStringExtra("name");
                         int price = getIntent().getIntExtra("price",0);
+                        int sale = getIntent().getIntExtra("sale",0);
+                        int saleData = getIntent().getIntExtra("saleData",0);
+
                         int no = 0;
                         try{
                             if( MainActivity.listBuy.size() == 0){
-                                MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1));
+                                MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
 
                             }else {
                                 for (int i = 0; i < MainActivity.listBuy.size(); i++) {
@@ -131,7 +152,7 @@ public class ReviewImageActivity extends AppCompatActivity {
                                     }
                                 }
                                 if ( MainActivity.listBuy.size() == no){
-                                    MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1));
+                                    MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
                                 }
                             }
                             tv_cart.setText(MainActivity.listBuy.size() +"");

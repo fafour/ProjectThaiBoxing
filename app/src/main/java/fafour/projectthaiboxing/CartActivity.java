@@ -9,6 +9,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,7 +21,8 @@ import java.util.List;
 public class CartActivity extends AppCompatActivity {
     private RecyclerView mRVList;
     private CartAdapter mAdapter;
-    public static  TextView txtStatus;
+    public static  TextView txtStatus,txtTotal;
+    public static LinearLayout dataBuy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +42,16 @@ public class CartActivity extends AppCompatActivity {
 
         txtStatus = (TextView)findViewById(R.id.txtStatus);
 
+        txtTotal = (TextView)findViewById(R.id.txtTotal);
+        dataBuy = (LinearLayout) findViewById(R.id.dataBuy);
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
+        }
+
         showData();
 
     }
@@ -50,6 +65,12 @@ public class CartActivity extends AppCompatActivity {
     public void showData(){
         if(MainActivity.listBuy.size() == 0){
             txtStatus.setText("Cart Empty");
+            txtStatus.setVisibility(View.VISIBLE);
+            dataBuy.setVisibility(View.GONE);
+        }else {
+            txtTotal.setText(Total.totalBuyItem()+"");
+            txtStatus.setVisibility(View.GONE);
+            dataBuy.setVisibility(View.VISIBLE);
         }
 
         List<DataBuyItem> data=new ArrayList<>();
@@ -62,6 +83,10 @@ public class CartActivity extends AppCompatActivity {
             cartData.accessoriesPrice =  MainActivity.listBuy.get(count).getAccessoriesPrice();
             cartData.accessoriesImg = MainActivity.listBuy.get(count).getAccessoriesImg();
             cartData.accessoriesNum = MainActivity.listBuy.get(count).getAccessoriesNum();
+
+            cartData.accessoriesSale = MainActivity.listBuy.get(count).getAccessoriesSale();
+            cartData.accessoriesSaleData = MainActivity.listBuy.get(count).getAccessoriesSaleData();
+
             data.add(cartData);
 
         }

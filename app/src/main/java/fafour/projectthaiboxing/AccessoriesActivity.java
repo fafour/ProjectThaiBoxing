@@ -15,6 +15,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -49,6 +51,13 @@ public class AccessoriesActivity extends AppCompatActivity {
         collapsingToolbar.setTitle("Accessories");
 
         List<DataAccessories> data=new ArrayList<>();
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
+        }
 
         String[] accessoriesName = {
                 "Shin guard ankle",
@@ -95,6 +104,20 @@ public class AccessoriesActivity extends AppCompatActivity {
                 R.drawable.accessories_twelve
 
         };
+        int [] accessoriesSaleDataPrice = {
+                10,
+                30,
+                10,
+                30,
+                45,
+                50,
+                21,
+                10,
+                25,
+                34,
+                40,
+                32
+        };
 
 
         for(int count=0; count < accessoriesName.length; count++){
@@ -109,6 +132,11 @@ public class AccessoriesActivity extends AppCompatActivity {
             accessoriesData.accessoriesImg2 = accessoriesImg[count];
             accessoriesData.accessoriesImg3 = accessoriesImg[count];
             accessoriesData.accessoriesImg4 = accessoriesImg[count];
+
+            int sum = accessoriesPrice[count]-(accessoriesPrice[count]*accessoriesSaleDataPrice[count]/100);
+
+            accessoriesData.accessoriesSale = sum;;
+            accessoriesData.accessoriesSaleData = accessoriesSaleDataPrice[count];;
 
 
             data.add(accessoriesData);

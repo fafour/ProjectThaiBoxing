@@ -10,14 +10,22 @@ public class DataBuyItem {
     public int accessoriesImg;
     public int accessoriesNum;
 
-    public DataBuyItem (String accessoriesName,int accessoriesPrice , int accessoriesImg , int accessoriesNum){
+    public int accessoriesSale;
+    public int accessoriesSaleData;
+
+
+    public DataBuyItem (String accessoriesName,int accessoriesPrice , int accessoriesImg ,
+                        int accessoriesNum , int accessoriesSale , int accessoriesSaleData){
         this.setAccessoriesImg(accessoriesImg);
         this.setAccessoriesName(accessoriesName);
         this.setAccessoriesPrice(accessoriesPrice);
         this.setAccessoriesNum(accessoriesNum);
+        this.setAccessoriesSale(accessoriesSale);
+        this.setAccessoriesSaleData(accessoriesSaleData);
     }
     public DataBuyItem (){
     }
+
 
     public String getAccessoriesName() {
         return accessoriesName;
@@ -49,5 +57,21 @@ public class DataBuyItem {
 
     public void setAccessoriesNum(int accessoriesNum) {
         this.accessoriesNum = accessoriesNum;
+    }
+
+    public int getAccessoriesSale() {
+        return accessoriesSale;
+    }
+
+    public void setAccessoriesSale(int accessoriesSale) {
+        this.accessoriesSale = accessoriesSale;
+    }
+
+    public int getAccessoriesSaleData() {
+        return accessoriesSaleData;
+    }
+
+    public void setAccessoriesSaleData(int accessoriesSaleData) {
+        this.accessoriesSaleData = accessoriesSaleData;
     }
 }

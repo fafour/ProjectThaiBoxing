@@ -16,13 +16,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class ScrollingTigerMuayThaiActivity extends AppCompatActivity {
     RelativeLayout notificationCount1;
-    TextView tv_cart;
+    public static TextView tv_cart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,13 @@ public class ScrollingTigerMuayThaiActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        if (android.os.Build.VERSION.SDK_INT >= 21) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
+        }
 
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         collapsingToolbar.setTitle("Tiger Muay Thai");
@@ -82,7 +91,7 @@ public class ScrollingTigerMuayThaiActivity extends AppCompatActivity {
         notificationCount1 = (RelativeLayout) MenuItemCompat.getActionView(item1);
         tv_cart  = (TextView)
                 notificationCount1.findViewById(R.id.cart_count);
-
+        tv_cart.setText(MainActivity.booking.size() +"");
 
         Button button = (Button) notificationCount1.findViewById(R.id.btn_cart);
 
@@ -92,6 +101,17 @@ public class ScrollingTigerMuayThaiActivity extends AppCompatActivity {
             }
         });
         return super.onCreateOptionsMenu(menu);
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        try{
+            tv_cart.setText(MainActivity.booking.size() +"");
+        }catch (Exception x){
+
+        }
+
 
     }
 }
