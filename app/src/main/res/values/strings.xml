@@ -146,4 +146,13 @@
     <string name="title_activity_scrolling_upper_part">ScrollingUpperPartActivity</string>
     <string name="title_activity_show_skill">ShowSkillActivity</string>
     <string name="title_activity_set_time">SetTimeActivity</string>
+    <string name="title_activity_booking">BookingActivity</string>
+    <string name="title_activity_payment_paypal">PaymentPaypalActivity</string>
+    <string name="title_activity_confirmation">ConfirmationActivity</string>
+    <string name="title_activity_your_details">YourDetailsActivity</string>
+    <string name="title_activity_your_details1">YourDetails1Activity</string>
+    <string name="title_activity_your_details2">YourDetails2Activity</string>
+    <string name="title_activity_lower_part">LowerPartActivity</string>
+    <string name="title_activity_upper_part">UpperPartActivity</string>
+    <string name="title_activity_show_skill_all">ShowSkillAllActivity</string>
 </resources>

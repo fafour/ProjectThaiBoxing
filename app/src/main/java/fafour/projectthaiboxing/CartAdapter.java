@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -51,10 +52,13 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         final CartAdapter.MyHolder myHolder= (CartAdapter.MyHolder) holder;
         final DataBuyItem current=data.get(position);
         myHolder.nameAccessories.setText(current.accessoriesName);
-        myHolder.priceAccessories.setText(current.accessoriesSale +" BTH");
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+        String yourFormattedString = formatter.format(current.accessoriesSale);
+        myHolder.priceAccessories.setText(yourFormattedString +" BTH");
 
         myHolder.txtSale.setPaintFlags(myHolder.txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-        myHolder.txtSale.setText(current.accessoriesPrice +" BTH");
+        String yourFormattedString1 = formatter.format(current.accessoriesPrice);
+        myHolder.txtSale.setText(yourFormattedString1 +" BTH");
 
         myHolder.txtSaleData.setText(current.accessoriesSaleData+"%");
 
@@ -74,6 +78,9 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     CartActivity.txtStatus.setVisibility(View.VISIBLE);
                     CartActivity.dataBuy.setVisibility(View.GONE);
                 }
+                DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+                String yourFormattedString = formatter.format(Total.totalBuyItem());
+                CartActivity.txtTotal.setText(yourFormattedString+"");
 
             }
         });
@@ -94,7 +101,9 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     MainActivity.listBuy.set(position ,new DataBuyItem(current.accessoriesName,current.accessoriesPrice,
                             current.accessoriesImg,a,current.accessoriesSale,current.accessoriesSaleData));
                     myHolder.display.setText(current.accessoriesNum+"");
-                    CartActivity.txtTotal.setText(Total.totalBuyItem()+"");
+                    DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+                    String yourFormattedString = formatter.format(Total.totalBuyItem());
+                    CartActivity.txtTotal.setText(yourFormattedString+"");
                 }
 
             }
@@ -111,7 +120,9 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 MainActivity.listBuy.set(position ,new DataBuyItem(current.accessoriesName,current.accessoriesPrice,
                         current.accessoriesImg,a,current.accessoriesSale,current.accessoriesSaleData));
                 myHolder.display.setText(current.accessoriesNum+"");
-                CartActivity.txtTotal.setText(Total.totalBuyItem()+"");
+                DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+                String yourFormattedString = formatter.format(Total.totalBuyItem());
+                CartActivity.txtTotal.setText(yourFormattedString+"");
 
             }
         });
@@ -152,8 +163,6 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             nameAccessories= (TextView) itemView.findViewById(R.id.nameAccessories);
             priceAccessories= (TextView) itemView.findViewById(R.id.priceAccessories);
             iconAccessories= (ImageView) itemView.findViewById(R.id.iconAccessories);
-
-
         }
 
     }

@@ -27,9 +27,12 @@ import android.widget.TextView;
 
 import com.viewpagerindicator.CirclePageIndicator;
 
+import java.text.DecimalFormat;
+
 public class ReviewImageActivity extends AppCompatActivity {
     RelativeLayout notificationCount1;
     TextView tv_cart;
+    Button button1,button2,button3,button4;
 
     private class ImagePagerAdapter extends PagerAdapter {
         int img = getIntent().getIntExtra("img",0);
@@ -91,6 +94,16 @@ public class ReviewImageActivity extends AppCompatActivity {
             }
         });
 
+        button1 = (Button) findViewById(R.id.button1);
+        button2 = (Button) findViewById(R.id.button2);
+        button3 = (Button) findViewById(R.id.button3);
+        button4 = (Button) findViewById(R.id.button4);
+
+        button4.setBackgroundResource(R.color.buttonBg);
+        button2.setBackgroundResource(R.color.buttonBg);
+        button3.setBackgroundResource(R.color.buttonBg);
+        button1.setBackgroundResource(R.color.buttonBg);
+
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -116,8 +129,11 @@ public class ReviewImageActivity extends AppCompatActivity {
         final TextView txtSaleData = (TextView) findViewById(R.id.txtSaleData);
 
         tvTextName.setText(name);
-        tvTextPrice.setText(sale +"  BTH");
-        txtSale.setText(price +"  BTH");
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+        String yourFormattedString = formatter.format(sale);
+        tvTextPrice.setText(yourFormattedString +"  BTH");
+        String yourFormattedString1 = formatter.format(price);
+        txtSale.setText(yourFormattedString1 +"  BTH");
         txtSaleData.setText(saleData +"%");
         txtSale.setPaintFlags(txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
@@ -206,6 +222,34 @@ public class ReviewImageActivity extends AppCompatActivity {
         }catch (Exception x){
 
         }
+
+    }
+    public void s(View view){
+        button1.setBackgroundResource(R.color.colorText);
+        button2.setBackgroundResource(R.color.buttonBg);
+        button3.setBackgroundResource(R.color.buttonBg);
+        button4.setBackgroundResource(R.color.buttonBg);
+
+    }
+    public void m(View view){
+        button2.setBackgroundResource(R.color.colorText);
+        button1.setBackgroundResource(R.color.buttonBg);
+        button3.setBackgroundResource(R.color.buttonBg);
+        button4.setBackgroundResource(R.color.buttonBg);
+
+    }
+    public void l(View view){
+        button3.setBackgroundResource(R.color.colorText);
+        button2.setBackgroundResource(R.color.buttonBg);
+        button1.setBackgroundResource(R.color.buttonBg);
+        button4.setBackgroundResource(R.color.buttonBg);
+
+    }
+    public void xl(View view){
+        button4.setBackgroundResource(R.color.colorText);
+        button2.setBackgroundResource(R.color.buttonBg);
+        button3.setBackgroundResource(R.color.buttonBg);
+        button1.setBackgroundResource(R.color.buttonBg);
 
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ScrollingLowerPartActivity extends AppCompatActivity {
     private RecyclerView mRVList;
-    private SkillAdapter mAdapter;
+    private Skill1Adapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,15 +54,17 @@ public class ScrollingLowerPartActivity extends AppCompatActivity {
                 R.drawable.lower_three
         };
 
-        int [] SkillVidio  = {
-                R.raw.muay_thai,
-                R.raw.muay_thai,
-                R.raw.muay_thai
-        };
+
         int [] SkillGif  = {
-                R.drawable.gif,
-                R.drawable.gif,
-                R.drawable.gif
+                R.drawable.gif_one,
+                R.drawable.gif_two,
+                R.drawable.gif_three
+        };
+
+        int [] SkillMp3  = {
+                R.raw.skill_one,
+                R.raw.skill_two,
+                R.raw.skill_three
         };
 
 
@@ -73,8 +75,9 @@ public class ScrollingLowerPartActivity extends AppCompatActivity {
             skillData.skillName = SkillName[count];
             skillData.skillImg = SkillImg[count];
 //            videoData.videoImage = imgVideoFile[count];
-            skillData.skilloRaw = SkillVidio[count];
             skillData.skillGif = SkillGif[count];
+
+            skillData.skillMp3 = SkillMp3[count];
 
             skillData.imgAll = R.drawable.img_lower;
 
@@ -117,7 +120,7 @@ public class ScrollingLowerPartActivity extends AppCompatActivity {
 
         // Setup and Handover data to recyclerview
         mRVList = (RecyclerView) findViewById(R.id.VideoList);
-        mAdapter = new SkillAdapter(ScrollingLowerPartActivity.this, data);
+        mAdapter = new Skill1Adapter(ScrollingLowerPartActivity.this, data);
         mRVList.setAdapter(mAdapter);
         mRVList.setLayoutManager(new LinearLayoutManager(ScrollingLowerPartActivity.this));
     }

@@ -97,7 +97,8 @@ public class ScrollingTigerMuayThaiActivity extends AppCompatActivity {
 
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), BookingActivity.class);
+                startActivity(intent);
             }
         });
         return super.onCreateOptionsMenu(menu);

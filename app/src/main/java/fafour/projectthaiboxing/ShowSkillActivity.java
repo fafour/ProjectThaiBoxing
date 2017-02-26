@@ -1,7 +1,9 @@
 package fafour.projectthaiboxing;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.IdRes;
@@ -18,7 +20,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
@@ -26,27 +30,29 @@ import com.bumptech.glide.Glide;
 
 import java.io.IOException;
 
+
 import pl.droidsonroids.gif.GifDrawable;
 import pl.droidsonroids.gif.AnimationListener;
 import pl.droidsonroids.gif.GifImageView;
 
 
 
-public class ShowSkillActivity extends AppCompatActivity  {
+
+public class ShowSkillActivity extends AppCompatActivity   implements AnimationListener {
     int i=-1;
-    RoundCornerProgressBar mProgressBar;
+    ProgressBar mprogressBar;
 
-    private TextView textViewShowTime; // will show the time
-    private CountDownTimer countDownTimer; // built in android class
-    // CountDownTimer
-    private long totalTimeCountInMilliseconds; // total count down time in
-    // milliseconds
-    private long timeBlinkInMilliseconds; // start time of start blinking
-    private boolean blink; // controls the blinking .. on and off
-
+    private TextView textViewShowTime;
+    private CountDownTimer countDownTimer,countDownTimer1;
+    private long totalTimeCountInMilliseconds;
 
     int x =0;
+    MediaPlayer mediaPlayer;
+    ImageView stop_play_button;
+    GifImageView gifImageView;
     private GifDrawable gifDrawable;
+
+    long time;
 
     public ShowSkillActivity() {
     }
@@ -61,26 +67,49 @@ public class ShowSkillActivity extends AppCompatActivity  {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(mediaPlayer!=null) {
+                    mediaPlayer.stop();
+                }
                 finish();
             }
         });
 
+
+
         textViewShowTime = (TextView) findViewById(R.id.tvTimeCount);
-        mProgressBar = (RoundCornerProgressBar) findViewById(R.id.progress_1 );
-        mProgressBar.setProgressColor(Color.parseColor("#ed3b27"));
-        mProgressBar.setProgressBackgroundColor(Color.parseColor("#808080"));
-        mProgressBar.setMax(60);
-//        mProgressBar.setProgress(0);
 
-//        gifImageView.setImageDrawable(gifDrawable);
 
+        mprogressBar = (ProgressBar) findViewById(R.id.circular_progress_bar);
+        mprogressBar.setProgress(0);
+
+        gifImageView = (GifImageView) findViewById(R.id.gifImg);
+        TextView txtSkillName = (TextView) findViewById(R.id.skillName);
+        stop_play_button = (ImageView) findViewById(R.id.stop_play_button);
+
+
+        String skillName_1 = getIntent().getStringExtra("name");;
+        int skillGif_1 = getIntent().getIntExtra("gif",0);
+        int skillMp3_1 = getIntent().getIntExtra("mp3",0);
+
+        gifImageView.setBackgroundResource(skillGif_1);
+        txtSkillName.setText(skillName_1);
+
+
+
+        if(mediaPlayer!=null) {
+            mediaPlayer.stop();
+        }
+        mediaPlayer = MediaPlayer.create(getBaseContext() , skillMp3_1);
+        mediaPlayer.start();
 
 
         setTimer();
-        startTimer();
+        startTimer(totalTimeCountInMilliseconds);
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
@@ -90,55 +119,56 @@ public class ShowSkillActivity extends AppCompatActivity  {
         }
 
     }
+
+
     private void setTimer() {
 
-        totalTimeCountInMilliseconds = 60 * 1 * 1000;
+        totalTimeCountInMilliseconds = (60 * 1 * 1000)+1000;
 
-        timeBlinkInMilliseconds = 30 * 1000;
     }
 
-    private void startTimer() {
-        countDownTimer = new CountDownTimer(totalTimeCountInMilliseconds, 500) {
-            // 500 means, onTick function will be called at every 500
-            // milliseconds
+    private void startTimer(long times) {
+        countDownTimer = new CountDownTimer(times, 500) {
+
 
             @Override
             public void onTick(long leftTimeInMilliseconds) {
+                time = leftTimeInMilliseconds;
                 long seconds = leftTimeInMilliseconds / 1000;
-                //i++;
-                //Setting the Progress Bar to decrease wih the timer
-                mProgressBar.setProgress((int) (leftTimeInMilliseconds / 1000));
-                textViewShowTime.setTextAppearance(getApplicationContext(),
-                        R.style.TextAppearance_CastIntroOverlay_Title);
+                int seconds1 = (int) (leftTimeInMilliseconds / 1000);
+                mprogressBar.setProgress(seconds1);
 
-
-                if (leftTimeInMilliseconds < timeBlinkInMilliseconds) {
-                    textViewShowTime.setTextAppearance(getApplicationContext(),
-                            R.style.TextAppearance_CastIntroOverlay_Title);
-                    // change the style of the textview .. giving a red
-                    // alert style
-
-                    if (blink) {
-                        textViewShowTime.setVisibility(View.VISIBLE);
-                        // if blink is true, textview will be visible
-                    } else {
-                        textViewShowTime.setVisibility(View.INVISIBLE);
-                    }
-
-                    blink = !blink; // toggle the value of blink
-                }
 
                 textViewShowTime.setText(String.format("%02d", seconds / 60)
                         + ":" + String.format("%02d", seconds % 60));
-                // format the textview to show the easily readable format
+                if(seconds==3){
+                    if(mediaPlayer!=null) {
+                        mediaPlayer.stop();
+                    }
+
+                    mediaPlayer = MediaPlayer.create(getBaseContext() , R.raw.countdown);
+                    mediaPlayer.start();
+                }
 
             }
 
             @Override
             public void onFinish() {
-                // this function will be called when the timecount is finished
-                textViewShowTime.setText("00.00");
-                textViewShowTime.setVisibility(View.VISIBLE);
+                countDownTimer1 = new CountDownTimer(1000, 500) {
+
+
+                    @Override
+                    public void onTick(long leftTimeInMilliseconds) {
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+                        finish();
+                    }
+
+                }.start();
             }
 
         }.start();
@@ -151,34 +181,95 @@ public class ShowSkillActivity extends AppCompatActivity  {
         return super.onCreateOptionsMenu(menu);
 
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId())
         {
             case R.id.action_end:
+                if(mediaPlayer!=null) {
+                    mediaPlayer.stop();
+                }
                 finish();
+
+                break;
+            case R.id.action_music:
+                if(mediaPlayer!=null) {
+                    mediaPlayer.stop();
+                }
+                int skillMp3_1 = getIntent().getIntExtra("mp3",0);
+                mediaPlayer = MediaPlayer.create(getBaseContext() , skillMp3_1);
+                mediaPlayer.start();
+
                 break;
         }
         return true;
     }
 
+
     public void stop_play(View view){
+
         if(x == 0){
+            stop_play_button.setImageResource(R.drawable.icn_play);
+            countDownTimer.cancel();
             x =1;
+            ((GifDrawable)gifImageView.getBackground()).stop();
+        }
+        else{
+            stop_play_button.setImageResource(R.drawable.icn_pause);
+            startTimer(time);
+            x =0;
+            ((GifDrawable)gifImageView.getBackground()).start();
+
 
         }
-        if (x == 1){
-            x =0;
-        }
-        final GifImageView gifImageView = (GifImageView) findViewById(R.id.gifImg);
 
 
     }
+
     public void video(View view){
+        if(mediaPlayer!=null) {
+            mediaPlayer.stop();
+        }
+
+        stop_play_button.setImageResource(R.drawable.icn_play);
+        countDownTimer.cancel();
+        ((GifDrawable)gifImageView.getBackground()).stop();
+
+        x =1;
+        int skillGif_1 = getIntent().getIntExtra("gif",0);
         Intent intent = new Intent(getApplicationContext(), ViewVideoActivity.class);
+        intent.putExtra("gif",skillGif_1);
         startActivity(intent);
 
     }
-    
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(mediaPlayer!=null) {
+            mediaPlayer.stop();
+        }
 
+        stop_play_button.setImageResource(R.drawable.icn_play);
+        countDownTimer.cancel();
+        ((GifDrawable)gifImageView.getBackground()).stop();
+
+        x =1;
+    }
+    public void onBackPressed() {
+        if(mediaPlayer!=null) {
+            mediaPlayer.stop();
+        }
+
+        stop_play_button.setImageResource(R.drawable.icn_play);
+        countDownTimer.cancel();
+        ((GifDrawable)gifImageView.getBackground()).stop();
+    }
+
+
+
+    @Override
+    public void onAnimationCompleted(int loopNumber) {
+
+    }
 }

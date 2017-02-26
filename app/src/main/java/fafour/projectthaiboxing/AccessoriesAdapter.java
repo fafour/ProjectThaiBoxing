@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
 
@@ -51,7 +52,9 @@ public class AccessoriesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
         AccessoriesAdapter.MyHolder myHolder= (AccessoriesAdapter.MyHolder) holder;
         final DataAccessories current=data.get(position);
         myHolder.nameAccessories.setText(current.accessoriesName);
-        myHolder.priceAccessories.setText(current.accessoriesSale +" BTH");
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+        String yourFormattedString = formatter.format(current.accessoriesSale);
+        myHolder.priceAccessories.setText(yourFormattedString +" BTH");
 
         myHolder.txtSale.setPaintFlags(myHolder.txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
         myHolder.txtSale.setText(current.accessoriesPrice +" BTH" );

@@ -8,10 +8,9 @@ import java.util.ArrayList;
 
 public class DataSkill {
     public String skillName;
-    public int skilloRaw;
     public int skillImg;
     public int skillGif;
-
+    public int skillMp3;
     public  int imgAll;
 
     public  ArrayList <String> sportequipmentName  = new ArrayList<>();

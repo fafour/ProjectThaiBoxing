@@ -58,17 +58,20 @@ public class ScrollingUpperPartActivity extends AppCompatActivity {
                 R.drawable.img_upper_four
         };
 
-        int [] SkillVidio  = {
-                R.raw.muay_thai,
-                R.raw.muay_thai,
-                R.raw.muay_thai,
-                R.raw.muay_thai
-        };
+
         int [] SkillGif  = {
-                R.drawable.gif,
-                R.drawable.gif,
-                R.drawable.gif,
-                R.drawable.gif
+                R.drawable.gif_one,
+                R.drawable.gif_two,
+                R.drawable.gif_three,
+                R.drawable.gif_four
+
+        };
+
+        int [] SkillMp3  = {
+                R.raw.skill_one,
+                R.raw.skill_two,
+                R.raw.skill_three,
+                R.raw.skill_four
         };
 
 
@@ -79,8 +82,9 @@ public class ScrollingUpperPartActivity extends AppCompatActivity {
             skillData.skillName = SkillName[count];
             skillData.skillImg = SkillImg[count];
 //            videoData.videoImage = imgVideoFile[count];
-            skillData.skilloRaw = SkillVidio[count];
             skillData.skillGif = SkillGif[count];
+
+            skillData.skillMp3 = SkillMp3[count];
 
             skillData.imgAll = R.drawable.img_upper;
 

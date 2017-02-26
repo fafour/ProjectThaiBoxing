@@ -2,10 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    buildToolsVersion "25.0.1"
     defaultConfig {
         applicationId "fafour.projectthaiboxing"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -48,7 +48,10 @@ dependencies {
 
     compile 'fr.avianey.com.viewpagerindicator:library:2.4.1.1@aar'
 
-    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.4'
+    compile 'pl.droidsonroids.gif:android-gif-drawable:1.2.5'
+
+    compile 'com.paypal.sdk:paypal-android-sdk:2.14.2'
+    compile project(':gmailbackgroundlibrary')
 
 
 }

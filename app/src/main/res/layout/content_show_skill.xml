@@ -10,8 +10,26 @@
     tools:showIn="@layout/activity_show_skill">
 
     <RelativeLayout
+        android:paddingTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skill Name"
+            android:id="@+id/skillName"
+            android:textColor="@android:color/black"
+            android:textSize="25dp"
+            android:textStyle="bold"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/gifBar"
-        android:paddingTop="100dp"
+        android:paddingTop="60dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -29,18 +47,29 @@
     <RelativeLayout
         android:id="@+id/ProgressBar"
         android:layout_below="@id/gifBar"
-        android:paddingTop="20dp"
+        android:paddingTop="10dp"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"  >
 
-
-        <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-            android:id="@+id/progress_1"
-            android:layout_height="80dp"
-            android:layout_width="320dp"
+        <ProgressBar
+            android:id="@+id/circular_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:indeterminate="false"
+            android:max="60"
+            android:progress="0"
             android:layout_centerHorizontal="true"
-            android:layout_alignParentTop="true" />
+            android:progressDrawable="@drawable/circular_progressbar" />
+
+
+        <!--<com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar-->
+            <!--android:id="@+id/progress_1"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:layout_width="320dp"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_alignParentTop="true" />-->
 
         <TextView
             android:id="@+id/tvTimeCount"
@@ -50,7 +79,7 @@
             android:layout_centerVertical="true"
             android:text="00.00"
             android:textColor="@android:color/black"
-            android:textSize="60dip"/>
+            android:textSize="40dip"/>
 
 
     </RelativeLayout>
@@ -59,27 +88,29 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:padding="7dp"
         android:layout_alignParentBottom="true">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:onClick="video"
-            android:src="@drawable/img_video_icon" />
+            android:padding="7dp"
+            android:background="@drawable/my_button_bg"
+            android:orderInCategory="100"
+            android:src="@drawable/icn_video" />
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:orderInCategory="100"
+            android:padding="7dp"
+            android:background="@drawable/my_button_bg"
+            android:id="@+id/stop_play_button"
             android:onClick="stop_play"
-            android:src="@drawable/img_stop" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/img_play" />
+            android:src="@drawable/icn_pause" />
     </LinearLayout>
 
 

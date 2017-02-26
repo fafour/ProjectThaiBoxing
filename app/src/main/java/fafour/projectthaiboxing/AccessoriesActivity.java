@@ -105,7 +105,7 @@ public class AccessoriesActivity extends AppCompatActivity {
 
         };
         int [] accessoriesSaleDataPrice = {
-                10,
+                99,
                 30,
                 10,
                 30,

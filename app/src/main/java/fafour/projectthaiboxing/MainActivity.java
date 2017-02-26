@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void  btnUpper(View view){
-        Intent intent = new Intent(getApplicationContext(), ScrollingUpperPartActivity.class);
+        Intent intent = new Intent(getApplicationContext(), UpperPartActivity.class);
         startActivity(intent);
 
 //        Intent intent = new Intent(getApplicationContext(), ShowSkillActivity.class);
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void  btnLower(View view){
-        Intent intent = new Intent(getApplicationContext(), ScrollingLowerPartActivity.class);
+        Intent intent = new Intent(getApplicationContext(), LowerPartActivity.class);
         startActivity(intent);
     }
 

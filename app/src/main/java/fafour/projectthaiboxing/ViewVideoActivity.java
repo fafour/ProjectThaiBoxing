@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
+
 public class ViewVideoActivity extends AppCompatActivity {
 
     @Override
@@ -32,6 +35,9 @@ public class ViewVideoActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
         }
+        int skillGif_1 = getIntent().getIntExtra("gif",0);
+        final GifImageView gifImageView = (GifImageView) findViewById(R.id.gifImg);
+        gifImageView.setBackgroundResource(skillGif_1);
 
     }
 }

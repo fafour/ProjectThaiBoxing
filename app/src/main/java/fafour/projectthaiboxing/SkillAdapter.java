@@ -63,7 +63,7 @@ public class SkillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
                 intent.putExtra("img",current.imgAll);
                 intent.putExtra("name",current.skillName);
                 intent.putExtra("gif",current.skillGif);
-                intent.putExtra("raw",current.skilloRaw);
+                intent.putExtra("mp3",current.skillMp3);
                 intent.putStringArrayListExtra("itemName", current.sportequipmentName);
                 intent.putIntegerArrayListExtra("itemImg" , current.sportequipmentImg);
                 context.startActivity(intent);

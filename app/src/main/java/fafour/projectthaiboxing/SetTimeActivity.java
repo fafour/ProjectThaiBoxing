@@ -5,12 +5,21 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.NumberPicker;
+import android.widget.TextView;
+
+import java.util.Calendar;
 
 public class SetTimeActivity extends AppCompatActivity {
+    TextView txtcount;
+    Button button1,button2;
+    int i = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,12 +45,72 @@ public class SetTimeActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
         }
 
+        txtcount = (TextView) findViewById(R.id.txtcount);
+        button1 = (Button) findViewById(R.id.button1);
+        button2 = (Button) findViewById(R.id.button2);
+
+        button1.setEnabled(false);
+        button2.setEnabled(true);
+        button1.setAlpha(.5f);
+        button2.setAlpha(1f);
+
+
 
     }
     public void click(View view){
-        Intent intent = new Intent(getApplicationContext(), ShowSkillActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ShowSkillAllActivity.class);
+        intent.putExtra("count",i);
         startActivity(intent);
         finish();
+    }
+    public void click1(View view){
+        if(i == 1){
+            button1.setEnabled(false);
+            button2.setEnabled(true);
+            button1.setAlpha(.5f);
+            button2.setAlpha(1f);
+
+        }else {
+            button2.setEnabled(true);
+            button1.setEnabled(true);
+            button2.setAlpha(1f);
+            button1.setAlpha(1f);
+
+            i--;
+            txtcount.setText(String.valueOf(i));
+            if(i == 1){
+                button1.setEnabled(false);
+                button2.setEnabled(true);
+                button1.setAlpha(.5f);
+                button2.setAlpha(1f);
+
+            }
+        }
+
+    }
+    public void click2(View view){
+        if(i==60){
+            button2.setEnabled(false);
+            button1.setEnabled(true);
+            button2.setAlpha(.5f);
+            button1.setAlpha(1f);
+        }else{
+            button2.setEnabled(true);
+            button1.setEnabled(true);
+            button2.setAlpha(1f);
+            button1.setAlpha(1f);
+
+            i++;
+            txtcount.setText(String.valueOf(i));
+            if(i==60){
+                button2.setEnabled(false);
+                button1.setEnabled(true);
+                button2.setAlpha(.5f);
+                button1.setAlpha(1f);
+            }
+
+        }
+
     }
 
 }

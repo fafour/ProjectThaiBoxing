@@ -25,28 +25,93 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:textColor="@android:color/black"
-        android:text="Set Time"
+        android:text="How many minutes?"
         android:textSize="30dp" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:gravity="center"
         android:layout_gravity="center"
-        android:textStyle="bold"
-        android:textColor="@android:color/black"
-        android:text="00:01:00"
-        android:textSize="70dp" />
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="96dp"
+            android:textStyle="bold"
+            android:id="@+id/txtcount"
+            android:textColor="@android:color/black"
+            android:text="1"/>
+
+
+    </LinearLayout>
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20dp" />
+        android:textSize="50dp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/colorText"
+        android:text="Minute"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="click1"
+                android:layout_gravity="left"
+                android:textStyle="bold"
+                android:textSize="50dp"
+                android:text="-"
+                android:textColor="@android:color/white"
+                android:background="@drawable/round_button"
+                android:id="@+id/button1"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="click2"
+                android:textStyle="bold"
+                android:textSize="50dp"
+                android:layout_gravity="right"
+                android:text="+"
+                android:textColor="@android:color/white"
+                android:background="@drawable/round_button"
+                android:id="@+id/button2"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+
+
 
     <Button
         android:layout_width="wrap_content"

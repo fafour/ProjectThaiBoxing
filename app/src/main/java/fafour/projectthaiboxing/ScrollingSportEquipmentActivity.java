@@ -50,7 +50,7 @@ public class ScrollingSportEquipmentActivity extends AppCompatActivity {
         String skillName = getIntent().getStringExtra("name");
         int sImg = getIntent().getIntExtra("img",0);
         int skillGif = getIntent().getIntExtra("gif",0);
-        int skillRaw = getIntent().getIntExtra("raw",0);
+        int skillMp3 = getIntent().getIntExtra("mp3",0);
 
 
         ArrayList<String> name = new ArrayList<>();
@@ -88,7 +88,13 @@ public class ScrollingSportEquipmentActivity extends AppCompatActivity {
 
     }
     public void click(View v){
-        Intent intent = new Intent(getApplicationContext(), SetTimeActivity.class);
+        String skillName_1 = getIntent().getStringExtra("name");;
+        int skillGif_1 = getIntent().getIntExtra("gif",0);
+        int skillMp3_1 = getIntent().getIntExtra("mp3",0);
+        Intent intent = new Intent(getApplicationContext(), ShowSkillActivity.class);
+        intent.putExtra("name",skillName_1);
+        intent.putExtra("gif",skillGif_1);
+        intent.putExtra("mp3",skillMp3_1);
         startActivity(intent);
 
     }
