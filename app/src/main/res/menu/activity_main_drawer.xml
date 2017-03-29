@@ -3,13 +3,25 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/upper_part"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Upper Part" />
+        <item
+            android:id="@+id/lower_part"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Lower Part" />
+        <item
+            android:id="@+id/course"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Course" />
+        <item
+            android:id="@+id/accessories"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Accessories" />
+        <item
             android:id="@+id/signOut"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Sign from Google" />
-        <item
-            android:id="@+id/maps"
-            android:icon="@drawable/ic_menu_camera"
-            android:title="map" />
+            android:title="Sign Out" />
 
     </group>
 

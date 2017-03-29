@@ -12,9 +12,9 @@ public class DataAccessories {
     public int accessoriesSale;
     public int accessoriesSaleData;
 
+    public String accessoriesDetail;
+
     public int accessoriesImg1;
     public int accessoriesImg2;
-    public int accessoriesImg3;
-    public int accessoriesImg4;
 
 }

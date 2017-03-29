@@ -62,7 +62,7 @@
         android:textStyle="bold"
         android:layout_gravity="center"
         android:textColor="@color/colorText"
-        android:text="Minute"/>
+        android:text="Minutes"/>
 
     <LinearLayout
         android:layout_width="match_parent"

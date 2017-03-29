@@ -1,16 +1,12 @@
 package fafour.projectthaiboxing;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
 import java.util.Collections;
@@ -86,7 +82,11 @@ public class BookingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     myHolder.display.setText(current.bookingNum+"");
                     DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
                     String yourFormattedString = formatter.format(TotalBooking.totalBuyItem());
+                    String yourFormattedString1 = formatter.format(TotalBooking.totalVat());
+                    String yourFormattedString2 = formatter.format(TotalBooking.totalBuyItem()+TotalBooking.totalVat());
                     BookingActivity.txtTotal.setText(yourFormattedString+"");
+                    BookingActivity.txtTotalAll.setText(yourFormattedString2+"");
+                    BookingActivity.txtvat.setText(yourFormattedString1+"");
                 }
 
             }
@@ -104,7 +104,12 @@ public class BookingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 myHolder.display.setText(current.bookingNum+"");
                 DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
                 String yourFormattedString = formatter.format(TotalBooking.totalBuyItem());
+                String yourFormattedString1 = formatter.format(TotalBooking.totalVat());
+                String yourFormattedString2 = formatter.format(TotalBooking.totalBuyItem()+TotalBooking.totalVat());
                 BookingActivity.txtTotal.setText(yourFormattedString+"");
+                BookingActivity.txtTotalAll.setText(yourFormattedString2+"");
+                BookingActivity.txtvat.setText(yourFormattedString1+"");
+
 
             }
         });

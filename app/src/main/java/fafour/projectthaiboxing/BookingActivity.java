@@ -2,20 +2,15 @@ package fafour.projectthaiboxing;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.creativityapps.gmailbackgroundlibrary.BackgroundMail;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -24,7 +19,7 @@ import java.util.List;
 public class BookingActivity extends AppCompatActivity {
     private RecyclerView mRVList;
     private BookingAdapter mAdapter;
-    public static TextView txtStatus,txtTotal;
+    public static TextView txtStatus,txtTotal,txtTotalAll,txtvat;
     public static LinearLayout dataBuy;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +41,8 @@ public class BookingActivity extends AppCompatActivity {
         txtStatus = (TextView)findViewById(R.id.txtStatus);
 
         txtTotal = (TextView)findViewById(R.id.txtTotal);
+        txtTotalAll = (TextView)findViewById(R.id.txtTotalAll);
+        txtvat = (TextView)findViewById(R.id.txtvat);
         dataBuy = (LinearLayout) findViewById(R.id.dataBuy);
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
@@ -72,7 +69,11 @@ public class BookingActivity extends AppCompatActivity {
         }else {
             DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
             String yourFormattedString = formatter.format(TotalBooking.totalBuyItem());
+            String yourFormattedString1 = formatter.format(TotalBooking.totalVat());
+            String yourFormattedString2 = formatter.format(TotalBooking.totalBuyItem()+TotalBooking.totalVat());
             txtTotal.setText(yourFormattedString+"");
+            txtTotalAll.setText(yourFormattedString2+"");
+            txtvat.setText(yourFormattedString1+"");
             txtStatus.setVisibility(View.GONE);
             dataBuy.setVisibility(View.VISIBLE);
         }
@@ -119,10 +120,9 @@ public class BookingActivity extends AppCompatActivity {
 //                    }
 //                })
 //                .send();
-
-        Intent intent = new Intent(getApplicationContext(), YourDetailsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), ContactActivity.class);
         startActivity(intent);
-        finish();
+
     }
 
 

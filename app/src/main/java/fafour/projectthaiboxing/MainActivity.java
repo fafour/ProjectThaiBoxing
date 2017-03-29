@@ -1,27 +1,35 @@
 package fafour.projectthaiboxing;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
-import android.view.View;
+import android.os.Environment;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 
+import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -31,7 +39,6 @@ public class MainActivity extends AppCompatActivity
 
     private TextView txtName, txtEmail;
     private CircleImageView imgProfilePic;
-    private GoogleApiClient mGoogleApiClient;
 
     public static ArrayList<DataBuyItem> listBuy = new ArrayList<>();
     public static ArrayList<DataBooking> booking = new ArrayList<>();
@@ -39,6 +46,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,75 +66,58 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View hView =  navigationView.getHeaderView(0);
-        String personName = getIntent().getStringExtra("personName");
-        String email = getIntent().getStringExtra("email");
+
+        Bundle inBundle = getIntent().getExtras();
+        String name = inBundle.get("name").toString();
+        String surname = inBundle.get("surname").toString();
+        String imageUrl = inBundle.get("imageUrl").toString();
+
 
 
         txtName = (TextView) hView.findViewById(R.id.nameAccount);
         txtEmail = (TextView) hView.findViewById(R.id.emailAccount);
         imgProfilePic = (CircleImageView ) hView.findViewById(R.id.imageView);
 
-        txtName.setText(personName);
-        txtEmail.setText(email);
+        txtName.setText("" + name + " " + surname);
+        txtEmail.setText("");
 
-        String personPhotoUrl = getIntent().getStringExtra("personPhotoUrl");
 
-        if(personPhotoUrl!= null) {
-            try {
-                Glide.with(getApplicationContext()).load(personPhotoUrl)
-                        .thumbnail(0.5f)
-                        .crossFade()
-                        .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .into(imgProfilePic);
-            } catch (Exception e) {
-                imgProfilePic.setImageResource(R.drawable.account);
-            }
-        }else{
-            imgProfilePic.setImageResource(R.drawable.account);
-        }
+        new DownloadImage((CircleImageView) hView.findViewById(R.id.imageView)).execute(imageUrl);
+
 
         navigationView.setNavigationItemSelectedListener(this);
 
-//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-//        tabLayout.addTab(tabLayout.newTab().setText("History"));
-//        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-//
-//        final ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-//        final PageAdapter adapter = new PageAdapter
-//                (getSupportFragmentManager(), tabLayout.getTabCount());
-//        viewPager.setAdapter(adapter);
-//        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-//        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//                viewPager.setCurrentItem(tab.getPosition());
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
+        int PERMISSION_ALL = 1;
+        String[] PERMISSIONS = {Manifest.permission.READ_CONTACTS, Manifest.permission.WRITE_CONTACTS, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+
+        if(!hasPermissions(this, PERMISSIONS)){
+            ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_ALL);
+        }
+
+
+        File mediaStorageDir = new File(Environment.getExternalStorageDirectory(),
+                "Muay_thai/fafour.projectthaiboxing/data");
+        if (!mediaStorageDir.exists()) {
+            if (!mediaStorageDir.mkdirs()) {
+
+            }
+        }
 
 
     }
-
-    @Override
-    protected void onStart() {
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
-        mGoogleApiClient.connect();
-        super.onStart();
+    public static boolean hasPermissions(Context context, String... permissions) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
+
+
+
 
     @Override
     public void onBackPressed() {
@@ -134,31 +125,45 @@ public class MainActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            Intent startMain = new Intent(Intent.ACTION_MAIN);
+            startMain.addCategory(Intent.CATEGORY_HOME);
+            startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(startMain);
+            finish();
+
         }
     }
-
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.signOut) {
-            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
-                    new ResultCallback<Status>() {
-                        @Override
-                        public void onResult(Status status) {
-                            Intent intent = new Intent(getApplicationContext(), LoginGoogleAccountActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    });
-        }
-        if (id == R.id.maps) {
-            Intent intent = new Intent(getApplicationContext(), MapActivity.class);
+        if (id == R.id.upper_part) {
+            Intent intent = new Intent(getApplicationContext(), UpperPartActivity.class);
             startActivity(intent);
+            item.setCheckable(false);
+        }
+        if (id == R.id.lower_part) {
+            Intent intent = new Intent(getApplicationContext(), LowerPartActivity.class);
+            startActivity(intent);
+            item.setCheckable(false);
+        }
+        if (id == R.id.course) {
+            Intent intent = new Intent(getApplicationContext(), ScrollingTigerMuayThaiActivity.class);
+            startActivity(intent);
+            item.setCheckable(false);
+        }
+        if (id == R.id.accessories) {
+            Intent intent = new Intent(getApplicationContext(), AccessoriesActivity.class);
+            startActivity(intent);
+            item.setCheckable(false);
+        }
+        if (id == R.id.signOut) {
+            LoginManager.getInstance().logOut();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+
         }
 
 
@@ -170,9 +175,6 @@ public class MainActivity extends AppCompatActivity
     public void  btnUpper(View view){
         Intent intent = new Intent(getApplicationContext(), UpperPartActivity.class);
         startActivity(intent);
-
-//        Intent intent = new Intent(getApplicationContext(), ShowSkillActivity.class);
-//        startActivity(intent);
 
     }
 
@@ -189,5 +191,29 @@ public class MainActivity extends AppCompatActivity
     public void  btnTool(View view){
         Intent intent = new Intent(getApplicationContext(), AccessoriesActivity.class);
         startActivity(intent);
+    }
+    public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
+        ImageView bmImage;
+
+        public DownloadImage(ImageView bmImage) {
+            this.bmImage = bmImage;
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String urldisplay = urls[0];
+            Bitmap mIcon11 = null;
+            try {
+                InputStream in = new java.net.URL(urldisplay).openStream();
+                mIcon11 = BitmapFactory.decodeStream(in);
+            } catch (Exception e) {
+                Log.e("Error", e.getMessage());
+                e.printStackTrace();
+            }
+            return mIcon11;
+        }
+
+        protected void onPostExecute(Bitmap result) {
+            bmImage.setImageBitmap(result);
+        }
     }
 }

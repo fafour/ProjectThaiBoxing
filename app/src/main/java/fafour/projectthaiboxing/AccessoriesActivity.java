@@ -1,11 +1,8 @@
 package fafour.projectthaiboxing;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +17,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,64 +56,126 @@ public class AccessoriesActivity extends AppCompatActivity {
         }
 
         String[] accessoriesName = {
-                "Shin guard ankle",
-                "Muay Thai Shorts",
-                "Sweatpants",
-                "Shorts",
-                "T-shirt",
-                "Muay Thai Mongkol",
-                "Shoes",
-                "Open patella knee sleeve",
-                "Head guard",
-                "Ankle",
-                "Jacket",
-                "Gloves"
+                "Tiger Muay Thai Head Guard",
+                "Tiger Muay Thai White Boxing Gloves",
+                "Tiger Muay Thai Black Boxing Gloves",
+                "Muay Thai Shorts Black& Blue Scratch",
+                "Muay Thai Shorts White& Pink",
+                "Muay Thai Shorts White & Blue",
+                "Muay Thai Shorts White & Orange",
+                "Muay Thai Shorts Black & Pink",
+                "Muay Thai Shorts Black& Blue",
+                "Muay Thai Shorts Black &Orange",
+                "Muay Thai Shorts Gray Camo",
+                "Tank Top White (Man)",
+                "Tank Top Black (Man)",
+                "Tank Top White & Pink (Woman)",
+                "Tank Top Black& Pink (Woman)",
+                "Rashguard  Shortsleeve  Black & White Edition",
+                "Rashguard  Shortsleeve  Black & Orange Edition"
+        };
+
+        String[] accessoriesDetail = {
+                "Tiger Muay Thai head guards are a top-quality product, ensuring safe and productive training sessions.",
+                "Specifically designed to improve the quality of your Muay Thai training and to reduce the chance of injury.",
+                "Specifically designed to improve the quality of your Muay Thai training and to reduce the chance of injury.",
+                "High quality satin Muaythai shorts from Tiger Muay Thai Special finished with a very high standard of embroidery and craftsmanship.",
+                "High quality satin Muaythai shorts from Tiger Muay Thai Special finished with a very high standard of embroidery and craftsmanship.",
+                "High quality satin Muaythai shorts from Tiger Muay Thai Special finished with a very high standard of embroidery and craftsmanship.",
+                "High quality satin Muaythai shorts from Tiger Muay Thai Special finished with a very high standard of embroidery and craftsmanship.",
+                "High quality satin Muaythai shorts from Tiger Muay Thai Special finished with a very high standard of embroidery and craftsmanship.",
+                "High quality satin Muaythai shorts from Tiger Muay Thai Special finished with a very high standard of embroidery and craftsmanship.",
+                "High quality satin Muaythai shorts from Tiger Muay Thai Special finished with a very high standard of embroidery and craftsmanship.",
+                "High quality satin Muaythai shorts from Tiger Muay Thai Special finished with a very high standard of embroidery and craftsmanship.",
+                "The classic Tiger Muay Thai Tank Top in white Drifit Material with the big circular TMT logo on the front.",
+                "The classic Tiger Muay Thai Tank Top in black Drifit Material with the big circular TMT logo on the front.",
+                "Woman Cut Strength is Beautiful Tank Top in White & Pink",
+                "Female Cut Strength is Beautiful Tank Top in Black & Pink",
+                "The short sleeve version of the Tiger Muay Thai Black & White Edition rashguard.",
+                "The short sleeve version of the Tiger Muay Thai Black & Orange Edition rashguard."
         };
 
         int [] accessoriesPrice = {
-                200,
-                300,
-                1000,
+                3600,
                 3000,
-                400,
-                500,
-                2000,
-                1500,
-                2500,
-                300,
-                4000,
-                3200
+                3000,
+                2800,
+                2800,
+                2800,
+                2800,
+                2800,
+                2800,
+                2800,
+                2800,
+                1100,
+                1100,
+                1100,
+                1100,
+                2400,
+                2400
         };
 
         int [] accessoriesImg  = {
-                R.drawable.accessories_one,
-                R.drawable.accessories_two,
-                R.drawable.accessories_three,
-                R.drawable.accessories_four,
-                R.drawable.accessories_five,
-                R.drawable.accessories_six,
-                R.drawable.accessories_seven,
-                R.drawable.accessories_eight,
-                R.drawable.accessories_nine,
-                R.drawable.accessories_ten,
-                R.drawable.accessories_eleven,
-                R.drawable.accessories_twelve
+                R.drawable.head_guard_one,
+                R.drawable.white_boxing_gloves_one,
+                R.drawable.black_boxing_gloves_one,
+                R.drawable.black_blue_scratch_one,
+                R.drawable.white_pink_one,
+                R.drawable.white_blue_one,
+                R.drawable.white_orange_one,
+                R.drawable.black_pink_one,
+                R.drawable.black_blue_one,
+                R.drawable.black_orange_one,
+                R.drawable.gray_camo_one
 
         };
         int [] accessoriesSaleDataPrice = {
-                99,
-                30,
+                20,
                 10,
-                30,
-                45,
-                50,
-                21,
                 10,
-                25,
-                34,
-                40,
-                32
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                10,
+                10,
+                10,
+                10,
+                10,
+                10
+
         };
+        int [] accessoriesImgReview_1  = {
+                R.drawable.head_guard_two,
+                R.drawable.white_boxing_gloves_two,
+                R.drawable.black_boxing_gloves_two,
+                R.drawable.black_blue_scratch_two,
+                R.drawable.white_pink_two,
+                R.drawable.white_blue_two,
+                R.drawable.white_orange_two,
+                R.drawable.black_pink_two,
+                R.drawable.black_blue_two,
+                R.drawable.black_orange_two,
+                R.drawable.gray_camo_two
+        };
+        int [] accessoriesImgReview_2  = {
+                R.drawable.head_guard_three,
+                R.drawable.white_boxing_gloves_one,
+                R.drawable.black_boxing_gloves_one,
+                R.drawable.black_blue_scratch_one,
+                R.drawable.white_pink_one,
+                R.drawable.white_blue_one,
+                R.drawable.white_orange_one,
+                R.drawable.black_pink_one,
+                R.drawable.black_blue_one,
+                R.drawable.black_orange_one,
+                R.drawable.gray_camo_one
+        };
+
 
 
         for(int count=0; count < accessoriesName.length; count++){
@@ -125,13 +183,13 @@ public class AccessoriesActivity extends AppCompatActivity {
 
             accessoriesData.accessoriesName = accessoriesName[count];
             accessoriesData.accessoriesPrice = accessoriesPrice[count];
-//            videoData.videoImage = imgVideoFile[count];
-            accessoriesData.accessoriesImg = accessoriesImg[count];
 
-            accessoriesData.accessoriesImg1 = accessoriesImg[count];
-            accessoriesData.accessoriesImg2 = accessoriesImg[count];
-            accessoriesData.accessoriesImg3 = accessoriesImg[count];
-            accessoriesData.accessoriesImg4 = accessoriesImg[count];
+            accessoriesData.accessoriesImg = accessoriesImg[count];
+            accessoriesData.accessoriesDetail = accessoriesDetail[count];
+
+            accessoriesData.accessoriesImg1 = accessoriesImgReview_1[count];
+            accessoriesData.accessoriesImg2 = accessoriesImgReview_2[count];
+
 
             int sum = accessoriesPrice[count]-(accessoriesPrice[count]*accessoriesSaleDataPrice[count]/100);
 
@@ -142,7 +200,6 @@ public class AccessoriesActivity extends AppCompatActivity {
             data.add(accessoriesData);
 
         }
-
 
         // Setup and Handover data to recyclerview
         mRVList = (RecyclerView) findViewById(R.id.accessoriesList);

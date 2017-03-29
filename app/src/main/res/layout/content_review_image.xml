@@ -115,6 +115,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
+                    android:text="XS"
+                    android:onClick="xs"
+                    android:id="@+id/button5"
+                    android:textColor="@android:color/black"
+                    android:background="@color/buttonBg"
+                    android:orderInCategory="100" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
                     android:text="S"
                     android:onClick="s"
                     android:id="@+id/button1"
@@ -151,6 +162,17 @@
                     android:text="XL"
                     android:onClick="xl"
                     android:id="@+id/button4"
+                    android:textColor="@android:color/black"
+                    android:background="@color/buttonBg"
+                    android:orderInCategory="100" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="XXL"
+                    android:onClick="xxl"
+                    android:id="@+id/button6"
                     android:textColor="@android:color/black"
                     android:background="@color/buttonBg"
                     android:orderInCategory="100" />

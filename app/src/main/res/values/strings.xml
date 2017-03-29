@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">Thai Boxing</string>
+    <string name="app_name">Muay Thai</string>
+
+    <string name="facebook_app_id">1335711179829679</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -8,11 +10,23 @@
     <string name="title_activity_history_menu">HistoryMenuActivity</string>
     <string name="title_activity_view_video">ViewVideoActivity</string>
     <string name="title_activity_view_video_data">ViewVideoDataActivity</string>
-    <string name="title_activity_login_google_account">LoginGoogleAccountActivity</string>
+    <string name="title_activity_login_google_account">Muay Thai</string>
     <string name="btn_logout_from_google">Logout from Google</string>
     <string name="btn_revoke_access">Revoke Access</string>
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_scrolling_view_video">ScrollingViewVideoActivity</string>
+
+    <string name="contact">
+        "Address and Contact info \n"
+        "\n"
+        "Tiger Muay Thai and MMA Training Camp \n"
+        "7/35 Moo 5, Soi Ta-iad \n"
+        "Ao Chalong, Muang \n"
+        "Phuket, Thailand, 83130 \n"
+        "\n"
+        "Phone: +66 (0)76 367 071 or Skype\n"
+        "Email: info@tigermuaythai.com\n"
+    </string>
 
     <string name="history_text">
 
@@ -155,4 +169,10 @@
     <string name="title_activity_lower_part">LowerPartActivity</string>
     <string name="title_activity_upper_part">UpperPartActivity</string>
     <string name="title_activity_show_skill_all">ShowSkillAllActivity</string>
+    <string name="title_activity_show_skill_all1">ShowSkillAll1Activity</string>
+    <string name="title_activity_set_time1">SetTime1Activity</string>
+    <string name="title_activity_contact">ContactActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_review_image_item">ReviewImageItemActivity</string>
+    <string name="title_activity_review_image_item1">ReviewImageItem1Activity</string>
 </resources>

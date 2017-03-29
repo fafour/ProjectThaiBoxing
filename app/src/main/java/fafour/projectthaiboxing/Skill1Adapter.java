@@ -1,8 +1,8 @@
 package fafour.projectthaiboxing;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,26 +27,44 @@ public class Skill1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     List<DataSkill> data= Collections.emptyList();
     DataSkill current;
     int currentPos=0;
+    private CallbackInterface mCallback;
 
     public Skill1Adapter(Context context, List<DataSkill> data){
         this.context=context;
         inflater= LayoutInflater.from(context);
         this.data=data;
+
+        try{
+            mCallback = (CallbackInterface) context;
+        }catch(ClassCastException ex){
+            //.. should log the error or throw and exception
+            Log.e("Skill1Adapter","Must implement the CallbackInterface in the Activity", ex);
+        }
+    }
+    public interface CallbackInterface{
+
+        /**
+         * Callback invoked when clicked
+         * @param position - the position
+         * @param textName - the text to pass back
+         * @param img - tthe position
+         */
+        void onHandleSelection(int position,String textName,int img );
     }
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.container_skill, parent,false);
+        View view=inflater.inflate(R.layout.container_skill1, parent,false);
         Skill1Adapter.MyHolder holder=new Skill1Adapter.MyHolder(view);
         return holder;
     }
 
     // Bind data
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         // Get current position of item in recyclerview to bind data and assign values from list
-        Skill1Adapter.MyHolder myHolder= (Skill1Adapter.MyHolder) holder;
+        final Skill1Adapter.MyHolder myHolder= (Skill1Adapter.MyHolder) holder;
         final DataSkill current=data.get(position);
         myHolder.textVieoName.setText(current.skillName);
 
@@ -56,25 +74,22 @@ public class Skill1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 .load(current.skillImg)
                 .into(myHolder.iconVideo);
 
-        myHolder.Tittle.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ScrollingSportEquipmentActivity.class);
-                intent.putExtra("img",current.imgAll);
-                intent.putExtra("name",current.skillName);
-                intent.putExtra("gif",current.skillGif);
-                intent.putExtra("mp3",current.skillMp3);
-                intent.putStringArrayListExtra("itemName", current.sportequipmentName);
-                intent.putIntegerArrayListExtra("itemImg" , current.sportequipmentImg);
-                context.startActivity(intent);
+            public void onClick(View v) {
+                if(mCallback != null){
+                    mCallback.onHandleSelection(position,current.skillName,current.skillImg);
+                }
             }
         });
 
-        if(position == 2){
-            Glide.with(context)
-                    .load(R.drawable.icn_pass)
-                    .into(myHolder.imageView);
-        }
+
+        Glide.with(context)
+                .load(current.imgLock)
+                .into(myHolder.imageView);
+
+        
+        
 
     }
 
@@ -85,7 +100,7 @@ public class Skill1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
 
-    class MyHolder extends RecyclerView.ViewHolder {
+    public  static class MyHolder extends RecyclerView.ViewHolder {
         TextView textVieoName;
         CircleImageView iconVideo;
         LinearLayout Tittle;
@@ -99,32 +114,8 @@ public class Skill1Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             iconVideo= (CircleImageView) itemView.findViewById(R.id.iconVideo);
         }
 
+
     }
 
-//    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-//        ImageView imageView;
-//
-//        public DownloadImageFromInternet(ImageView imageView) {
-//            this.imageView = imageView;
-//        }
-//
-//        protected Bitmap doInBackground(String... urls) {
-//            String imageURL = urls[0];
-//            Bitmap bimage = null;
-//            try {
-//                InputStream in = new java.net.URL(imageURL).openStream();
-//                bimage = BitmapFactory.decodeStream(in);
-//
-//            } catch (Exception e) {
-//                Log.e("Error Message", e.getMessage());
-//                e.printStackTrace();
-//            }
-//            return bimage;
-//        }
-//
-//        protected void onPostExecute(Bitmap result) {
-//            imageView.setImageBitmap(result);
-//        }
-//    }
 
 }

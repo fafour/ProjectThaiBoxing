@@ -3,9 +3,7 @@ package fafour.projectthaiboxing;
 /**
  * Created by Fafour on 30/1/2560.
  */
-import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -17,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,11 +64,15 @@ public class TabFragmentAllPackage extends Fragment {
                 if (parent.getItemAtPosition(position).toString()
                         .equals("Choose an option")) {
                     select_1[0] = 0;
+                    select_2[0] = 0;
                     txt.setText("");
                     txtPrice.setText("");
 
                     txt.setVisibility(View.GONE);
                     txtPrice.setVisibility(View.GONE);
+
+                    itemName = null;
+                    itemDuration = null;
 
                     itemName = null;
 
@@ -203,11 +204,15 @@ public class TabFragmentAllPackage extends Fragment {
                 if (parent.getItemAtPosition(position).toString()
                         .equals("Choose an option")) {
                     select_2[0] = 0;
+                    select_1[0] = 0;
                     txt.setText("");
                     txtPrice.setText("");
 
                     txt.setVisibility(View.GONE);
                     txtPrice.setVisibility(View.GONE);
+
+                    itemName = null;
+                    itemDuration = null;
 
                     itemDuration = null;
                 }
@@ -335,7 +340,7 @@ public class TabFragmentAllPackage extends Fragment {
         booking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (itemName == null || itemDuration == null){
+                if (select_2[0] == 0 || select_1[0] == 0){
                     final AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity());
                     dialog.setTitle("Investigate Booking ");
                     dialog.setCancelable(true);

@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -32,20 +30,15 @@ import java.text.DecimalFormat;
 public class ReviewImageActivity extends AppCompatActivity {
     RelativeLayout notificationCount1;
     TextView tv_cart;
-    Button button1,button2,button3,button4;
+    Button button1,button2,button3,button4,button5,button6;
+    String size ="";
 
     private class ImagePagerAdapter extends PagerAdapter {
         int img = getIntent().getIntExtra("img",0);
         int img1 = getIntent().getIntExtra("img1",0);
-        int img2 = getIntent().getIntExtra("img2",0);
-        int img3 = getIntent().getIntExtra("img3",0);
-        int img4 = getIntent().getIntExtra("img4",0);
         private final int[] mImages = new int[] {
                 img,
-                img1,
-                img2,
-                img3,
-                img4
+                img1
         };
 
         @Override
@@ -98,7 +91,11 @@ public class ReviewImageActivity extends AppCompatActivity {
         button2 = (Button) findViewById(R.id.button2);
         button3 = (Button) findViewById(R.id.button3);
         button4 = (Button) findViewById(R.id.button4);
+        button5 = (Button) findViewById(R.id.button5);
+        button6 = (Button) findViewById(R.id.button6);
 
+        button6.setBackgroundResource(R.color.buttonBg);
+        button5.setBackgroundResource(R.color.buttonBg);
         button4.setBackgroundResource(R.color.buttonBg);
         button2.setBackgroundResource(R.color.buttonBg);
         button3.setBackgroundResource(R.color.buttonBg);
@@ -142,43 +139,59 @@ public class ReviewImageActivity extends AppCompatActivity {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
-                dialog.setTitle("Add Cart Success ");
-                dialog.setCancelable(true);
-                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        int img = getIntent().getIntExtra("img",0);
-                        String name = getIntent().getStringExtra("name");
-                        int price = getIntent().getIntExtra("price",0);
-                        int sale = getIntent().getIntExtra("sale",0);
-                        int saleData = getIntent().getIntExtra("saleData",0);
-
-                        int no = 0;
-                        try{
-                            if( MainActivity.listBuy.size() == 0){
-                                MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
-
-                            }else {
-                                for (int i = 0; i < MainActivity.listBuy.size(); i++) {
-                                    if (MainActivity.listBuy.get(i).getAccessoriesName().equals(name)) {
-                                        MainActivity.listBuy.get(i).setAccessoriesNum(MainActivity.listBuy.get(i).getAccessoriesNum() + 1);
-                                        continue;
-                                    } else {
-                                        no++;
-                                    }
-                                }
-                                if ( MainActivity.listBuy.size() == no){
-                                    MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
-                                }
-                            }
-                            tv_cart.setText(MainActivity.listBuy.size() +"");
-                        }catch (Exception x){
+                if (size == ""){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
+                    dialog.setTitle("Please select size..");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
                         }
-                    }
-                });
+                    });
 
-                dialog.show();
+                    dialog.show();
+
+                }else {
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
+                    dialog.setTitle("Add Cart Success ");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            int img = getIntent().getIntExtra("img",0);
+                            String name = getIntent().getStringExtra("name")+" Size :"+size;
+                            int price = getIntent().getIntExtra("price",0);
+                            int sale = getIntent().getIntExtra("sale",0);
+                            int saleData = getIntent().getIntExtra("saleData",0);
+
+                            int no = 0;
+                            try{
+                                if( MainActivity.listBuy.size() == 0){
+                                    MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
+
+                                }else {
+                                    for (int i = 0; i < MainActivity.listBuy.size(); i++) {
+                                        if (MainActivity.listBuy.get(i).getAccessoriesName().equals(name)) {
+                                            MainActivity.listBuy.get(i).setAccessoriesNum(MainActivity.listBuy.get(i).getAccessoriesNum() + 1);
+                                            continue;
+                                        } else {
+                                            no++;
+                                        }
+                                    }
+                                    if ( MainActivity.listBuy.size() == no){
+                                        MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
+                                    }
+                                }
+                                tv_cart.setText(MainActivity.listBuy.size() +"");
+                            }catch (Exception x){
+
+                            }
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+
             }
         });
 
@@ -224,32 +237,64 @@ public class ReviewImageActivity extends AppCompatActivity {
         }
 
     }
+    public void xs(View view){
+        size = "xs";
+        button1.setBackgroundResource(R.color.buttonBg);
+        button2.setBackgroundResource(R.color.buttonBg);
+        button3.setBackgroundResource(R.color.buttonBg);
+        button4.setBackgroundResource(R.color.buttonBg);
+        button5.setBackgroundResource(R.color.colorText);
+        button6.setBackgroundResource(R.color.buttonBg);
+
+    }
+    public void xxl(View view){
+        size = "XXL";
+        button1.setBackgroundResource(R.color.buttonBg);
+        button2.setBackgroundResource(R.color.buttonBg);
+        button3.setBackgroundResource(R.color.buttonBg);
+        button4.setBackgroundResource(R.color.buttonBg);
+        button5.setBackgroundResource(R.color.buttonBg);
+        button6.setBackgroundResource(R.color.colorText);
+
+    }
     public void s(View view){
+        size = "S";
         button1.setBackgroundResource(R.color.colorText);
         button2.setBackgroundResource(R.color.buttonBg);
         button3.setBackgroundResource(R.color.buttonBg);
         button4.setBackgroundResource(R.color.buttonBg);
+        button5.setBackgroundResource(R.color.buttonBg);
+        button6.setBackgroundResource(R.color.buttonBg);
 
     }
     public void m(View view){
+        size = "M";
         button2.setBackgroundResource(R.color.colorText);
         button1.setBackgroundResource(R.color.buttonBg);
         button3.setBackgroundResource(R.color.buttonBg);
         button4.setBackgroundResource(R.color.buttonBg);
+        button5.setBackgroundResource(R.color.buttonBg);
+        button6.setBackgroundResource(R.color.buttonBg);
 
     }
     public void l(View view){
+        size = "L";
         button3.setBackgroundResource(R.color.colorText);
         button2.setBackgroundResource(R.color.buttonBg);
         button1.setBackgroundResource(R.color.buttonBg);
         button4.setBackgroundResource(R.color.buttonBg);
+        button5.setBackgroundResource(R.color.buttonBg);
+        button6.setBackgroundResource(R.color.buttonBg);
 
     }
     public void xl(View view){
+        size = "XL";
         button4.setBackgroundResource(R.color.colorText);
         button2.setBackgroundResource(R.color.buttonBg);
         button3.setBackgroundResource(R.color.buttonBg);
         button1.setBackgroundResource(R.color.buttonBg);
+        button5.setBackgroundResource(R.color.buttonBg);
+        button6.setBackgroundResource(R.color.buttonBg);
 
     }
 

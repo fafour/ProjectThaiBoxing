@@ -2,8 +2,6 @@ package fafour.projectthaiboxing;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -11,7 +9,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 public class LowerPartActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +35,7 @@ public class LowerPartActivity extends AppCompatActivity {
 
     }
     public void click1(View view){
-        Intent intent = new Intent(getApplicationContext(), SetTimeActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SetTime1Activity.class);
         startActivity(intent);
     }
     public void click2(View view){

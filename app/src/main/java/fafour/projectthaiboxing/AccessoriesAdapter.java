@@ -8,9 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,8 +16,6 @@ import com.bumptech.glide.Glide;
 import java.text.DecimalFormat;
 import java.util.Collections;
 import java.util.List;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Fafour on 28/1/2560.
@@ -60,31 +56,72 @@ public class AccessoriesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
         myHolder.txtSale.setText(current.accessoriesPrice +" BTH" );
         myHolder.txtSaleData.setText(current.accessoriesSaleData +"%");
 
-//        new DownloadImageFromInternet(myHolder.iconVideo)
-//                .execute(current.videoImage);
+
         Glide.with(context)
                 .load(current.accessoriesImg)
                 .into(myHolder.iconAccessories);
 
-        myHolder.cvAccessories.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ReviewImageActivity.class);
-                intent.putExtra("img",current.accessoriesImg);
-                intent.putExtra("img1",current.accessoriesImg1);
-                intent.putExtra("img2",current.accessoriesImg2);
-                intent.putExtra("img3",current.accessoriesImg3);
-                intent.putExtra("img4",current.accessoriesImg4);
+        if(position == 0) {
 
-                intent.putExtra("name",current.accessoriesName);
-                intent.putExtra("price",current.accessoriesPrice);
+            myHolder.cvAccessories.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ReviewImageItemActivity.class);
+                    intent.putExtra("img", current.accessoriesImg);
+                    intent.putExtra("img1", current.accessoriesImg1);
+                    intent.putExtra("img2", current.accessoriesImg2);
+                    intent.putExtra("detail", current.accessoriesDetail);
+                    intent.putExtra("name", current.accessoriesName);
+                    intent.putExtra("price", current.accessoriesPrice);
 
-                intent.putExtra("sale",current.accessoriesSale);
-                intent.putExtra("saleData",current.accessoriesSaleData);
+                    intent.putExtra("sale", current.accessoriesSale);
+                    intent.putExtra("saleData", current.accessoriesSaleData);
 
-                context.startActivity(intent);
-            }
-        });
+                    context.startActivity(intent);
+                }
+            });
+        }
+        else if(position == 1 || position == 2) {
+
+            myHolder.cvAccessories.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ReviewImageItem1Activity.class);
+                    intent.putExtra("img", current.accessoriesImg);
+                    intent.putExtra("img1", current.accessoriesImg1);
+                    intent.putExtra("img2", current.accessoriesImg2);
+                    intent.putExtra("detail", current.accessoriesDetail);
+                    intent.putExtra("name", current.accessoriesName);
+                    intent.putExtra("price", current.accessoriesPrice);
+
+                    intent.putExtra("sale", current.accessoriesSale);
+                    intent.putExtra("saleData", current.accessoriesSaleData);
+
+                    context.startActivity(intent);
+                }
+            });
+        }
+        else if(position == 3 || position == 4 || position == 5 || position == 6 || position == 7
+                || position == 8 || position == 9 || position == 10) {
+
+            myHolder.cvAccessories.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ReviewImageActivity.class);
+                    intent.putExtra("img", current.accessoriesImg);
+                    intent.putExtra("img1", current.accessoriesImg1);
+                    intent.putExtra("img2", current.accessoriesImg2);
+                    intent.putExtra("detail", current.accessoriesDetail);
+                    intent.putExtra("name", current.accessoriesName);
+                    intent.putExtra("price", current.accessoriesPrice);
+
+                    intent.putExtra("sale", current.accessoriesSale);
+                    intent.putExtra("saleData", current.accessoriesSaleData);
+
+                    context.startActivity(intent);
+                }
+            });
+        }
 
     }
 

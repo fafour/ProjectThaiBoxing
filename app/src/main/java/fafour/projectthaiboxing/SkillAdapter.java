@@ -1,8 +1,8 @@
 package fafour.projectthaiboxing;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,12 +27,32 @@ public class SkillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     List<DataSkill> data= Collections.emptyList();
     DataSkill current;
     int currentPos=0;
+    private CallbackInterface mCallback;
 
     public SkillAdapter(Context context, List<DataSkill> data){
         this.context=context;
         inflater= LayoutInflater.from(context);
         this.data=data;
+
+        try{
+            mCallback = (CallbackInterface) context;
+        }catch(ClassCastException ex){
+            //.. should log the error or throw and exception
+            Log.e("SkillAdapter","Must implement the CallbackInterface in the Activity", ex);
+        }
+
     }
+    public interface CallbackInterface{
+
+        /**
+         * Callback invoked when clicked
+         * @param position - the position
+         * @param textName - the text to pass back
+         * @param img - tthe position
+         */
+        void onHandleSelection(int position,String textName ,int img );
+    }
+
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -43,38 +63,31 @@ public class SkillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     // Bind data
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         // Get current position of item in recyclerview to bind data and assign values from list
         SkillAdapter.MyHolder myHolder= (SkillAdapter.MyHolder) holder;
         final DataSkill current=data.get(position);
         myHolder.textVieoName.setText(current.skillName);
 
-//        new DownloadImageFromInternet(myHolder.iconVideo)
-//                .execute(current.videoImage);
         Glide.with(context)
                 .load(current.skillImg)
                 .into(myHolder.iconVideo);
 
-        myHolder.Tittle.setOnClickListener(new View.OnClickListener() {
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, ScrollingSportEquipmentActivity.class);
-                intent.putExtra("img",current.imgAll);
-                intent.putExtra("name",current.skillName);
-                intent.putExtra("gif",current.skillGif);
-                intent.putExtra("mp3",current.skillMp3);
-                intent.putStringArrayListExtra("itemName", current.sportequipmentName);
-                intent.putIntegerArrayListExtra("itemImg" , current.sportequipmentImg);
-                context.startActivity(intent);
+            public void onClick(View v) {
+                if(mCallback != null){
+                    mCallback.onHandleSelection(position,current.skillName,current.skillImg);
+                }
             }
         });
 
-        if(position == 3){
-            Glide.with(context)
-                    .load(R.drawable.icn_pass)
-                    .into(myHolder.imageView);
-        }
+
+        Glide.with(context)
+                .load(current.imgLock)
+                .into(myHolder.imageView);
 
     }
 
@@ -101,31 +114,6 @@ public class SkillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
 
     }
 
-//    private class DownloadImageFromInternet extends AsyncTask<String, Void, Bitmap> {
-//        ImageView imageView;
-//
-//        public DownloadImageFromInternet(ImageView imageView) {
-//            this.imageView = imageView;
-//        }
-//
-//        protected Bitmap doInBackground(String... urls) {
-//            String imageURL = urls[0];
-//            Bitmap bimage = null;
-//            try {
-//                InputStream in = new java.net.URL(imageURL).openStream();
-//                bimage = BitmapFactory.decodeStream(in);
-//
-//            } catch (Exception e) {
-//                Log.e("Error Message", e.getMessage());
-//                e.printStackTrace();
-//            }
-//            return bimage;
-//        }
-//
-//        protected void onPostExecute(Bitmap result) {
-//            imageView.setImageBitmap(result);
-//        }
-//    }
 
 
 }

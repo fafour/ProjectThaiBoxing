@@ -1,15 +1,10 @@
 package fafour.projectthaiboxing;
 
-import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.graphics.Color;
+import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.annotation.IdRes;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -18,27 +13,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar;
-import com.bumptech.glide.Glide;
-
-import java.io.IOException;
-
-
 import pl.droidsonroids.gif.GifDrawable;
-import pl.droidsonroids.gif.AnimationListener;
 import pl.droidsonroids.gif.GifImageView;
 
 
-
-
-public class ShowSkillActivity extends AppCompatActivity   implements AnimationListener {
+public class ShowSkillActivity extends AppCompatActivity  {
     int i=-1;
     ProgressBar mprogressBar;
 
@@ -50,12 +33,11 @@ public class ShowSkillActivity extends AppCompatActivity   implements AnimationL
     MediaPlayer mediaPlayer;
     ImageView stop_play_button;
     GifImageView gifImageView;
-    private GifDrawable gifDrawable;
+
+    MenuItem favButton;
 
     long time;
-
-    public ShowSkillActivity() {
-    }
+    int begin = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,17 +54,13 @@ public class ShowSkillActivity extends AppCompatActivity   implements AnimationL
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(mediaPlayer!=null) {
-                    mediaPlayer.stop();
-                }
+                stopSound();
+                endSound();
                 finish();
             }
         });
 
-
-
         textViewShowTime = (TextView) findViewById(R.id.tvTimeCount);
-
 
         mprogressBar = (ProgressBar) findViewById(R.id.circular_progress_bar);
         mprogressBar.setProgress(0);
@@ -97,15 +75,28 @@ public class ShowSkillActivity extends AppCompatActivity   implements AnimationL
         int skillMp3_1 = getIntent().getIntExtra("mp3",0);
 
         gifImageView.setBackgroundResource(skillGif_1);
+
         txtSkillName.setText(skillName_1);
 
-
-
-        if(mediaPlayer!=null) {
-            mediaPlayer.stop();
-        }
-        mediaPlayer = MediaPlayer.create(getBaseContext() , skillMp3_1);
+        mediaPlayer =  MediaPlayer.create(getBaseContext(),skillMp3_1);
         mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            public void onCompletion(MediaPlayer mp) {
+                if (begin == 1){
+                    begin = 0;
+                    favButton.setEnabled(true);
+                    mediaPlayer =  MediaPlayer.create(getBaseContext(),R.raw.begin);
+                    mediaPlayer.start();
+                    mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                        public void onCompletion(MediaPlayer mp) {
+                            if(mediaPlayer!=null) {
+                                mediaPlayer.stop();
+                            }
+                        }
+                    });
+                }
+            }
+        });
 
 
         setTimer();
@@ -120,64 +111,66 @@ public class ShowSkillActivity extends AppCompatActivity   implements AnimationL
 
     }
 
-
     private void setTimer() {
 
         totalTimeCountInMilliseconds = (60 * 1 * 1000)+1000;
 
     }
 
-    private void startTimer(long times) {
-        countDownTimer = new CountDownTimer(times, 500) {
+    private void startTimer(final long times) {
+            countDownTimer = new CountDownTimer(times, 1000) {
+
+                @Override
+                public void onTick(long leftTimeInMilliseconds) {
+                    Resources res = getResources();
+                    time = leftTimeInMilliseconds;
+                    long seconds = leftTimeInMilliseconds / 1000;
+                    int seconds1 = (int) (leftTimeInMilliseconds / 1000);
+                    mprogressBar.setProgress(seconds1);
 
 
-            @Override
-            public void onTick(long leftTimeInMilliseconds) {
-                time = leftTimeInMilliseconds;
-                long seconds = leftTimeInMilliseconds / 1000;
-                int seconds1 = (int) (leftTimeInMilliseconds / 1000);
-                mprogressBar.setProgress(seconds1);
-
-
-                textViewShowTime.setText(String.format("%02d", seconds / 60)
-                        + ":" + String.format("%02d", seconds % 60));
-                if(seconds==3){
-                    if(mediaPlayer!=null) {
-                        mediaPlayer.stop();
+                    textViewShowTime.setText(String.format("%02d", seconds / 60)
+                            + ":" + String.format("%02d", seconds % 60));
+                    if(seconds==3.00){
+                        playSound(R.raw.countdown);
+                        favButton.setEnabled(false);
                     }
 
-                    mediaPlayer = MediaPlayer.create(getBaseContext() , R.raw.countdown);
-                    mediaPlayer.start();
                 }
 
-            }
+                @Override
+                public void onFinish() {
+                    textViewShowTime.setText("00:00");
+                    countDownTimer1 = new CountDownTimer(1000, 1000) {
 
-            @Override
-            public void onFinish() {
-                countDownTimer1 = new CountDownTimer(1000, 500) {
+                        @Override
+                        public void onTick(long leftTimeInMilliseconds) {
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+                            stopSound();
+                            endSound();
+                            finish();
+                        }
+
+                    }.start();
+                }
+
+            }.start();
 
 
-                    @Override
-                    public void onTick(long leftTimeInMilliseconds) {
 
-                    }
 
-                    @Override
-                    public void onFinish() {
-
-                        finish();
-                    }
-
-                }.start();
-            }
-
-        }.start();
 
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater=getMenuInflater();
         inflater.inflate(R.menu.menu_end, menu);
+        favButton = (MenuItem) menu.findItem(R.id.action_music);
+        favButton.setEnabled(false);
         return super.onCreateOptionsMenu(menu);
 
     }
@@ -187,20 +180,13 @@ public class ShowSkillActivity extends AppCompatActivity   implements AnimationL
         switch(item.getItemId())
         {
             case R.id.action_end:
-                if(mediaPlayer!=null) {
-                    mediaPlayer.stop();
-                }
+                stopSound();
+                endSound();
                 finish();
-
                 break;
             case R.id.action_music:
-                if(mediaPlayer!=null) {
-                    mediaPlayer.stop();
-                }
                 int skillMp3_1 = getIntent().getIntExtra("mp3",0);
-                mediaPlayer = MediaPlayer.create(getBaseContext() , skillMp3_1);
-                mediaPlayer.start();
-
+                playSound(skillMp3_1);
                 break;
         }
         return true;
@@ -210,33 +196,21 @@ public class ShowSkillActivity extends AppCompatActivity   implements AnimationL
     public void stop_play(View view){
 
         if(x == 0){
-            stop_play_button.setImageResource(R.drawable.icn_play);
-            countDownTimer.cancel();
-            x =1;
-            ((GifDrawable)gifImageView.getBackground()).stop();
+            stopSound();
+
         }
         else{
             stop_play_button.setImageResource(R.drawable.icn_pause);
             startTimer(time);
             x =0;
             ((GifDrawable)gifImageView.getBackground()).start();
-
+            mediaPlayer.start();
 
         }
-
 
     }
-
     public void video(View view){
-        if(mediaPlayer!=null) {
-            mediaPlayer.stop();
-        }
-
-        stop_play_button.setImageResource(R.drawable.icn_play);
-        countDownTimer.cancel();
-        ((GifDrawable)gifImageView.getBackground()).stop();
-
-        x =1;
+        stopSound();
         int skillGif_1 = getIntent().getIntExtra("gif",0);
         Intent intent = new Intent(getApplicationContext(), ViewVideoActivity.class);
         intent.putExtra("gif",skillGif_1);
@@ -246,30 +220,47 @@ public class ShowSkillActivity extends AppCompatActivity   implements AnimationL
     @Override
     public void onPause() {
         super.onPause();
-        if(mediaPlayer!=null) {
-            mediaPlayer.stop();
-        }
-
-        stop_play_button.setImageResource(R.drawable.icn_play);
-        countDownTimer.cancel();
-        ((GifDrawable)gifImageView.getBackground()).stop();
-
-        x =1;
+        stopSound();
     }
     public void onBackPressed() {
+        stopSound();
+        endSound();
+        finish();
+
+    }
+    public void playSound(int sound){
+        if(mediaPlayer!=null) {
+            mediaPlayer.stop();
+        }
+        mediaPlayer =  MediaPlayer.create(getBaseContext(),sound);
+        mediaPlayer.start();
+
+    }
+    public void stopSound(){
+        if(mediaPlayer.isPlaying()) {
+            mediaPlayer.pause();
+        }
+        if (begin == 0) {
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                public void onCompletion(MediaPlayer mp) {
+                    if (mediaPlayer != null) {
+                            mediaPlayer.stop();
+                    }
+                }
+            });
+        }
+        stop_play_button.setImageResource(R.drawable.icn_play);
+        countDownTimer.cancel();
+        ((GifDrawable)gifImageView.getBackground()).stop();
+        x =1;
+
+    }
+    public void endSound(){
         if(mediaPlayer!=null) {
             mediaPlayer.stop();
         }
 
-        stop_play_button.setImageResource(R.drawable.icn_play);
-        countDownTimer.cancel();
-        ((GifDrawable)gifImageView.getBackground()).stop();
     }
 
 
-
-    @Override
-    public void onAnimationCompleted(int loopNumber) {
-
-    }
 }
