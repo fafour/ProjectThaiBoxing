@@ -64,7 +64,6 @@ public class TabFragmentAllPackage extends Fragment {
                 if (parent.getItemAtPosition(position).toString()
                         .equals("Choose an option")) {
                     select_1[0] = 0;
-                    select_2[0] = 0;
                     txt.setText("");
                     txtPrice.setText("");
 
@@ -204,7 +203,6 @@ public class TabFragmentAllPackage extends Fragment {
                 if (parent.getItemAtPosition(position).toString()
                         .equals("Choose an option")) {
                     select_2[0] = 0;
-                    select_1[0] = 0;
                     txt.setText("");
                     txtPrice.setText("");
 

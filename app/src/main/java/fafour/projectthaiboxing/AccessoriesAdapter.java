@@ -28,6 +28,7 @@ public class AccessoriesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
     DataAccessories current;
     int currentPos=0;
 
+
     public AccessoriesAdapter(Context context, List<DataAccessories> data){
         this.context=context;
         inflater= LayoutInflater.from(context);
@@ -48,12 +49,12 @@ public class AccessoriesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
         AccessoriesAdapter.MyHolder myHolder= (AccessoriesAdapter.MyHolder) holder;
         final DataAccessories current=data.get(position);
         myHolder.nameAccessories.setText(current.accessoriesName);
-        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
         String yourFormattedString = formatter.format(current.accessoriesSale);
-        myHolder.priceAccessories.setText(yourFormattedString +" BTH");
+        myHolder.priceAccessories.setText(yourFormattedString +" USD");
 
         myHolder.txtSale.setPaintFlags(myHolder.txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
-        myHolder.txtSale.setText(current.accessoriesPrice +" BTH" );
+        myHolder.txtSale.setText(current.accessoriesPrice +" USD" );
         myHolder.txtSaleData.setText(current.accessoriesSaleData +"%");
 
 
@@ -73,6 +74,8 @@ public class AccessoriesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
                     intent.putExtra("detail", current.accessoriesDetail);
                     intent.putExtra("name", current.accessoriesName);
                     intent.putExtra("price", current.accessoriesPrice);
+
+                    intent.putExtra("stock_1", current.accessoriesstock1);
 
                     intent.putExtra("sale", current.accessoriesSale);
                     intent.putExtra("saleData", current.accessoriesSaleData);
@@ -108,6 +111,27 @@ public class AccessoriesAdapter  extends RecyclerView.Adapter<RecyclerView.ViewH
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ReviewImageActivity.class);
+                    intent.putExtra("img", current.accessoriesImg);
+                    intent.putExtra("img1", current.accessoriesImg1);
+                    intent.putExtra("img2", current.accessoriesImg2);
+                    intent.putExtra("detail", current.accessoriesDetail);
+                    intent.putExtra("name", current.accessoriesName);
+                    intent.putExtra("price", current.accessoriesPrice);
+
+                    intent.putExtra("sale", current.accessoriesSale);
+                    intent.putExtra("saleData", current.accessoriesSaleData);
+
+                    context.startActivity(intent);
+                }
+            });
+        }
+        else if(position == 11 || position == 12 || position == 13 || position == 14 || position == 15
+                || position == 16 ){
+
+            myHolder.cvAccessories.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ReviewImage1Activity.class);
                     intent.putExtra("img", current.accessoriesImg);
                     intent.putExtra("img1", current.accessoriesImg1);
                     intent.putExtra("img2", current.accessoriesImg2);

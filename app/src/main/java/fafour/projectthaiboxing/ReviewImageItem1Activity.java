@@ -29,7 +29,7 @@ import java.text.DecimalFormat;
 
 public class ReviewImageItem1Activity extends AppCompatActivity {
     RelativeLayout notificationCount1;
-    TextView tv_cart;
+    TextView tv_cart,cart_count,cart_count1,cart_count2,cart_count3,cart_count4;
     Button button1,button2,button3,button4,button5;
     String size ="";
 
@@ -107,10 +107,9 @@ public class ReviewImageItem1Activity extends AppCompatActivity {
         button1.setBackgroundResource(R.color.buttonBg);
 
 
-
-        int price = getIntent().getIntExtra("price",0);
+        double sale = getIntent().getDoubleExtra("sale",0.0);
+        double price = getIntent().getDoubleExtra("price",0.0);
         String name = getIntent().getStringExtra("name");
-        int sale = getIntent().getIntExtra("sale",0);
         int saleData = getIntent().getIntExtra("saleData",0);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -119,6 +118,26 @@ public class ReviewImageItem1Activity extends AppCompatActivity {
 
         final CirclePageIndicator circleIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
         circleIndicator.setViewPager(viewPager);
+
+
+        cart_count = (TextView) findViewById(R.id.cart_count);
+        cart_count1 = (TextView) findViewById(R.id.cart_count1);
+        cart_count2 = (TextView) findViewById(R.id.cart_count2);
+        cart_count3 = (TextView) findViewById(R.id.cart_count3);
+        cart_count4 = (TextView) findViewById(R.id.cart_count4);
+
+        int stock = getIntent().getIntExtra("stock1",0);
+        int stock1 = getIntent().getIntExtra("stock2",0);
+        int stock2 = getIntent().getIntExtra("stock3",0);
+        int stock3 = getIntent().getIntExtra("stock4",0);
+        int stock4 = getIntent().getIntExtra("stock5",0);
+
+        cart_count.setText(stock+"");
+        cart_count1.setText(stock1+"");
+        cart_count2.setText(stock2+"");
+        cart_count3.setText(stock3+"");
+        cart_count4.setText(stock4+"");
+
 
         final TextView tvTextName = (TextView) findViewById(R.id.textName);
         final TextView tvTextPrice = (TextView) findViewById(R.id.textPrice);
@@ -130,11 +149,11 @@ public class ReviewImageItem1Activity extends AppCompatActivity {
         textTittle.setText(detail);
 
         tvTextName.setText(name);
-        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
         String yourFormattedString = formatter.format(sale);
-        tvTextPrice.setText(yourFormattedString +"  BTH");
+        tvTextPrice.setText(yourFormattedString +"  USD");
         String yourFormattedString1 = formatter.format(price);
-        txtSale.setText(yourFormattedString1 +"  BTH");
+        txtSale.setText(yourFormattedString1 +"  USD");
         txtSaleData.setText(saleData +"%");
         txtSale.setPaintFlags(txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
@@ -143,6 +162,11 @@ public class ReviewImageItem1Activity extends AppCompatActivity {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int stock = getIntent().getIntExtra("stock1",0);
+                int stock1 = getIntent().getIntExtra("stock2",0);
+                int stock2 = getIntent().getIntExtra("stock3",0);
+                int stock3 = getIntent().getIntExtra("stock4",0);
+                int stock4 = getIntent().getIntExtra("stock5",0);
                 if (size == ""){
                     final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItem1Activity.this);
                     dialog.setTitle("Please select size..");
@@ -155,7 +179,68 @@ public class ReviewImageItem1Activity extends AppCompatActivity {
 
                     dialog.show();
 
-                }else {
+                }else if (size == "8 oz" && stock == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItem1Activity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }else if (size == "10 oz" && stock1 == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItem1Activity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }else if (size == "12 oz" && stock2 == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItem1Activity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }else if (size == "14 oz" && stock3 == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItem1Activity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }else if (size == "16 oz" && stock4 == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItem1Activity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }
+                else {
                     final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItem1Activity.this);
                     dialog.setTitle("Add Cart Success ");
                     dialog.setCancelable(true);
@@ -163,8 +248,8 @@ public class ReviewImageItem1Activity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             int img = getIntent().getIntExtra("img",0);
                             String name = getIntent().getStringExtra("name")+" Size :"+size;
-                            int price = getIntent().getIntExtra("price",0);
-                            int sale = getIntent().getIntExtra("sale",0);
+                            double sale = getIntent().getDoubleExtra("sale",0.0);
+                            double price = getIntent().getDoubleExtra("price",0.0);
                             int saleData = getIntent().getIntExtra("saleData",0);
 
                             int no = 0;

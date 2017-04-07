@@ -111,60 +111,181 @@
         android:padding="3dp"
         >
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:orderInCategory="100"
             android:layout_weight="1"
-            android:text="8 oz"
-            android:onClick="oz_one"
-            android:id="@+id/button1"
-            android:textColor="@android:color/black"
-            android:background="@color/buttonBg"
-            android:orderInCategory="100" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="10 oz"
-            android:onClick="oz_two"
-            android:id="@+id/button2"
-            android:textColor="@android:color/black"
-            android:background="@color/buttonBg"
-            android:orderInCategory="100" />
+            <RelativeLayout
+                android:id="@+id/img_cart"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="12 oz"
-            android:onClick="oz_three"
-            android:id="@+id/button3"
-            android:textColor="@android:color/black"
-            android:background="@color/buttonBg"
-            android:orderInCategory="100" />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8 oz"
+                    android:onClick="oz_one"
+                    android:id="@+id/button1"
+                    android:textColor="@android:color/black"
+                    android:background="@color/buttonBg" />
+            </RelativeLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="14oz"
-            android:onClick="oz_four"
-            android:id="@+id/button4"
-            android:textColor="@android:color/black"
-            android:background="@color/buttonBg"
-            android:orderInCategory="100" />
+            <TextView android:id="@+id/cart_count"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@android:drawable/ic_notification_overlay"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#FFF"
+                android:text="0"
+                android:layout_alignRight="@id/img_cart"/>
+        </RelativeLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:orderInCategory="100"
             android:layout_weight="1"
-            android:text="16oz"
-            android:onClick="oz_five"
-            android:id="@+id/button5"
-            android:textColor="@android:color/black"
-            android:background="@color/buttonBg"
-            android:orderInCategory="100" />
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/img_cart1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10 oz"
+                    android:onClick="oz_two"
+                    android:id="@+id/button2"
+                    android:textColor="@android:color/black"
+                    android:background="@color/buttonBg"
+                    />
+            </RelativeLayout>
+
+            <TextView android:id="@+id/cart_count1"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@android:drawable/ic_notification_overlay"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#FFF"
+                android:text="0"
+                android:layout_alignRight="@id/img_cart1"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:orderInCategory="100"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/img_cart2"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="12 oz"
+                    android:onClick="oz_three"
+                    android:id="@+id/button3"
+                    android:textColor="@android:color/black"
+                    android:background="@color/buttonBg"
+                    android:orderInCategory="100" />
+            </RelativeLayout>
+
+            <TextView android:id="@+id/cart_count2"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@android:drawable/ic_notification_overlay"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#FFF"
+                android:text="0"
+                android:layout_alignRight="@id/img_cart2"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:orderInCategory="100"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/img_cart3"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="14oz"
+                    android:onClick="oz_four"
+                    android:id="@+id/button4"
+                    android:textColor="@android:color/black"
+                    android:background="@color/buttonBg" />
+            </RelativeLayout>
+
+            <TextView android:id="@+id/cart_count3"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@android:drawable/ic_notification_overlay"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#FFF"
+                android:text="0"
+                android:layout_alignRight="@id/img_cart3"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:orderInCategory="100"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_width="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/img_cart4"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16oz"
+                    android:onClick="oz_five"
+                    android:id="@+id/button5"
+                    android:textColor="@android:color/black"
+                    android:background="@color/buttonBg" />
+            </RelativeLayout>
+
+            <TextView android:id="@+id/cart_count4"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:background="@android:drawable/ic_notification_overlay"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#FFF"
+                android:text="0"
+                android:layout_alignRight="@id/img_cart4"/>
+        </RelativeLayout>
+
+
+
     </LinearLayout>
 
     <Button

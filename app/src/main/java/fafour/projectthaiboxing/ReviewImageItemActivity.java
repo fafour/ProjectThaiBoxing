@@ -94,10 +94,14 @@ public class ReviewImageItemActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
         }
 
-        int price = getIntent().getIntExtra("price",0);
+        double sale = getIntent().getDoubleExtra("sale",0.0);
+        double price = getIntent().getDoubleExtra("price",0.0);
         String name = getIntent().getStringExtra("name");
-        int sale = getIntent().getIntExtra("sale",0);
         int saleData = getIntent().getIntExtra("saleData",0);
+
+        int stockData = getIntent().getIntExtra("stock_1",0);
+        final TextView stock = (TextView) findViewById(R.id.stock);
+        stock.setText(""+stockData);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
         final ReviewImageItemActivity.ImagePagerAdapter adapter = new ReviewImageItemActivity.ImagePagerAdapter();
@@ -116,11 +120,11 @@ public class ReviewImageItemActivity extends AppCompatActivity {
         textTittle.setText(detail);
 
         tvTextName.setText(name);
-        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
         String yourFormattedString = formatter.format(sale);
-        tvTextPrice.setText(yourFormattedString +"  BTH");
+        tvTextPrice.setText(yourFormattedString +"  USD");
         String yourFormattedString1 = formatter.format(price);
-        txtSale.setText(yourFormattedString1 +"  BTH");
+        txtSale.setText(yourFormattedString1 +"  USD");
         txtSaleData.setText(saleData +"%");
         txtSale.setPaintFlags(txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
@@ -129,43 +133,58 @@ public class ReviewImageItemActivity extends AppCompatActivity {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItemActivity.this);
-                dialog.setTitle("Add Cart Success ");
-                dialog.setCancelable(true);
-                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        int img = getIntent().getIntExtra("img",0);
-                        String name = getIntent().getStringExtra("name");
-                        int price = getIntent().getIntExtra("price",0);
-                        int sale = getIntent().getIntExtra("sale",0);
-                        int saleData = getIntent().getIntExtra("saleData",0);
-
-                        int no = 0;
-                        try{
-                            if( MainActivity.listBuy.size() == 0){
-                                MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
-
-                            }else {
-                                for (int i = 0; i < MainActivity.listBuy.size(); i++) {
-                                    if (MainActivity.listBuy.get(i).getAccessoriesName().equals(name)) {
-                                        MainActivity.listBuy.get(i).setAccessoriesNum(MainActivity.listBuy.get(i).getAccessoriesNum() + 1);
-                                        continue;
-                                    } else {
-                                        no++;
-                                    }
-                                }
-                                if ( MainActivity.listBuy.size() == no){
-                                    MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
-                                }
-                            }
-                            tv_cart.setText(MainActivity.listBuy.size() +"");
-                        }catch (Exception x){
+                int stockData = getIntent().getIntExtra("stock_1",0);
+                if (stockData == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItemActivity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
 
                         }
-                    }
-                });
+                    });
 
-                dialog.show();
+                    dialog.show();
+
+                }else {
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItemActivity.this);
+                    dialog.setTitle("Add Cart Success ");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            int img = getIntent().getIntExtra("img", 0);
+                            String name = getIntent().getStringExtra("name");
+                            double sale = getIntent().getDoubleExtra("sale", 0.0);
+                            double price = getIntent().getDoubleExtra("price", 0.0);
+                            int saleData = getIntent().getIntExtra("saleData", 0);
+
+                            int no = 0;
+                            try {
+                                if (MainActivity.listBuy.size() == 0) {
+                                    MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1, sale, saleData));
+
+                                } else {
+                                    for (int i = 0; i < MainActivity.listBuy.size(); i++) {
+                                        if (MainActivity.listBuy.get(i).getAccessoriesName().equals(name)) {
+                                            MainActivity.listBuy.get(i).setAccessoriesNum(MainActivity.listBuy.get(i).getAccessoriesNum() + 1);
+                                            continue;
+                                        } else {
+                                            no++;
+                                        }
+                                    }
+                                    if (MainActivity.listBuy.size() == no) {
+                                        MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1, sale, saleData));
+                                    }
+                                }
+                                tv_cart.setText(MainActivity.listBuy.size() + "");
+                            } catch (Exception x) {
+
+                            }
+                        }
+                    });
+
+                    dialog.show();
+                }
 
             }
         });

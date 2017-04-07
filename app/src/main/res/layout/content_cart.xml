@@ -54,7 +54,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    android:text="Tootal  :  "
+                    android:text="Total  :  "
                     android:textColor="@android:color/black"/>
 
                 <TextView
@@ -70,7 +70,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="20dp"
                     android:textStyle="bold"
-                    android:text="   BTH   "
+                    android:text="   USD   "
                     android:textColor="@android:color/black"/>
 
 

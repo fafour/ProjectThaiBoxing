@@ -1,9 +1,14 @@
 package fafour.projectthaiboxing;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,7 +51,6 @@ public class AccessoriesActivity extends AppCompatActivity {
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
         collapsingToolbar.setTitle("Accessories");
 
-        List<DataAccessories> data=new ArrayList<>();
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
             Window window = this.getWindow();
@@ -54,6 +58,21 @@ public class AccessoriesActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
         }
+
+
+        if (!isNetworkConnected() && !isWifiConnected() ) {
+
+            new AlertDialog.Builder(this)
+                    .setTitle("Oops! Connection Timeout")
+                    .setMessage("Please check your Internet connection")
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                           finish();
+                        }
+                    }).setIcon(android.R.drawable.ic_dialog_alert).show();
+        }
+
+        List<DataAccessories> data1=new ArrayList<>();
 
         String[] accessoriesName = {
                 "Tiger Muay Thai Head Guard",
@@ -89,31 +108,33 @@ public class AccessoriesActivity extends AppCompatActivity {
                 "High quality satin Muaythai shorts from Tiger Muay Thai Special finished with a very high standard of embroidery and craftsmanship.",
                 "The classic Tiger Muay Thai Tank Top in white Drifit Material with the big circular TMT logo on the front.",
                 "The classic Tiger Muay Thai Tank Top in black Drifit Material with the big circular TMT logo on the front.",
-                "Woman Cut Strength is Beautiful Tank Top in White & Pink",
+                "Female Cut Strength is Beautiful Tank Top in White & Pink",
                 "Female Cut Strength is Beautiful Tank Top in Black & Pink",
                 "The short sleeve version of the Tiger Muay Thai Black & White Edition rashguard.",
                 "The short sleeve version of the Tiger Muay Thai Black & Orange Edition rashguard."
         };
 
-        int [] accessoriesPrice = {
-                3600,
-                3000,
-                3000,
-                2800,
-                2800,
-                2800,
-                2800,
-                2800,
-                2800,
-                2800,
-                2800,
-                1100,
-                1100,
-                1100,
-                1100,
-                2400,
-                2400
+        Double [] accessoriesPrice = {
+                104.61,
+                87.17,
+                87.17,
+                81.36,
+                81.36,
+                81.36,
+                81.36,
+                81.36,
+                81.36,
+                81.36,
+                81.36,
+                31.96,
+                31.96,
+                31.96,
+                31.96,
+                69.74,
+                69.74
         };
+
+
 
         int [] accessoriesImg  = {
                 R.drawable.head_guard_one,
@@ -126,21 +147,131 @@ public class AccessoriesActivity extends AppCompatActivity {
                 R.drawable.black_pink_one,
                 R.drawable.black_blue_one,
                 R.drawable.black_orange_one,
-                R.drawable.gray_camo_one
+                R.drawable.gray_camo_one,
+                R.drawable.tank_top_white_one,
+                R.drawable.tank_top_black_one,
+                R.drawable.tank_top_white_pink_one,
+                R.drawable.tank_top_black_pink_one,
+                R.drawable.rashguard_shortsleeve_black_white_edition_one,
+                R.drawable.rashguard_shortsleeve_black_orange_edition_one
+        };
+        int [] accessories_stock1 = {
+                10,
+                10,
+                10,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
 
         };
+
+        int [] accessories_stock2 = {
+                10,
+                10,
+                10,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+
+        };
+
+        int [] accessories_stock3 = {
+                10,
+                10,
+                10,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+
+        };
+
+        int [] accessories_stock4 = {
+                10,
+                10,
+                10,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+
+        };
+
+        int [] accessories_stock5 = {
+                10,
+                10,
+                10,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                5,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+
+        };
+
         int [] accessoriesSaleDataPrice = {
                 20,
                 10,
                 10,
-                5,
-                5,
-                5,
-                5,
-                5,
-                5,
-                5,
-                5,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
+                7,
                 10,
                 10,
                 10,
@@ -160,7 +291,13 @@ public class AccessoriesActivity extends AppCompatActivity {
                 R.drawable.black_pink_two,
                 R.drawable.black_blue_two,
                 R.drawable.black_orange_two,
-                R.drawable.gray_camo_two
+                R.drawable.gray_camo_two,
+                R.drawable.tank_top_white_two,
+                R.drawable.tank_top_black_two,
+                R.drawable.tank_top_white_pink_two,
+                R.drawable.tank_top_black_pink_two,
+                R.drawable.rashguard_shortsleeve_black_white_edition_two,
+                R.drawable.rashguard_shortsleeve_black_orange_edition_two
         };
         int [] accessoriesImgReview_2  = {
                 R.drawable.head_guard_three,
@@ -173,7 +310,13 @@ public class AccessoriesActivity extends AppCompatActivity {
                 R.drawable.black_pink_one,
                 R.drawable.black_blue_one,
                 R.drawable.black_orange_one,
-                R.drawable.gray_camo_one
+                R.drawable.gray_camo_one,
+                R.drawable.tank_top_white_one,
+                R.drawable.tank_top_black_one,
+                R.drawable.tank_top_white_pink_one,
+                R.drawable.tank_top_black_pink_one,
+                R.drawable.rashguard_shortsleeve_black_white_edition_one,
+                R.drawable.rashguard_shortsleeve_black_orange_edition_one
         };
 
 
@@ -191,23 +334,29 @@ public class AccessoriesActivity extends AppCompatActivity {
             accessoriesData.accessoriesImg2 = accessoriesImgReview_2[count];
 
 
-            int sum = accessoriesPrice[count]-(accessoriesPrice[count]*accessoriesSaleDataPrice[count]/100);
+            Double sum = accessoriesPrice[count]-(accessoriesPrice[count]*accessoriesSaleDataPrice[count]/100);
 
             accessoriesData.accessoriesSale = sum;;
-            accessoriesData.accessoriesSaleData = accessoriesSaleDataPrice[count];;
+            accessoriesData.accessoriesSaleData = accessoriesSaleDataPrice[count];
 
+            accessoriesData.accessoriesstock1 = accessories_stock1[count];
+            accessoriesData.accessoriesstock2 = accessories_stock2[count];
+            accessoriesData.accessoriesstock3 = accessories_stock3[count];
+            accessoriesData.accessoriesstock4 = accessories_stock4[count];
+            accessoriesData.accessoriesstock5 = accessories_stock5[count];
 
-            data.add(accessoriesData);
+            data1.add(accessoriesData);
 
         }
 
         // Setup and Handover data to recyclerview
         mRVList = (RecyclerView) findViewById(R.id.accessoriesList);
-        mAdapter = new AccessoriesAdapter(AccessoriesActivity.this, data);
+        mAdapter = new AccessoriesAdapter(AccessoriesActivity.this, data1);
         mRVList.setAdapter(mAdapter);
         mRVList.setLayoutManager(new LinearLayoutManager(AccessoriesActivity.this));
 
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -247,6 +396,26 @@ public class AccessoriesActivity extends AppCompatActivity {
 
 
     }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    private boolean isNetworkConnected() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE); // 1
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo(); // 2
+        return networkInfo != null && networkInfo.isConnected(); // 3
+    }
+    private boolean isWifiConnected() {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        return networkInfo != null && (ConnectivityManager.TYPE_WIFI == networkInfo.getType()) && networkInfo.isConnected();
+    }
+
 
 
 }

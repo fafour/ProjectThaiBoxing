@@ -2,10 +2,9 @@ package fafour.projectthaiboxing;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,14 +13,11 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.paypal.android.sdk.payments.PayPalConfiguration;
-import com.paypal.android.sdk.payments.PayPalItem;
 import com.paypal.android.sdk.payments.PayPalPayment;
-import com.paypal.android.sdk.payments.PayPalPaymentDetails;
 import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
@@ -94,14 +90,14 @@ public class CartActivity extends AppCompatActivity {
             txtStatus.setVisibility(View.VISIBLE);
             dataBuy.setVisibility(View.GONE);
         }else {
-            DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+            DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
             String yourFormattedString = formatter.format(Total.totalBuyItem());
             txtTotal.setText(yourFormattedString+"");
             txtStatus.setVisibility(View.GONE);
             dataBuy.setVisibility(View.VISIBLE);
         }
 
-        List<DataBuyItem> data=new ArrayList<>();
+        List<DataBuyItem> data=new ArrayList<DataBuyItem>();
         data.clear();
 
         for(int count=0; count < MainActivity.listBuy.size(); count++){
@@ -138,7 +134,7 @@ public class CartActivity extends AppCompatActivity {
 
     private void getPayment() {
 
-        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(Total.totalBuyItem())), "THB", "Accessoies",
+        PayPalPayment payment = new PayPalPayment(new BigDecimal(String.valueOf(Total.totalBuyItem())), "USD", "Accessoies",
                 PayPalPayment.PAYMENT_INTENT_SALE);
 
         Intent intent = new Intent(this, PaymentActivity.class);

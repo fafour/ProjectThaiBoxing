@@ -6,16 +6,16 @@ package fafour.projectthaiboxing;
 
 public class DataBuyItem {
     public String accessoriesName;
-    public int accessoriesPrice;
+    public double accessoriesPrice;
     public int accessoriesImg;
     public int accessoriesNum;
 
-    public int accessoriesSale;
+    public double accessoriesSale;
     public int accessoriesSaleData;
 
 
-    public DataBuyItem (String accessoriesName,int accessoriesPrice , int accessoriesImg ,
-                        int accessoriesNum , int accessoriesSale , int accessoriesSaleData){
+    public DataBuyItem (String accessoriesName,double accessoriesPrice , int accessoriesImg ,
+                        int accessoriesNum , double accessoriesSale , int accessoriesSaleData){
         this.setAccessoriesImg(accessoriesImg);
         this.setAccessoriesName(accessoriesName);
         this.setAccessoriesPrice(accessoriesPrice);
@@ -35,11 +35,11 @@ public class DataBuyItem {
         this.accessoriesName = accessoriesName;
     }
 
-    public int getAccessoriesPrice() {
+    public double getAccessoriesPrice() {
         return accessoriesPrice;
     }
 
-    public void setAccessoriesPrice(int accessoriesPrice) {
+    public void setAccessoriesPrice(double accessoriesPrice) {
         this.accessoriesPrice = accessoriesPrice;
     }
 
@@ -59,11 +59,11 @@ public class DataBuyItem {
         this.accessoriesNum = accessoriesNum;
     }
 
-    public int getAccessoriesSale() {
+    public double getAccessoriesSale() {
         return accessoriesSale;
     }
 
-    public void setAccessoriesSale(int accessoriesSale) {
+    public void setAccessoriesSale(double accessoriesSale) {
         this.accessoriesSale = accessoriesSale;
     }
 

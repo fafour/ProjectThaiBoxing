@@ -1,22 +1,18 @@
 package fafour.projectthaiboxing;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Paint;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,13 +48,13 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         final CartAdapter.MyHolder myHolder= (CartAdapter.MyHolder) holder;
         final DataBuyItem current=data.get(position);
         myHolder.nameAccessories.setText(current.accessoriesName);
-        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###.##");
         String yourFormattedString = formatter.format(current.accessoriesSale);
-        myHolder.priceAccessories.setText(yourFormattedString +" BTH");
+        myHolder.priceAccessories.setText(yourFormattedString +" USD");
 
         myHolder.txtSale.setPaintFlags(myHolder.txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
         String yourFormattedString1 = formatter.format(current.accessoriesPrice);
-        myHolder.txtSale.setText(yourFormattedString1 +" BTH");
+        myHolder.txtSale.setText(yourFormattedString1 +" USD");
 
         myHolder.txtSaleData.setText(current.accessoriesSaleData+"%");
 
@@ -78,7 +74,7 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     CartActivity.txtStatus.setVisibility(View.VISIBLE);
                     CartActivity.dataBuy.setVisibility(View.GONE);
                 }
-                DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+                DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
                 String yourFormattedString = formatter.format(Total.totalBuyItem());
                 CartActivity.txtTotal.setText(yourFormattedString+"");
 
@@ -101,7 +97,7 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     MainActivity.listBuy.set(position ,new DataBuyItem(current.accessoriesName,current.accessoriesPrice,
                             current.accessoriesImg,a,current.accessoriesSale,current.accessoriesSaleData));
                     myHolder.display.setText(current.accessoriesNum+"");
-                    DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+                    DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
                     String yourFormattedString = formatter.format(Total.totalBuyItem());
                     CartActivity.txtTotal.setText(yourFormattedString+"");
                 }
@@ -120,7 +116,7 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 MainActivity.listBuy.set(position ,new DataBuyItem(current.accessoriesName,current.accessoriesPrice,
                         current.accessoriesImg,a,current.accessoriesSale,current.accessoriesSaleData));
                 myHolder.display.setText(current.accessoriesNum+"");
-                DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+                DecimalFormat formatter = new DecimalFormat("#,###,###,###,###.##");
                 String yourFormattedString = formatter.format(Total.totalBuyItem());
                 CartActivity.txtTotal.setText(yourFormattedString+"");
 

@@ -97,32 +97,6 @@
 
                     </LinearLayout>
 
-
-                    <!--<LinearLayout-->
-                        <!--android:id="@+id/payment2"-->
-                        <!--android:layout_width="wrap_content"-->
-                        <!--android:layout_height="wrap_content"-->
-                        <!--android:layout_gravity="center"-->
-                        <!--android:orientation="horizontal" >-->
-
-                        <!--<NumberPicker-->
-                            <!--android:id="@+id/numberPicker1"-->
-                            <!--android:layout_width="wrap_content"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:scaleX="0.55"-->
-                            <!--android:scaleY="0.55"-->
-                            <!--numberpicker:background="#FF6D00"-->
-
-                            <!--android:focusableInTouchMode="true"-->
-                            <!--android:descendantFocusability="blocksDescendants"-->
-                            <!--android:theme = "@style/cust_dialog"-->
-                            <!--android:textColor="#FF6D00"-->
-                            <!--android:background="@null"-->
-                            <!--android:orientation="horizontal" />-->
-
-                        <!---->
-
-                    <!--</LinearLayout>-->
                     <RelativeLayout
                         android:layout_width="fill_parent"
                         android:gravity="bottom"

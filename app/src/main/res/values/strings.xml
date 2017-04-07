@@ -6,6 +6,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="phone_hint">Tel.*</string>
+
     <string name="action_settings">Settings</string>
     <string name="title_activity_history_menu">HistoryMenuActivity</string>
     <string name="title_activity_view_video">ViewVideoActivity</string>
@@ -175,4 +177,11 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_review_image_item">ReviewImageItemActivity</string>
     <string name="title_activity_review_image_item1">ReviewImageItem1Activity</string>
+    <string name="title_activity_review_image1">ReviewImage1Activity</string>
+    <string name="title_activity_email_name_sur_name">EmailNameSurNameActivity</string>
+    <string name="title_activity_address">AddressActivity</string>
+    <string name="title_activity_head_guard">HeadGuardActivity</string>
+    <string name="title_activity_boxing_gloves">BoxingGlovesActivity</string>
+    <string name="title_activity_shorts">ShortsActivity</string>
+    <string name="title_activity_tshirt">TshirtActivity</string>
 </resources>

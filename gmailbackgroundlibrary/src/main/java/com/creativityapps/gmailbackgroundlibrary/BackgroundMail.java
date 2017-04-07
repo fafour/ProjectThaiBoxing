@@ -32,7 +32,7 @@ public class BackgroundMail {
     private String sendingMessageSuccess;
     private String sendingMessageError;
     private boolean processVisibility = true;
-    private ArrayList<String> attachments = new ArrayList<>();
+    private ArrayList<String> attachments = new ArrayList<String>();
     private Context mContext;
     private OnSuccessCallback onSuccessCallback;
     private OnFailCallback onFailCallback;
@@ -327,7 +327,7 @@ public class BackgroundMail {
         private String subject;
         private String body;
         private String type = BackgroundMail.TYPE_PLAIN;
-        private ArrayList<String> attachments = new ArrayList<>();
+        private ArrayList<String> attachments = new ArrayList<String>();
         private String sendingMessage;
         private String sendingMessageSuccess;
         private String sendingMessageError;

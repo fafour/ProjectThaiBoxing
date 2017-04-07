@@ -78,7 +78,7 @@ public class BookingActivity extends AppCompatActivity {
             dataBuy.setVisibility(View.VISIBLE);
         }
 
-        List<DataBooking> data=new ArrayList<>();
+        List<DataBooking> data=new ArrayList<DataBooking>();
         data.clear();
 
         for(int count=0; count < MainActivity.booking.size(); count++){
@@ -94,7 +94,6 @@ public class BookingActivity extends AppCompatActivity {
         }
 
 
-        // Setup and Handover data to recyclerview
         mRVList = (RecyclerView) findViewById(R.id.bookingList);
         mAdapter = new BookingAdapter(BookingActivity.this, data);
         mRVList.setAdapter(mAdapter);
@@ -120,8 +119,14 @@ public class BookingActivity extends AppCompatActivity {
 //                    }
 //                })
 //                .send();
+
+        //-----------------------------------------------------------------------------------
         Intent intent = new Intent(getApplicationContext(), ContactActivity.class);
         startActivity(intent);
+        //-----------------------------------------------------------------------------------
+
+//        Intent intent = new Intent(getApplicationContext(), EmailNameSurNameActivity.class);
+//        startActivity(intent);
 
     }
 

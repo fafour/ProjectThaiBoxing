@@ -17,6 +17,12 @@ public class DataBooking {
         this.setBookingNum(bookingNum);
         this.setBookingDuration(bookingDuration);
     }
+
+    public DataBooking(String bookingName,int bookingPrice,int bookingNum){
+        this.setBookingName(bookingName);
+        this.setBookingPrice(bookingPrice);
+        this.setBookingNum(bookingNum);
+    }
     public  DataBooking(){
 
     }

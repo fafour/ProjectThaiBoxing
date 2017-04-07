@@ -43,7 +43,11 @@ public class BookingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         // Get current position of item in recyclerview to bind data and assign values from list
         final BookingAdapter.MyHolder myHolder= (BookingAdapter.MyHolder) holder;
         final DataBooking current=data.get(position);
-        myHolder.nameAccessories.setText(current.bookingName+" "+current.bookingDuration);
+        if(current.bookingDuration == null){
+            myHolder.nameAccessories.setText(current.bookingName);
+        }else {
+            myHolder.nameAccessories.setText(current.bookingName + " " + current.bookingDuration);
+        }
         DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
         String yourFormattedString = formatter.format(current.bookingPrice);
         myHolder.priceAccessories.setText(yourFormattedString +" BTH");

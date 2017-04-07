@@ -52,7 +52,23 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp" />
+            android:textSize="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:id="@+id/txt"
+            android:layout_margin="@dimen/text_margin"
+            android:textColor="@android:color/black" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/txtPrice"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/text_margin"
+            android:textColor="@android:color/black" />
 
 
         <Button

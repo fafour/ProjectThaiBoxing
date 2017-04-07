@@ -29,7 +29,7 @@ import java.text.DecimalFormat;
 
 public class ReviewImageActivity extends AppCompatActivity {
     RelativeLayout notificationCount1;
-    TextView tv_cart;
+    TextView tv_cart,cart_count,cart_count1,cart_count2,cart_count3,cart_count4,cart_count5;
     Button button1,button2,button3,button4,button5,button6;
     String size ="";
 
@@ -108,9 +108,9 @@ public class ReviewImageActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
         }
 
-        int price = getIntent().getIntExtra("price",0);
+        double sale = getIntent().getDoubleExtra("sale",0.0);
+        double price = getIntent().getDoubleExtra("price",0.0);
         String name = getIntent().getStringExtra("name");
-        int sale = getIntent().getIntExtra("sale",0);
         int saleData = getIntent().getIntExtra("saleData",0);
 
         final ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
@@ -120,17 +120,43 @@ public class ReviewImageActivity extends AppCompatActivity {
         final CirclePageIndicator circleIndicator = (CirclePageIndicator) findViewById(R.id.indicator);
         circleIndicator.setViewPager(viewPager);
 
+
+        cart_count = (TextView) findViewById(R.id.cart_count);
+        cart_count1 = (TextView) findViewById(R.id.cart_count1);
+        cart_count2 = (TextView) findViewById(R.id.cart_count2);
+        cart_count3 = (TextView) findViewById(R.id.cart_count3);
+        cart_count4 = (TextView) findViewById(R.id.cart_count4);
+        cart_count5 = (TextView) findViewById(R.id.cart_count5);
+
+        int stock = getIntent().getIntExtra("stock1",0);
+        int stock1 = getIntent().getIntExtra("stock2",0);
+        int stock2 = getIntent().getIntExtra("stock3",0);
+        int stock3 = getIntent().getIntExtra("stock4",0);
+        int stock4 = getIntent().getIntExtra("stock5",0);
+        int stock5 = getIntent().getIntExtra("stock6",0);
+
+        cart_count.setText(stock+"");
+        cart_count1.setText(stock1+"");
+        cart_count2.setText(stock2+"");
+        cart_count3.setText(stock3+"");
+        cart_count4.setText(stock4+"");
+        cart_count5.setText(stock5+"");
+
         final TextView tvTextName = (TextView) findViewById(R.id.textName);
         final TextView tvTextPrice = (TextView) findViewById(R.id.textPrice);
         final TextView txtSale = (TextView) findViewById(R.id.txtSale);
         final TextView txtSaleData = (TextView) findViewById(R.id.txtSaleData);
+        final TextView textTittle = (TextView) findViewById(R.id.textTittle);
+
+        String detail = getIntent().getStringExtra("detail");
+        textTittle.setText(detail);
 
         tvTextName.setText(name);
-        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###");
+        DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
         String yourFormattedString = formatter.format(sale);
-        tvTextPrice.setText(yourFormattedString +"  BTH");
+        tvTextPrice.setText(yourFormattedString +"  USD");
         String yourFormattedString1 = formatter.format(price);
-        txtSale.setText(yourFormattedString1 +"  BTH");
+        txtSale.setText(yourFormattedString1 +"  USD");
         txtSaleData.setText(saleData +"%");
         txtSale.setPaintFlags(txtSale.getPaintFlags()| Paint.STRIKE_THRU_TEXT_FLAG);
 
@@ -139,6 +165,12 @@ public class ReviewImageActivity extends AppCompatActivity {
         addCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int stock = getIntent().getIntExtra("stock1",0);
+                int stock1 = getIntent().getIntExtra("stock2",0);
+                int stock2 = getIntent().getIntExtra("stock3",0);
+                int stock3 = getIntent().getIntExtra("stock4",0);
+                int stock4 = getIntent().getIntExtra("stock5",0);
+                int stock5 = getIntent().getIntExtra("stock6",0);
                 if (size == ""){
                     final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
                     dialog.setTitle("Please select size..");
@@ -151,7 +183,79 @@ public class ReviewImageActivity extends AppCompatActivity {
 
                     dialog.show();
 
-                }else {
+                }else if (size == "XS" && stock == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }else if (size == "S" && stock1 == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }else if (size == "M" && stock2 == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }else if (size == "L" && stock3 == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }else if (size == "XL" && stock4 == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                }else if (size == "XXL" && stock5 == 0){
+                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
+                    dialog.setTitle("Out Of Stock");
+                    dialog.setCancelable(true);
+                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+                    dialog.show();
+
+                } else {
                     final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
                     dialog.setTitle("Add Cart Success ");
                     dialog.setCancelable(true);
@@ -159,8 +263,8 @@ public class ReviewImageActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             int img = getIntent().getIntExtra("img",0);
                             String name = getIntent().getStringExtra("name")+" Size :"+size;
-                            int price = getIntent().getIntExtra("price",0);
-                            int sale = getIntent().getIntExtra("sale",0);
+                            double sale = getIntent().getDoubleExtra("sale",0.0);
+                            double price = getIntent().getDoubleExtra("price",0.0);
                             int saleData = getIntent().getIntExtra("saleData",0);
 
                             int no = 0;
@@ -238,7 +342,7 @@ public class ReviewImageActivity extends AppCompatActivity {
 
     }
     public void xs(View view){
-        size = "xs";
+        size = "XS";
         button1.setBackgroundResource(R.color.buttonBg);
         button2.setBackgroundResource(R.color.buttonBg);
         button3.setBackgroundResource(R.color.buttonBg);

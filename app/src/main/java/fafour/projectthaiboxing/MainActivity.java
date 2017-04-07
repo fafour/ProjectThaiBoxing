@@ -104,6 +104,8 @@ public class MainActivity extends AppCompatActivity
         }
 
 
+
+
     }
     public static boolean hasPermissions(Context context, String... permissions) {
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && context != null && permissions != null) {
@@ -154,7 +156,7 @@ public class MainActivity extends AppCompatActivity
             item.setCheckable(false);
         }
         if (id == R.id.accessories) {
-            Intent intent = new Intent(getApplicationContext(), AccessoriesActivity.class);
+            Intent intent = new Intent(getApplicationContext(), HeadGuardActivity.class);
             startActivity(intent);
             item.setCheckable(false);
         }
@@ -189,7 +191,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void  btnTool(View view){
-        Intent intent = new Intent(getApplicationContext(), AccessoriesActivity.class);
+        Intent intent = new Intent(getApplicationContext(), HeadGuardActivity.class);
         startActivity(intent);
     }
     public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
