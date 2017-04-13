@@ -122,6 +122,7 @@
 
         <activity
             android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:screenOrientation="portrait" />
 
@@ -151,11 +152,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ScrollingTigerMuayThaiActivity"
-            android:label=""
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".AccessoriesActivity"
             android:label=""
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -272,6 +268,15 @@
         <activity
             android:name=".TshirtActivity"
             android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AccountActivity"
+            android:label="@string/title_activity_account"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".AccountAddressActivity"
+            android:label="@string/title_activity_account_address"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

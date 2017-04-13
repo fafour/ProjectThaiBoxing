@@ -23,7 +23,7 @@ import java.io.InputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EmailNameSurNameActivity extends AppCompatActivity {
+public class AccountActivity extends AppCompatActivity {
     final String PREFNAME = "DetailPreferences";
     final String  firstname = "Firstname";
     final String  surname = "surname";
@@ -46,7 +46,7 @@ public class EmailNameSurNameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_email_name_sur_name);
+        setContentView(R.layout.activity_account);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -68,7 +68,7 @@ public class EmailNameSurNameActivity extends AppCompatActivity {
             window.setStatusBarColor(this.getResources().getColor(R.color.colorStatus));
         }
         imgProfilePic = (CircleImageView ) findViewById(R.id.imageView);
-        new EmailNameSurNameActivity.DownloadImage((CircleImageView) findViewById(R.id.imageView)).execute(MainActivity.img);
+        new AccountActivity.DownloadImage((CircleImageView) findViewById(R.id.imageView)).execute(MainActivity.img);
 
         input_layout_name = (TextInputLayout) findViewById(R.id.input_layout_name);
         input_layout_sname = (TextInputLayout) findViewById(R.id.input_layout_sname);
@@ -157,6 +157,7 @@ public class EmailNameSurNameActivity extends AppCompatActivity {
             }
         });
 
+
     }
     public  void  click(View view){
         String txt_email = email.getText().toString();
@@ -175,20 +176,9 @@ public class EmailNameSurNameActivity extends AppCompatActivity {
             input_layout_sname.setErrorEnabled(false);
             input_layout_sname.setError(null);
             input_layout_email.setErrorEnabled(false);
-            input_layout_email.setError(null);
-
-            Intent intent = new Intent(getApplicationContext(), AddressActivity.class);
-            intent.putExtra("name",txt_username);
-            intent.putExtra("surname",txt_surname);
-            intent.putExtra("email",txt_email);
-            intent.putExtra("vat",txt_vat);
-            intent.putExtra("company_name",txt_company_name);
-            intent.putExtra("phoneNumber",txt_pnone);
+            input_layout_email.setError(null);Intent intent = new Intent(getApplicationContext(), AccountAddressActivity.class);
             startActivity(intent);
             finish();
-
-
-
         }else{
             if(txt_pnone.isEmpty()){
                 input_layout_phone_number.setError("Invalid Phone Number");
@@ -196,22 +186,18 @@ public class EmailNameSurNameActivity extends AppCompatActivity {
                 input_layout_phone_number.setErrorEnabled(false);
                 input_layout_phone_number.setError(null);
             }
-
             if(txt_username.isEmpty()){
                 input_layout_name.setError("Invalid Name");
             }else {
                 input_layout_name.setErrorEnabled(false);
                 input_layout_name.setError(null);
             }
-
             if(txt_surname.isEmpty()){
                 input_layout_sname.setError("Invalid Surname");
             }else {
                 input_layout_sname.setErrorEnabled(false);
                 input_layout_sname.setError(null);
             }
-
-
             if (!txt_email.matches(emailRegex)) {
                 input_layout_email.setError("Invalid Email");
             }else {
@@ -247,6 +233,5 @@ public class EmailNameSurNameActivity extends AppCompatActivity {
             bmImage.setImageBitmap(result);
         }
     }
-
 
 }

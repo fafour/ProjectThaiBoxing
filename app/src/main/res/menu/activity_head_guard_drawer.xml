@@ -6,21 +6,21 @@
             <menu>
                 <item
                     android:id="@+id/nav_head_guard"
-                    android:icon="@drawable/ic_menu_camera"
+                    android:icon="@drawable/head_guard"
                     android:title="Head Guard" />
                 <item
                     android:id="@+id/nav_boxing_gloves"
-                    android:icon="@drawable/ic_menu_gallery"
+                    android:icon="@drawable/boxing_gloves"
                     android:title="Boxing Gloves" />
                 <item
                     android:id="@+id/nav_shorts"
-                    android:icon="@drawable/ic_menu_slideshow"
+                    android:icon="@drawable/shorts"
                     android:title="Shorts" />
                 <item
                     android:id="@+id/nav_t_shirt"
-                    android:icon="@drawable/ic_menu_manage"
+                    android:icon="@drawable/t_shirt"
                     android:title="T-Shirt" />
-                </menu>
+            </menu>
         </item>
     </group>
 

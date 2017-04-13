@@ -47,7 +47,11 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         // Get current position of item in recyclerview to bind data and assign values from list
         final CartAdapter.MyHolder myHolder= (CartAdapter.MyHolder) holder;
         final DataBuyItem current=data.get(position);
-        myHolder.nameAccessories.setText(current.accessoriesName);
+        if(!current.accessoriesSize.equals("")) {
+            myHolder.nameAccessories.setText(current.accessoriesName + "   Size:" + current.accessoriesSize);
+        }else {
+            myHolder.nameAccessories.setText(current.accessoriesName +  current.accessoriesSize);
+        }
         DecimalFormat formatter = new DecimalFormat("#,###,###,###,###.##");
         String yourFormattedString = formatter.format(current.accessoriesSale);
         myHolder.priceAccessories.setText(yourFormattedString +" USD");
@@ -94,8 +98,8 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     int a = current.accessoriesNum +txtdecrement;
                     current.accessoriesNum =a;
 
-                    MainActivity.listBuy.set(position ,new DataBuyItem(current.accessoriesName,current.accessoriesPrice,
-                            current.accessoriesImg,a,current.accessoriesSale,current.accessoriesSaleData));
+                    MainActivity.listBuy.set(position ,new DataBuyItem(current.type,current.accessoriesName,current.accessoriesSize,current.accessoriesPrice,
+                            current.accessoriesImg,a,current.accessoriesSale,current.accessoriesSaleData,current.accessoriesStock));
                     myHolder.display.setText(current.accessoriesNum+"");
                     DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
                     String yourFormattedString = formatter.format(Total.totalBuyItem());
@@ -110,15 +114,17 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onClick(View view) {
                 // +
-                int a = current.accessoriesNum +txtincrement;
-                current.accessoriesNum =a;
+                if(current.accessoriesNum < current.accessoriesStock) {
+                    int a = current.accessoriesNum + txtincrement;
+                    current.accessoriesNum = a;
 
-                MainActivity.listBuy.set(position ,new DataBuyItem(current.accessoriesName,current.accessoriesPrice,
-                        current.accessoriesImg,a,current.accessoriesSale,current.accessoriesSaleData));
-                myHolder.display.setText(current.accessoriesNum+"");
-                DecimalFormat formatter = new DecimalFormat("#,###,###,###,###.##");
-                String yourFormattedString = formatter.format(Total.totalBuyItem());
-                CartActivity.txtTotal.setText(yourFormattedString+"");
+                    MainActivity.listBuy.set(position ,new DataBuyItem(current.type,current.accessoriesName,current.accessoriesSize,current.accessoriesPrice,
+                            current.accessoriesImg,a,current.accessoriesSale,current.accessoriesSaleData,current.accessoriesStock));
+                    myHolder.display.setText(current.accessoriesNum + "");
+                    DecimalFormat formatter = new DecimalFormat("#,###,###,###,###.##");
+                    String yourFormattedString = formatter.format(Total.totalBuyItem());
+                    CartActivity.txtTotal.setText(yourFormattedString + "");
+                }
 
             }
         });

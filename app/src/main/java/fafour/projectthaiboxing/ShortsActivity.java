@@ -216,6 +216,8 @@ public class ShortsActivity extends AppCompatActivity
                             List<Integer> accessories_stock6=new ArrayList<Integer>();
                             List<Integer> accessoriesSaleDataPrice=new ArrayList<Integer>();
                             List<Double> accessoriesPrice=new ArrayList<Double>();
+                            List<String> accessories_img_1=new ArrayList<String>();
+                            List<String> accessories_img_2=new ArrayList<String>();
                             JSONArray jsonarray = new JSONArray(response);
                             for(int i=0;i<jsonarray.length();i++) {
                                 JSONObject jsonResponse = jsonarray.getJSONObject(i);
@@ -229,35 +231,13 @@ public class ShortsActivity extends AppCompatActivity
                                 accessoriesSaleDataPrice.add(jsonResponse.getInt("sale_percent"));
                                 accessories_name_item.add(jsonResponse.getString("name_item"));
                                 accessories_detail.add(jsonResponse.getString("detail"));
+
+                                accessories_img_1.add(jsonResponse.getString("img_1"));
+                                accessories_img_2.add(jsonResponse.getString("img_2"));
                             }
 
 
                             List<DataAccessories> data1=new ArrayList<>();
-
-                            int [] accessoriesImg  = {
-                                    R.drawable.black_blue_scratch_one,
-                                    R.drawable.white_pink_one,
-                                    R.drawable.white_blue_one,
-                                    R.drawable.white_orange_one,
-                                    R.drawable.black_pink_one,
-                                    R.drawable.black_blue_one,
-                                    R.drawable.black_orange_one,
-                                    R.drawable.gray_camo_one,
-                            };
-
-
-                            int [] accessoriesImgReview_1  = {
-                                    R.drawable.black_blue_scratch_two,
-                                    R.drawable.white_pink_two,
-                                    R.drawable.white_blue_two,
-                                    R.drawable.white_orange_two,
-                                    R.drawable.black_pink_two,
-                                    R.drawable.black_blue_two,
-                                    R.drawable.black_orange_two,
-                                    R.drawable.gray_camo_two,
-                            };
-
-
 
 
                             for(int count=0; count < accessories_name_item.size(); count++){
@@ -266,10 +246,10 @@ public class ShortsActivity extends AppCompatActivity
                                 accessoriesData.accessoriesName = accessories_name_item.get(count);
                                 accessoriesData.accessoriesPrice = accessoriesPrice.get(count);
 
-                                accessoriesData.accessoriesImg = accessoriesImg[count];
+                                accessoriesData.accessoriesImg = accessories_img_1.get(count);
                                 accessoriesData.accessoriesDetail = accessories_detail.get(count);
 
-                                accessoriesData.accessoriesImg1 = accessoriesImgReview_1[count];
+                                accessoriesData.accessoriesImg1 = accessories_img_2.get(count);
 
 
                                 Double sum = accessoriesPrice.get(count)-(accessoriesPrice.get(count)*accessoriesSaleDataPrice.get(count)/100);

@@ -216,9 +216,12 @@ public class BoxingGlovesActivity extends AppCompatActivity
                             List<Integer> accessories_stock12oz=new ArrayList<Integer>();
                             List<Integer> accessories_stock14oz=new ArrayList<Integer>();
                             List<Integer> accessories_stock16oz=new ArrayList<Integer>();
+
+                            List<String> accessories_img_1=new ArrayList<String>();
+                            List<String> accessories_img_2=new ArrayList<String>();
                             JSONArray jsonarray = new JSONArray(response);
                             for(int i=0;i<jsonarray.length();i++) {
-                                JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                JSONObject jsonResponse = jsonarray.getJSONObject(i);
                                 accessoriesPrice1.add(jsonResponse.getDouble("price"));
                                 accessoriesSaleDataPrice1.add(jsonResponse.getInt("sale_percent"));
 
@@ -229,19 +232,13 @@ public class BoxingGlovesActivity extends AppCompatActivity
                                 accessories_stock16oz.add(jsonResponse.getInt("stock_16oz"));
                                 accessories_name_item.add(jsonResponse.getString("name_item"));
                                 accessories_detail.add(jsonResponse.getString("detail"));
+
+                                accessories_img_1.add(jsonResponse.getString("img_1"));
+                                accessories_img_2.add(jsonResponse.getString("img_2"));
                             }
 
 
                             List<DataAccessories> data1=new ArrayList<DataAccessories>();
-
-                            int [] accessoriesImg  = {
-                                    R.drawable.white_boxing_gloves_one,
-                                    R.drawable.black_boxing_gloves_one
-                            };
-                            int [] accessoriesImgReview_1  = {
-                                    R.drawable.white_boxing_gloves_two,
-                                    R.drawable.black_boxing_gloves_two
-                            };
 
 
 
@@ -251,10 +248,10 @@ public class BoxingGlovesActivity extends AppCompatActivity
                                 accessoriesData.accessoriesName = accessories_name_item.get(count);
                                 accessoriesData.accessoriesPrice = accessoriesPrice1.get(count);
 
-                                accessoriesData.accessoriesImg = accessoriesImg[count];
+                                accessoriesData.accessoriesImg = accessories_img_1.get(count);
                                 accessoriesData.accessoriesDetail = accessories_detail.get(count);
 
-                                accessoriesData.accessoriesImg1 = accessoriesImgReview_1[count];
+                                accessoriesData.accessoriesImg1 = accessories_img_2.get(count);
 
                                 Double sum = accessoriesPrice1.get(count)-(accessoriesPrice1.get(count)*accessoriesSaleDataPrice1.get(count)/100);
 

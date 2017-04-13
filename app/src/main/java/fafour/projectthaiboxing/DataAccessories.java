@@ -7,15 +7,15 @@ package fafour.projectthaiboxing;
 public class DataAccessories {
     public String accessoriesName;
     public double accessoriesPrice;
-    public int accessoriesImg;
+    public String accessoriesImg;
 
     public double accessoriesSale;
     public int accessoriesSaleData;
 
     public String accessoriesDetail;
 
-    public int accessoriesImg1;
-    public int accessoriesImg2;
+    public String accessoriesImg1;
+    public String accessoriesImg2;
 
     public int accessoriesstock1;
     public int accessoriesstock2;

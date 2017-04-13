@@ -2,7 +2,6 @@ package fafour.projectthaiboxing;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
@@ -22,8 +21,7 @@ import android.widget.Spinner;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddressActivity extends AppCompatActivity {
-
+public class AccountAddressActivity extends AppCompatActivity{
     EditText address_line_1,address_line_2,city,state,zip;
     TextInputLayout input_layout_address_line_1,input_layout_address_line_2,input_layout_city, input_layout_state,input_layout_zip;
     Spinner spinner1;
@@ -43,7 +41,7 @@ public class AddressActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_address);
+        setContentView(R.layout.activity_account_address);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -384,17 +382,9 @@ public class AddressActivity extends AppCompatActivity {
     }
     public void click(View view){
         String txt_address_line_1 = address_line_1.getText().toString();
-        String txt_address_line_2 = address_line_2.getText().toString();
         String txt_city = city.getText().toString();
         String txt_state = state.getText().toString();
         String txt_zip = zip.getText().toString();
-
-        String name = getIntent().getStringExtra("name");
-        String surname = getIntent().getStringExtra("surname");
-        String email = getIntent().getStringExtra("email");
-        String vat = getIntent().getStringExtra("vat");
-        String company_name = getIntent().getStringExtra("company_name");
-        String phoneNumber = getIntent().getStringExtra("phoneNumber");
 
 
         if(!txt_address_line_1.isEmpty() && !txt_city.isEmpty() && !txt_state.isEmpty() && !txt_zip.isEmpty() && !item_country.equals("COUNTRY:") ){
@@ -407,21 +397,6 @@ public class AddressActivity extends AppCompatActivity {
             input_layout_zip.setErrorEnabled(false);
             input_layout_zip.setError(null);
 
-            Intent intent = new Intent(getApplicationContext(), AddressActivity.class);
-            intent.putExtra("name",name);
-            intent.putExtra("surname",surname);
-            intent.putExtra("email",email);
-            intent.putExtra("vat",vat);
-            intent.putExtra("company_name",company_name);
-            intent.putExtra("phoneNumber",phoneNumber);
-
-            intent.putExtra("address_1",txt_address_line_1);
-            intent.putExtra("address_2",txt_address_line_2);
-            intent.putExtra("city",txt_city);
-            intent.putExtra("state",txt_state);
-            intent.putExtra("zip",txt_zip);
-            intent.putExtra("item_country",item_country);
-            startActivity(intent);
             finish();
 
 
@@ -456,7 +431,7 @@ public class AddressActivity extends AppCompatActivity {
             }
 
             if(item_country.equals("COUNTRY:")){
-                final AlertDialog.Builder dialog = new AlertDialog.Builder(AddressActivity.this);
+                final AlertDialog.Builder dialog = new AlertDialog.Builder(AccountAddressActivity.this);
                 dialog.setTitle("Country Is Null...");
                 dialog.setMessage("Please Select Country...");
                 dialog.setCancelable(true);
@@ -473,6 +448,5 @@ public class AddressActivity extends AppCompatActivity {
         }
 
     }
-
 
 }

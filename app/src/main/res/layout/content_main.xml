@@ -25,8 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@drawable/upper_part"
+                android:layout_margin="1dp"
+                android:background="@drawable/img_menu_upper"
                 android:onClick="btnUpper" />
 
         </LinearLayout>
@@ -41,8 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@drawable/lower_part"
+                android:layout_margin="1dp"
+                android:background="@drawable/img_menu_lower"
                 android:onClick="btnLower" />
 
 
@@ -65,9 +65,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
+                android:layout_margin="1dp"
                 android:id="@+id/img_course"
-                android:background="@drawable/course"
+                android:background="@drawable/img_menu_course"
                 android:onClick="btnTiger" />
 
 
@@ -83,8 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:layout_margin="5dp"
-                android:background="@drawable/accessories"
+                android:layout_margin="1dp"
+                android:background="@drawable/img_menu_accessories"
                 android:onClick="btnTool" />
 
         </LinearLayout>

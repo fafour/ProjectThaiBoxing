@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.text.DecimalFormat;
@@ -32,10 +33,10 @@ public class ReviewImageItemActivity extends AppCompatActivity {
     TextView tv_cart;
 
     private class ImagePagerAdapter extends PagerAdapter {
-        int img = getIntent().getIntExtra("img",0);
-        int img1 = getIntent().getIntExtra("img1",0);
-        int img2 = getIntent().getIntExtra("img2",0);
-        private final int[] mImages = new int[] {
+        String img = getIntent().getStringExtra("img");
+        String img1 = getIntent().getStringExtra("img1");
+        String img2 = getIntent().getStringExtra("img2");
+        private final String[] mImages = new String[] {
                 img,
                 img1,
                 img2
@@ -59,7 +60,9 @@ public class ReviewImageItemActivity extends AppCompatActivity {
                     R.dimen.padding_medium);
             imageView.setPadding(padding, padding, padding, padding);
             imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            imageView.setImageResource(this.mImages[position]);
+            Glide.with(context)
+                    .load(this.mImages[position])
+                    .into(imageView);
             ((ViewPager) container).addView(imageView, 0);
             return imageView;
         }
@@ -147,43 +150,81 @@ public class ReviewImageItemActivity extends AppCompatActivity {
                     dialog.show();
 
                 }else {
-                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItemActivity.this);
-                    dialog.setTitle("Add Cart Success ");
-                    dialog.setCancelable(true);
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            int img = getIntent().getIntExtra("img", 0);
-                            String name = getIntent().getStringExtra("name");
-                            double sale = getIntent().getDoubleExtra("sale", 0.0);
-                            double price = getIntent().getDoubleExtra("price", 0.0);
-                            int saleData = getIntent().getIntExtra("saleData", 0);
+                    String img = getIntent().getStringExtra("img");
+                    String name = getIntent().getStringExtra("name");
+                    String size ="";
+                    double sale = getIntent().getDoubleExtra("sale", 0.0);
+                    double price = getIntent().getDoubleExtra("price", 0.0);
+                    int saleData = getIntent().getIntExtra("saleData", 0);
 
-                            int no = 0;
-                            try {
-                                if (MainActivity.listBuy.size() == 0) {
-                                    MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1, sale, saleData));
+                    int no = 0;
+                    try {
+                        if (MainActivity.listBuy.size() == 0) {
+                            final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItemActivity.this);
+                            dialog.setTitle("Add Cart Success ");
+                            dialog.setCancelable(true);
+                            dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+
+                            dialog.show();
+                            MainActivity.listBuy.add(new DataBuyItem(1,name,size ,price, img, 1, sale, saleData,stockData));
+
+                        } else {
+                            for (int i = 0; i < MainActivity.listBuy.size(); i++) {
+                                if (MainActivity.listBuy.get(i).getAccessoriesName().equals(name)) {
+                                    if(MainActivity.listBuy.get(i).getAccessoriesNum()< stockData){
+                                        MainActivity.listBuy.get(i).setAccessoriesNum(MainActivity.listBuy.get(i).getAccessoriesNum() + 1);
+                                        final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItemActivity.this);
+                                        dialog.setTitle("Add Cart Success ");
+                                        dialog.setCancelable(true);
+                                        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        });
+
+                                        dialog.show();
+                                        continue;
+                                    }else {
+                                        final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItemActivity.this);
+                                        dialog.setTitle("Its Not Enough ");
+                                        dialog.setCancelable(true);
+                                        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        });
+
+                                        dialog.show();
+
+                                    }
 
                                 } else {
-                                    for (int i = 0; i < MainActivity.listBuy.size(); i++) {
-                                        if (MainActivity.listBuy.get(i).getAccessoriesName().equals(name)) {
-                                            MainActivity.listBuy.get(i).setAccessoriesNum(MainActivity.listBuy.get(i).getAccessoriesNum() + 1);
-                                            continue;
-                                        } else {
-                                            no++;
-                                        }
-                                    }
-                                    if (MainActivity.listBuy.size() == no) {
-                                        MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1, sale, saleData));
-                                    }
+                                    no++;
                                 }
-                                tv_cart.setText(MainActivity.listBuy.size() + "");
-                            } catch (Exception x) {
+                            }
+                            if (MainActivity.listBuy.size() == no) {
+                                MainActivity.listBuy.add(new DataBuyItem(1,name,size,price, img, 1, sale, saleData,stockData));
+                                final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageItemActivity.this);
+                                dialog.setTitle("Add Cart Success ");
+                                dialog.setCancelable(true);
+                                dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int which) {
 
+                                    }
+                                });
+
+                                dialog.show();
                             }
                         }
-                    });
+                        tv_cart.setText(MainActivity.listBuy.size() + "");
+                    } catch (Exception x) {
 
-                    dialog.show();
+                    }
+
                 }
 
             }

@@ -63,8 +63,9 @@ public class LoginActivity extends AppCompatActivity {
             public void onSuccess(LoginResult loginResult) {
                 Profile profile = Profile.getCurrentProfile();
                 nextActivity(profile);
-                Toast.makeText(getApplicationContext(), "Logging in...", Toast.LENGTH_SHORT).show();
-
+                Toast.makeText(getApplicationContext(), "Logging Success..", Toast.LENGTH_SHORT).show();
+                accessTokenTracker.startTracking();
+                profileTracker.startTracking();
             }
 
             @Override
@@ -121,11 +122,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private void nextActivity(Profile profile){
         if(profile != null){
-            Intent main = new Intent(LoginActivity.this, MainActivity.class);
+            Intent main = new Intent(getApplicationContext(), MainActivity.class);
             main.putExtra("name", profile.getFirstName());
             main.putExtra("surname", profile.getLastName());
             main.putExtra("imageUrl", profile.getProfilePictureUri(200,200).toString());
             startActivity(main);
+            finish();
         }
     }
 }

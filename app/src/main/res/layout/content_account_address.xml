@@ -7,8 +7,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="fafour.projectthaiboxing.EmailNameSurNameActivity"
-    tools:showIn="@layout/activity_email_name_sur_name">
+    tools:context="fafour.projectthaiboxing.AccountAddressActivity"
+    tools:showIn="@layout/activity_account_address">
 
 
     <LinearLayout android:layout_height="match_parent"
@@ -19,28 +19,16 @@
         android:orientation="vertical"
         android:layout_width="match_parent">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imageView"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:layout_gravity="center"
-            android:paddingTop="@dimen/nav_header_vertical_spacing"
-            android:src="@drawable/account"
-            app:civ_border_width="2dp"
-            app:civ_border_color="#BDBDBD"/>
-
-
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_name"
+            android:id="@+id/input_layout_address_line_1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/name"
+                android:id="@+id/address_line_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="FristName*"
+                android:hint="Address Line 1*"
                 android:inputType="textCapSentences|textAutoCorrect"
                 android:padding="10dp"
                 android:paddingTop="10dp"
@@ -55,17 +43,17 @@
 
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_sname"
+            android:id="@+id/input_layout_address_line_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:paddingTop="10dp"
                 android:padding="10dp"
-                android:id="@+id/sname"
+                android:id="@+id/address_line_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Surname*"
+                android:hint="Address Line 2"
                 android:inputType=
                     "textCapSentences|textAutoCorrect"
                 android:textColor="@android:color/black"
@@ -77,19 +65,20 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_email"
+            android:id="@+id/input_layout_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:paddingTop="10dp"
                 android:padding="10dp"
-                android:id="@+id/email"
+                android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email*"
+                android:hint="City*"
                 android:windowSoftInputMode="adjustResize"
-                android:inputType="textWebEmailAddress"
+                android:inputType=
+                    "textCapSentences|textAutoCorrect"
                 android:textColor="@android:color/black"
                 android:textSize="20dp">
                 <requestFocus />
@@ -98,39 +87,19 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_vat"
+            android:id="@+id/input_layout_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:paddingTop="10dp"
                 android:padding="10dp"
-                android:id="@+id/vat"
+                android:id="@+id/state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="VAT/SST"
-                android:inputType="textWebEmailAddress"
-                android:textColor="@android:color/black"
-                android:windowSoftInputMode="adjustResize"
-                android:textSize="20dp">
-                <requestFocus />
-            </EditText>
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_company_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:paddingTop="10dp"
-                android:padding="10dp"
-                android:id="@+id/company_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Company Name"
-                android:inputType="textWebEmailAddress"
+                android:hint="State/Province/Region*"
+                android:inputType=
+                    "textCapSentences|textAutoCorrect"
                 android:textColor="@android:color/black"
                 android:windowSoftInputMode="adjustResize"
                 android:textSize="20dp">
@@ -140,17 +109,17 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/input_layout_phone_number"
+            android:id="@+id/input_layout_zip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <EditText
                 android:paddingTop="10dp"
                 android:padding="10dp"
-                android:id="@+id/phone_number"
+                android:id="@+id/zip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Phone Number*"
+                android:hint="Zip*"
                 android:inputType="phone"
                 android:textColor="@android:color/black"
                 android:windowSoftInputMode="adjustResize"
@@ -160,6 +129,22 @@
 
         </android.support.design.widget.TextInputLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="5dp" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:padding="20dp"
+            android:background="@color/blueBg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="5dp" />
 
 
         <Button
@@ -174,7 +159,7 @@
             android:background="@drawable/edittext_bg"
             android:textStyle="bold"
             android:onClick="click"
-            android:text="Next"/>
+            android:text="Save"/>
 
     </LinearLayout>
 

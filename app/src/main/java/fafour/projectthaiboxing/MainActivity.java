@@ -25,7 +25,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 
 import java.io.File;
@@ -42,11 +41,11 @@ public class MainActivity extends AppCompatActivity
 
     public static ArrayList<DataBuyItem> listBuy = new ArrayList<>();
     public static ArrayList<DataBooking> booking = new ArrayList<>();
+    public static String img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        FacebookSdk.sdkInitialize(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         String surname = inBundle.get("surname").toString();
         String imageUrl = inBundle.get("imageUrl").toString();
 
-
+        img = imageUrl = inBundle.get("imageUrl").toString();
 
         txtName = (TextView) hView.findViewById(R.id.nameAccount);
         txtEmail = (TextView) hView.findViewById(R.id.emailAccount);
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity
 
         txtName.setText("" + name + " " + surname);
         txtEmail.setText("");
-
 
         new DownloadImage((CircleImageView) hView.findViewById(R.id.imageView)).execute(imageUrl);
 
@@ -157,6 +155,11 @@ public class MainActivity extends AppCompatActivity
         }
         if (id == R.id.accessories) {
             Intent intent = new Intent(getApplicationContext(), HeadGuardActivity.class);
+            startActivity(intent);
+            item.setCheckable(false);
+        }
+        if (id == R.id.account) {
+            Intent intent = new Intent(getApplicationContext(), AccountActivity.class);
             startActivity(intent);
             item.setCheckable(false);
         }

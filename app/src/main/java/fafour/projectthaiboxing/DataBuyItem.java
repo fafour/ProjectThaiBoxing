@@ -5,26 +5,34 @@ package fafour.projectthaiboxing;
  */
 
 public class DataBuyItem {
+    public int type;
     public String accessoriesName;
+    public String accessoriesSize;
+    public int accessoriesStock;
     public double accessoriesPrice;
-    public int accessoriesImg;
+    public String accessoriesImg;
     public int accessoriesNum;
 
     public double accessoriesSale;
     public int accessoriesSaleData;
 
-
-    public DataBuyItem (String accessoriesName,double accessoriesPrice , int accessoriesImg ,
-                        int accessoriesNum , double accessoriesSale , int accessoriesSaleData){
+    public DataBuyItem (){
+    }
+    public DataBuyItem (int type,String accessoriesName,String accessoriesSize,double accessoriesPrice ,
+                        String accessoriesImg , int accessoriesNum , double accessoriesSale ,
+                        int accessoriesSaleData,int accessoriesStock){
+        this.setType(type);
         this.setAccessoriesImg(accessoriesImg);
         this.setAccessoriesName(accessoriesName);
+        this.setAccessoriesSize(accessoriesSize);
         this.setAccessoriesPrice(accessoriesPrice);
         this.setAccessoriesNum(accessoriesNum);
         this.setAccessoriesSale(accessoriesSale);
         this.setAccessoriesSaleData(accessoriesSaleData);
+        this.setAccessoriesStock(accessoriesStock);
     }
-    public DataBuyItem (){
-    }
+
+
 
 
     public String getAccessoriesName() {
@@ -43,11 +51,11 @@ public class DataBuyItem {
         this.accessoriesPrice = accessoriesPrice;
     }
 
-    public int getAccessoriesImg() {
+    public String getAccessoriesImg() {
         return accessoriesImg;
     }
 
-    public void setAccessoriesImg(int accessoriesImg) {
+    public void setAccessoriesImg(String accessoriesImg) {
         this.accessoriesImg = accessoriesImg;
     }
 
@@ -73,5 +81,29 @@ public class DataBuyItem {
 
     public void setAccessoriesSaleData(int accessoriesSaleData) {
         this.accessoriesSaleData = accessoriesSaleData;
+    }
+
+    public String getAccessoriesSize() {
+        return accessoriesSize;
+    }
+
+    public void setAccessoriesSize(String accessoriesSize) {
+        this.accessoriesSize = accessoriesSize;
+    }
+
+    public int getAccessoriesStock() {
+        return accessoriesStock;
+    }
+
+    public void setAccessoriesStock(int accessoriesStock) {
+        this.accessoriesStock = accessoriesStock;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

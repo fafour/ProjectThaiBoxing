@@ -26,7 +26,7 @@
 
 
             <ImageView
-                android:src="@drawable/img_tiger_muay_thai"
+                android:src="@drawable/img_title_coruse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"

@@ -2,11 +2,8 @@
 package fafour.projectthaiboxing;
 
 import android.content.Intent;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
@@ -50,7 +47,7 @@ public class ScrollingTigerMuayThaiActivity extends AppCompatActivity {
         }
 
         CollapsingToolbarLayout collapsingToolbar = (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        collapsingToolbar.setTitle("Tiger Muay Thai");
+        collapsingToolbar.setTitle("Courses");
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("All-Package"));
         tabLayout.addTab(tabLayout.newTab().setText("Training"));

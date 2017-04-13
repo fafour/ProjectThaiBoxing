@@ -212,6 +212,9 @@ public class HeadGuardActivity extends AppCompatActivity
                             List<Integer> accessories_stock1=new ArrayList<Integer>();
                             List<Integer> accessoriesSaleDataPrice=new ArrayList<Integer>();
                             List<Double> accessoriesPrice=new ArrayList<Double>();
+                            List<String> accessories_img_1=new ArrayList<String>();
+                            List<String> accessories_img_2=new ArrayList<String>();
+                            List<String> accessories_img_3=new ArrayList<String>();
                             JSONArray jsonarray = new JSONArray(response);
                             for(int i=0;i<jsonarray.length();i++) {
                                 JSONObject jsonResponse = jsonarray.getJSONObject(i);
@@ -220,20 +223,14 @@ public class HeadGuardActivity extends AppCompatActivity
                                 accessoriesSaleDataPrice.add(jsonResponse.getInt("sale_percent"));
                                 accessories_name_item.add(jsonResponse.getString("name_item"));
                                 accessories_detail.add(jsonResponse.getString("detail"));
+
+                                accessories_img_1.add(jsonResponse.getString("img_1"));
+                                accessories_img_2.add(jsonResponse.getString("img_2"));
+                                accessories_img_3.add(jsonResponse.getString("img_3"));
+
                             }
 
                             List<DataAccessories> data1=new ArrayList<DataAccessories>();
-
-                            int [] accessoriesImg  = {
-                                    R.drawable.head_guard_one
-                            };
-                            int [] accessoriesImgReview_1  = {
-                                    R.drawable.head_guard_two,
-                            };
-                            int [] accessoriesImgReview_2  = {
-                                    R.drawable.head_guard_three
-                            };
-
 
 
                             for(int count=0; count <  accessories_name_item.size(); count++){
@@ -242,11 +239,11 @@ public class HeadGuardActivity extends AppCompatActivity
                                 accessoriesData.accessoriesName = accessories_name_item.get(count);
                                 accessoriesData.accessoriesPrice = accessoriesPrice.get(count);
 
-                                accessoriesData.accessoriesImg = accessoriesImg[count];
+                                accessoriesData.accessoriesImg = accessories_img_1.get(count);
                                 accessoriesData.accessoriesDetail = accessories_detail.get(count);
 
-                                accessoriesData.accessoriesImg1 = accessoriesImgReview_1[count];
-                                accessoriesData.accessoriesImg2 = accessoriesImgReview_2[count];
+                                accessoriesData.accessoriesImg1 = accessories_img_2.get(count);
+                                accessoriesData.accessoriesImg2 = accessories_img_3.get(count);
 
 
                                 Double sum = accessoriesPrice.get(count)-(accessoriesPrice.get(count)*accessoriesSaleDataPrice.get(count)/100);

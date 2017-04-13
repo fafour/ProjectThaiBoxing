@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.text.DecimalFormat;
@@ -34,9 +35,9 @@ public class ReviewImageActivity extends AppCompatActivity {
     String size ="";
 
     private class ImagePagerAdapter extends PagerAdapter {
-        int img = getIntent().getIntExtra("img",0);
-        int img1 = getIntent().getIntExtra("img1",0);
-        private final int[] mImages = new int[] {
+        String img = getIntent().getStringExtra("img");
+        String img1 = getIntent().getStringExtra("img1");
+        private final String[] mImages = new String[] {
                 img,
                 img1
         };
@@ -59,7 +60,9 @@ public class ReviewImageActivity extends AppCompatActivity {
                     R.dimen.padding_medium);
             imageView.setPadding(padding, padding, padding, padding);
             imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-            imageView.setImageResource(this.mImages[position]);
+            Glide.with(context)
+                    .load(this.mImages[position])
+                    .into(imageView);
             ((ViewPager) container).addView(imageView, 0);
             return imageView;
         }
@@ -171,129 +174,37 @@ public class ReviewImageActivity extends AppCompatActivity {
                 int stock3 = getIntent().getIntExtra("stock4",0);
                 int stock4 = getIntent().getIntExtra("stock5",0);
                 int stock5 = getIntent().getIntExtra("stock6",0);
+                String img = getIntent().getStringExtra("img");
+                String name = getIntent().getStringExtra("name");
+                double sale = getIntent().getDoubleExtra("sale",0.0);
+                double price = getIntent().getDoubleExtra("price",0.0);
+                int saleData = getIntent().getIntExtra("saleData",0);
                 if (size == ""){
-                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
-                    dialog.setTitle("Please select size..");
-                    dialog.setCancelable(true);
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-                    dialog.show();
-
+                    show_ms("Please select size..");
                 }else if (size == "XS" && stock == 0){
-                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
-                    dialog.setTitle("Out Of Stock");
-                    dialog.setCancelable(true);
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-                    dialog.show();
-
+                    show_ms("Out Of Stock..");
                 }else if (size == "S" && stock1 == 0){
-                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
-                    dialog.setTitle("Out Of Stock");
-                    dialog.setCancelable(true);
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-                    dialog.show();
-
+                    show_ms("Out Of Stock..");
                 }else if (size == "M" && stock2 == 0){
-                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
-                    dialog.setTitle("Out Of Stock");
-                    dialog.setCancelable(true);
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-                    dialog.show();
-
+                    show_ms("Out Of Stock..");
                 }else if (size == "L" && stock3 == 0){
-                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
-                    dialog.setTitle("Out Of Stock");
-                    dialog.setCancelable(true);
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-                    dialog.show();
-
+                    show_ms("Out Of Stock..");
                 }else if (size == "XL" && stock4 == 0){
-                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
-                    dialog.setTitle("Out Of Stock");
-                    dialog.setCancelable(true);
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-                    dialog.show();
-
+                    show_ms("Out Of Stock..");
                 }else if (size == "XXL" && stock5 == 0){
-                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
-                    dialog.setTitle("Out Of Stock");
-                    dialog.setCancelable(true);
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-
-                        }
-                    });
-
-                    dialog.show();
-
-                } else {
-                    final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
-                    dialog.setTitle("Add Cart Success ");
-                    dialog.setCancelable(true);
-                    dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            int img = getIntent().getIntExtra("img",0);
-                            String name = getIntent().getStringExtra("name")+" Size :"+size;
-                            double sale = getIntent().getDoubleExtra("sale",0.0);
-                            double price = getIntent().getDoubleExtra("price",0.0);
-                            int saleData = getIntent().getIntExtra("saleData",0);
-
-                            int no = 0;
-                            try{
-                                if( MainActivity.listBuy.size() == 0){
-                                    MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
-
-                                }else {
-                                    for (int i = 0; i < MainActivity.listBuy.size(); i++) {
-                                        if (MainActivity.listBuy.get(i).getAccessoriesName().equals(name)) {
-                                            MainActivity.listBuy.get(i).setAccessoriesNum(MainActivity.listBuy.get(i).getAccessoriesNum() + 1);
-                                            continue;
-                                        } else {
-                                            no++;
-                                        }
-                                    }
-                                    if ( MainActivity.listBuy.size() == no){
-                                        MainActivity.listBuy.add(new DataBuyItem(name, price, img, 1,sale,saleData));
-                                    }
-                                }
-                                tv_cart.setText(MainActivity.listBuy.size() +"");
-                            }catch (Exception x){
-
-                            }
-                        }
-                    });
-
-                    dialog.show();
-
+                    show_ms("Out Of Stock..");
+                }else if(size == "XS" && stock != 0){
+                    add_item(name,size,price ,img ,sale , saleData , stock );
+                }else if(size == "S" && stock1 != 0){
+                    add_item(name, size,price ,img ,sale , saleData , stock1 );
+                }else if(size == "M" && stock2 != 0){
+                    add_item(name,size ,price ,img ,sale , saleData , stock2 );
+                }else if(size == "L" && stock3 != 0){
+                    add_item(name, size,price ,img ,sale , saleData , stock3 );
+                }else if(size == "XL" && stock4 != 0){
+                    add_item(name, size,price ,img ,sale , saleData , stock4 );
+                }else if(size == "XXL" && stock5 != 0){
+                    add_item(name, size,price ,img ,sale , saleData , stock5 );
                 }
 
             }
@@ -400,6 +311,54 @@ public class ReviewImageActivity extends AppCompatActivity {
         button5.setBackgroundResource(R.color.buttonBg);
         button6.setBackgroundResource(R.color.buttonBg);
 
+    }
+    public void show_ms(String mg){
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(ReviewImageActivity.this);
+        dialog.setTitle(mg);
+        dialog.setCancelable(true);
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        dialog.show();
+
+    }
+
+    public void add_item(String name, String size,double price ,String img ,double sale , int saleData ,int stock ){
+        int no = 0;
+        try {
+            if (MainActivity.listBuy.size() == 0) {
+                show_ms("Add Cart Success...");
+                MainActivity.listBuy.add(new DataBuyItem(3,name,size,price, img, 1, sale, saleData,stock));
+
+            } else {
+                for (int i = 0; i < MainActivity.listBuy.size(); i++) {
+                    if (MainActivity.listBuy.get(i).getAccessoriesName().equals(name) && MainActivity.listBuy.get(i).getAccessoriesSize().equals(size) ) {
+                        if(MainActivity.listBuy.get(i).getAccessoriesNum()< stock){
+                            MainActivity.listBuy.get(i).setAccessoriesNum(MainActivity.listBuy.get(i).getAccessoriesNum() + 1);
+                            show_ms("Add Cart Success...");
+                            continue;
+                        }else {
+                            show_ms("Its Not Enough...");
+                            continue;
+
+                        }
+
+                    } else {
+                        no++;
+                    }
+                }
+                if (MainActivity.listBuy.size() == no) {
+                    MainActivity.listBuy.add(new DataBuyItem(3,name,size, price, img, 1, sale, saleData,stock));
+                    show_ms("Add Cart Success...");
+                }
+            }
+            tv_cart.setText(MainActivity.listBuy.size() + "");
+        } catch (Exception x) {
+
+        }
     }
 
 

@@ -2,6 +2,7 @@
     <string name="app_name">Muay Thai</string>
 
     <string name="facebook_app_id">1335711179829679</string>
+    <string name="fb_login_protocol_scheme">fb1335711179829679</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -184,4 +185,6 @@
     <string name="title_activity_boxing_gloves">BoxingGlovesActivity</string>
     <string name="title_activity_shorts">ShortsActivity</string>
     <string name="title_activity_tshirt">TshirtActivity</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_account_address">AccountAddressActivity</string>
 </resources>

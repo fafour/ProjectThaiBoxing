@@ -214,6 +214,9 @@ public class TshirtActivity extends AppCompatActivity
                             List<Integer> accessories_stock4=new ArrayList<Integer>();
                             List<Integer> accessoriesSaleDataPrice=new ArrayList<Integer>();
                             List<Double> accessoriesPrice=new ArrayList<Double>();
+                            List<String> accessories_img_1=new ArrayList<String>();
+                            List<String> accessories_img_2=new ArrayList<String>();
+
                             JSONArray jsonarray = new JSONArray(response);
                             for(int i=0;i<jsonarray.length();i++) {
                                 JSONObject jsonResponse = jsonarray.getJSONObject(i);
@@ -225,30 +228,13 @@ public class TshirtActivity extends AppCompatActivity
                                 accessoriesSaleDataPrice.add(jsonResponse.getInt("sale_percent"));
                                 accessories_name_item.add(jsonResponse.getString("name_item"));
                                 accessories_detail.add(jsonResponse.getString("detail"));
+
+                                accessories_img_1.add(jsonResponse.getString("img_1"));
+                                accessories_img_2.add(jsonResponse.getString("img_2"));
                             }
 
 
                             List<DataAccessories> data1=new ArrayList<>();
-
-                            int [] accessoriesImg  = {
-                                    R.drawable.tank_top_white_one,
-                                    R.drawable.tank_top_black_one,
-                                    R.drawable.tank_top_white_pink_one,
-                                    R.drawable.tank_top_black_pink_one,
-                                    R.drawable.rashguard_shortsleeve_black_white_edition_one,
-                                    R.drawable.rashguard_shortsleeve_black_orange_edition_one
-                            };
-
-
-                            int [] accessoriesImgReview_1  = {
-                                    R.drawable.tank_top_white_two,
-                                    R.drawable.tank_top_black_two,
-                                    R.drawable.tank_top_white_pink_two,
-                                    R.drawable.tank_top_black_pink_two,
-                                    R.drawable.rashguard_shortsleeve_black_white_edition_two,
-                                    R.drawable.rashguard_shortsleeve_black_orange_edition_two
-                            };
-
 
 
                             for(int count=0; count < accessories_name_item.size(); count++){
@@ -257,11 +243,10 @@ public class TshirtActivity extends AppCompatActivity
                                 accessoriesData.accessoriesName = accessories_name_item.get(count);
                                 accessoriesData.accessoriesPrice = accessoriesPrice.get(count);
 
-                                accessoriesData.accessoriesImg = accessoriesImg[count];
+                                accessoriesData.accessoriesImg = accessories_img_1.get(count);
                                 accessoriesData.accessoriesDetail = accessories_detail.get(count);
 
-                                accessoriesData.accessoriesImg1 = accessoriesImgReview_1[count];
-
+                                accessoriesData.accessoriesImg1 = accessories_img_2.get(count);
 
                                 Double sum = accessoriesPrice.get(count)-(accessoriesPrice.get(count)*accessoriesSaleDataPrice.get(count)/100);
 
