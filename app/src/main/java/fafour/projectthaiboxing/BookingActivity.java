@@ -100,33 +100,10 @@ public class BookingActivity extends AppCompatActivity {
         mRVList.setLayoutManager(new LinearLayoutManager(BookingActivity.this));
     }
     public  void payment(View v) {
-//        BackgroundMail.newBuilder(this)
-//                .withUsername("fafour.se09@gmail.com")
-//                .withPassword("fafour09")
-//                .withMailto("fafour.liv09@gmail.com")
-//                .withSubject("this is the subject")
-//                .withBody("this is the body")
-//                .withOnSuccessCallback(new BackgroundMail.OnSuccessCallback() {
-//                    @Override
-//                    public void onSuccess() {
-//                        //do some magic
-//                    }
-//                })
-//                .withOnFailCallback(new BackgroundMail.OnFailCallback() {
-//                    @Override
-//                    public void onFail() {
-//                        //do some magic
-//                    }
-//                })
-//                .send();
-
         //-----------------------------------------------------------------------------------
         Intent intent = new Intent(getApplicationContext(), ContactActivity.class);
         startActivity(intent);
         //-----------------------------------------------------------------------------------
-
-//        Intent intent = new Intent(getApplicationContext(), EmailNameSurNameActivity.class);
-//        startActivity(intent);
 
     }
 

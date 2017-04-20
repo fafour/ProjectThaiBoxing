@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,19 +16,16 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by Fafour on 29/1/2560.
+ * Created by Fafour on 13/4/2560.
  */
 
-public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
+public class CheckProductsAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
     private Context context;
     private LayoutInflater inflater;
     List<DataBuyItem> data= Collections.emptyList();
     DataBuyItem current;
-    int txtincrement = 1;
-    int txtdecrement = -1;
-    int currentPos=0;
 
-    public CartAdapter(Context context, List<DataBuyItem> data){
+    public CheckProductsAdapter(Context context, List<DataBuyItem> data){
         this.context=context;
         inflater= LayoutInflater.from(context);
         this.data=data;
@@ -37,15 +33,15 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view=inflater.inflate(R.layout.cart_data, parent,false);
-        CartAdapter.MyHolder holder=new CartAdapter.MyHolder(view);
+        View view=inflater.inflate(R.layout.check_products_data, parent,false);
+        CheckProductsAdapter.MyHolder holder=new CheckProductsAdapter.MyHolder(view);
         return holder;
     }
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
         // Get current position of item in recyclerview to bind data and assign values from list
-        final CartAdapter.MyHolder myHolder= (CartAdapter.MyHolder) holder;
+        final CheckProductsAdapter.MyHolder myHolder= (CheckProductsAdapter.MyHolder) holder;
         final DataBuyItem current=data.get(position);
         if(!current.accessoriesSize.equals("")) {
             myHolder.nameAccessories.setText(current.accessoriesName + "   Size:" + current.accessoriesSize);
@@ -62,72 +58,15 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
         myHolder.txtSaleData.setText(current.accessoriesSaleData+"%");
 
-;
+
         Glide.with(context)
                 .load(current.accessoriesImg)
                 .into(myHolder.iconAccessories);
 
-        myHolder.bin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                removeAt(position);
-                if( data.size() == 0){
-                    CartActivity.txtStatus.setText("Cart Empty");
-                    CartActivity.txtStatus.setVisibility(View.VISIBLE);
-                    CartActivity.dataBuy.setVisibility(View.GONE);
-                }
-                DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
-                String yourFormattedString = formatter.format(Total.totalBuyItem());
-                CartActivity.txtTotal.setText(yourFormattedString+"");
-
-            }
-        });
 
         myHolder.display.setText(current.accessoriesNum+"");
 
 
-        myHolder.decrement.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // -
-                if(current.accessoriesNum == 1){
-
-                }else {
-                    int a = current.accessoriesNum +txtdecrement;
-                    current.accessoriesNum =a;
-
-                    MainActivity.listBuy.get(position).setAccessoriesNum(MainActivity.listBuy.get(position).getAccessoriesNum() -1);
-
-                    myHolder.display.setText(current.accessoriesNum+"");
-                    DecimalFormat formatter = new DecimalFormat("#,###,###,###,###,###.##");
-                    String yourFormattedString = formatter.format(Total.totalBuyItem());
-                    CartActivity.txtTotal.setText(yourFormattedString+"");
-                }
-
-            }
-        });
-
-
-        myHolder.increment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // +
-                if(current.accessoriesNum < current.accessoriesStock) {
-                    int a = current.accessoriesNum + txtincrement;
-                    current.accessoriesNum = a;
-
-                    MainActivity.listBuy.get(position).setAccessoriesNum(MainActivity.listBuy.get(position).getAccessoriesNum() +1);
-
-                    myHolder.display.setText(current.accessoriesNum + "");
-                    DecimalFormat formatter = new DecimalFormat("#,###,###,###,###.##");
-                    String yourFormattedString = formatter.format(Total.totalBuyItem());
-                    CartActivity.txtTotal.setText(yourFormattedString + "");
-                }
-
-            }
-        });
-
-       
 
     }
 
@@ -150,15 +89,11 @@ public  class CartAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     class MyHolder extends RecyclerView.ViewHolder {
         TextView nameAccessories,priceAccessories,display;
         ImageView iconAccessories;
-        Button bin,increment,decrement;
         TextView txtSale,txtSaleData;
         public MyHolder(View itemView) {
             super(itemView);
             txtSale = (TextView) itemView.findViewById(R.id.txtSale);
             txtSaleData  = (TextView) itemView.findViewById(R.id.txtSaleData);
-            increment = (Button) itemView.findViewById(R.id.increment);
-            decrement = (Button) itemView.findViewById(R.id.decrement);
-            bin = (Button) itemView.findViewById(R.id.bin);
             display= (TextView) itemView.findViewById(R.id.display);
             nameAccessories= (TextView) itemView.findViewById(R.id.nameAccessories);
             priceAccessories= (TextView) itemView.findViewById(R.id.priceAccessories);

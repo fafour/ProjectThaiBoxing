@@ -14,4 +14,14 @@ public class Total {
 
         return total;
     }
+
+    public static  double totalBuyItemVat(){
+        double total = 0.0;
+        for(int count=0; count < MainActivity.listBuy.size(); count++){
+            total = total + (MainActivity.listBuy.get(count).accessoriesNum *
+                    MainActivity.listBuy.get(count).accessoriesSale );
+        }
+
+        return (total*7)/100;
+    }
 }

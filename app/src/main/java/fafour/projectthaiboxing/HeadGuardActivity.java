@@ -274,7 +274,6 @@ public class HeadGuardActivity extends AppCompatActivity
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        ;
                     }
                 }){
             @Override
@@ -286,8 +285,6 @@ public class HeadGuardActivity extends AppCompatActivity
         };
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
-
-
 
     }
 

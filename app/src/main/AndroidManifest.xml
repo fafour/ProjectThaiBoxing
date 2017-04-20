@@ -107,12 +107,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ViewVideoDataActivity"
-            android:label="View Video"
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
 
@@ -142,7 +142,7 @@
 
         <activity
             android:name=".MapActivity"
-            android:label="@string/title_activity_map"
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -157,12 +157,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ReviewImageActivity"
-            android:label=""
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".CartActivity"
-            android:label="@string/title_activity_cart"
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -177,53 +177,58 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ViewVideoActivity"
-            android:label=""
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SetTimeActivity"
-            android:label="@string/title_activity_set_time"
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BookingActivity"
-            android:label="@string/title_activity_booking"
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ConfirmationActivity"
-            android:label="@string/title_activity_confirmation"
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LowerPartActivity"
-            android:label="@string/title_activity_lower_part"
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".UpperPartActivity"
-            android:label="@string/title_activity_upper_part"
+            android:label="Muay Thai"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ShowSkillAllActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ShowSkillAll1Activity"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SetTime1Activity"
-            android:label="@string/title_activity_set_time1"
+            android:label="Muay Thai"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ContactActivity"
-            android:label="@string/title_activity_contact"
+            android:label="Muay Thai"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"
+            android:label="Let-Punch Kit"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -233,50 +238,67 @@
         </activity>
         <activity
             android:name=".ReviewImageItemActivity"
-            android:label="@string/title_activity_review_image_item"
+            android:label="Muay Thai"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ReviewImageItem1Activity"
-            android:label="@string/title_activity_review_image_item1"
+            android:label="Muay Thai"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ReviewImage1Activity"
-            android:label="@string/title_activity_review_image1"
+            android:label="Muay Thai"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".EmailNameSurNameActivity"
-            android:label="@string/title_activity_email_name_sur_name"
+            android:label="Profile"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".AddressActivity"
-            android:label="@string/title_activity_address"
+            android:label="Shipping"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".HeadGuardActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".BoxingGlovesActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ShortsActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TshirtActivity"
             android:label=""
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".AccountActivity"
-            android:label="@string/title_activity_account"
+            android:screenOrientation="portrait"
+            android:label="Profile"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".AccountAddressActivity"
-            android:label="@string/title_activity_account_address"
+            android:screenOrientation="portrait"
+            android:label="Shipping"
+            android:windowSoftInputMode="stateHidden"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CheckProductsActivity"
+            android:screenOrientation="portrait"
+            android:label="Review Product"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

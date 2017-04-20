@@ -1,5 +1,6 @@
 package fafour.projectthaiboxing;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,8 +20,23 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddressActivity extends AppCompatActivity {
 
@@ -39,6 +55,9 @@ public class AddressActivity extends AppCompatActivity {
 
     SharedPreferences sp;
     SharedPreferences.Editor editor;
+
+    String check = null;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -154,6 +173,7 @@ public class AddressActivity extends AppCompatActivity {
         list1.add("BAHAMAS");
         list1.add("BAHRAIN");
         list1.add("BALERIC IS.");
+        list1.add("BANGLADESH");
         list1.add("BARBADOS");
         list1.add("BELARUS");
         list1.add("BELGIUM");
@@ -165,6 +185,8 @@ public class AddressActivity extends AppCompatActivity {
         list1.add("BOSNIA & HERZEGOVINA");
         list1.add("BOTSWANA");
         list1.add("BRAZIL");
+        list1.add("BRITISH INDIAN OCEAN TERRITORY (U.K.)");
+        list1.add("BRITISH VIRGIN IS. (U.K.)");
         list1.add("BRUNEI");
         list1.add("BULGARIA");
         list1.add("BURKINA FASO");
@@ -216,7 +238,7 @@ public class AddressActivity extends AppCompatActivity {
         list1.add("GERMANY");
         list1.add("GHANA");
         list1.add("GIBRALTAR");
-        list1.add("GREAT BRITAIN");
+        list1.add("GREAT BRITAIN & NORTHERN IRELANDS");
         list1.add("GREECE");
         list1.add("GREENLAND");
         list1.add("GRENADA");
@@ -333,7 +355,7 @@ public class AddressActivity extends AppCompatActivity {
         list1.add("TAIWAN");
         list1.add("TAJIKISTAN");
         list1.add("TANZANIA");
-        list1.add("THAILANND");
+        list1.add("THAILAND");
         list1.add("TOGO");
         list1.add("TOKELAU");
         list1.add("TONGA");
@@ -354,7 +376,6 @@ public class AddressActivity extends AppCompatActivity {
         list1.add("VATICAN");
         list1.add("VENEZUELA");
         list1.add("VIET NAM");
-        list1.add("VIRGIN IS. (U.K.)");
         list1.add("YEMEN");
         list1.add("YUGOSLAVIA");
         list1.add("ZAMBIA");
@@ -383,6 +404,38 @@ public class AddressActivity extends AppCompatActivity {
 
     }
     public void click(View view){
+        progressDialog = ProgressDialog.show(AddressActivity.this, "Please wait ...",  "Task in progress ...", true);
+        progressDialog.setCancelable(true);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    check_stock();
+                    Thread.sleep(3000);
+                } catch (Exception e) {
+
+                }
+                progressDialog.dismiss();
+
+                progressDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        if (check != null) {
+                            show_ms();
+                        } else {
+                            next_page();
+                        }
+                    }
+
+                });
+
+            }
+        }).start();
+
+    }
+    //------------------------------------------------------------------------------------------------
+    public void next_page(){
         String txt_address_line_1 = address_line_1.getText().toString();
         String txt_address_line_2 = address_line_2.getText().toString();
         String txt_city = city.getText().toString();
@@ -397,6 +450,27 @@ public class AddressActivity extends AppCompatActivity {
         String phoneNumber = getIntent().getStringExtra("phoneNumber");
 
 
+        String description ="VAT/SST : "+vat+"\n"+
+                "Company Name : "+company_name+"\n"+
+                "Phone Number : "+phoneNumber;
+        String address ="";
+        if(txt_address_line_2.isEmpty()){
+            address =txt_address_line_1+"\n"+
+                    "City : "+txt_city+"\n"+
+                    "State/Province/Region : "+txt_state+"\n"+
+                    "Zip : "+txt_zip+"\n"+
+                    "Conntry : "+item_country;
+        }else {
+            address =txt_address_line_1+"  "+txt_address_line_2+"\n"+
+                    "City : "+txt_city+"\n"+
+                    "State/Province/Region : "+txt_state+"\n"+
+                    "Zip : "+txt_zip+"\n"+
+                    "Conntry : "+item_country;
+        }
+        String User = name+"  "+surname;
+
+
+
         if(!txt_address_line_1.isEmpty() && !txt_city.isEmpty() && !txt_state.isEmpty() && !txt_zip.isEmpty() && !item_country.equals("COUNTRY:") ){
             input_layout_address_line_1.setErrorEnabled(false);
             input_layout_address_line_1.setError(null);
@@ -407,19 +481,11 @@ public class AddressActivity extends AppCompatActivity {
             input_layout_zip.setErrorEnabled(false);
             input_layout_zip.setError(null);
 
-            Intent intent = new Intent(getApplicationContext(), AddressActivity.class);
-            intent.putExtra("name",name);
-            intent.putExtra("surname",surname);
+            Intent intent = new Intent(getApplicationContext(), CheckProductsActivity.class);
+            intent.putExtra("user",User);
             intent.putExtra("email",email);
-            intent.putExtra("vat",vat);
-            intent.putExtra("company_name",company_name);
-            intent.putExtra("phoneNumber",phoneNumber);
-
-            intent.putExtra("address_1",txt_address_line_1);
-            intent.putExtra("address_2",txt_address_line_2);
-            intent.putExtra("city",txt_city);
-            intent.putExtra("state",txt_state);
-            intent.putExtra("zip",txt_zip);
+            intent.putExtra("address",address);
+            intent.putExtra("description",description);
             intent.putExtra("item_country",item_country);
             startActivity(intent);
             finish();
@@ -471,6 +537,673 @@ public class AddressActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    //------------------------------------------------------------------------------------------------
+    public void show_ms(){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(AddressActivity.this);
+        dialog.setTitle("Products Have Changed...");
+        dialog.setMessage("Please Select A New Product...");
+        dialog.setCancelable(true);
+        dialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                MainActivity.listBuy.clear();
+                finish();
+            }
+        });
+
+        dialog.show();
+
+    }
+    //------------------------------------------------------------------------------------------------
+    public void check_stock(){
+        int socketTimeout = 100;
+        RetryPolicy policy = new DefaultRetryPolicy(socketTimeout,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT);
+        for (int i = 0; i < MainActivity.listBuy.size(); i++) {
+            if (MainActivity.listBuy.get(i).getType() == 1) {
+                String Url = connect_web_service.url+"check_stock_1.php";
+                final int finalI = i;
+                StringRequest stringRequest1 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue1 = Volley.newRequestQueue(this);
+                stringRequest1.setRetryPolicy(policy);
+                requestQueue1.add(stringRequest1);
+
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 2 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("8 oz")) {
+                String Url = connect_web_service.url+"check_stock_2.php";
+                final int finalI = i;
+                StringRequest stringRequest2 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_8oz") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue2 = Volley.newRequestQueue(this);
+                stringRequest2.setRetryPolicy(policy);
+                requestQueue2.add(stringRequest2);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 2 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("10 oz")) {
+                String Url = connect_web_service.url+"check_stock_2.php";
+                final int finalI = i;
+                StringRequest stringRequest3 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_10oz") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue3 = Volley.newRequestQueue(this);
+                stringRequest3.setRetryPolicy(policy);
+                requestQueue3.add(stringRequest3);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 2 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("12 oz")) {
+                String Url = connect_web_service.url+"check_stock_2.php";
+                final int finalI = i;
+                StringRequest stringRequest4 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_12oz") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue4 = Volley.newRequestQueue(this);
+                stringRequest4.setRetryPolicy(policy);
+                requestQueue4.add(stringRequest4);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 2 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("14 oz")) {
+                String Url = connect_web_service.url+"check_stock_2.php";
+                final int finalI = i;
+                StringRequest stringRequest5 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_14oz") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue5 = Volley.newRequestQueue(this);
+                stringRequest5.setRetryPolicy(policy);
+                requestQueue5.add(stringRequest5);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 2 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("16 oz")) {
+                String Url = connect_web_service.url+"check_stock_2.php";
+                final int finalI = i;
+                StringRequest stringRequest6 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_16oz") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue6 = Volley.newRequestQueue(this);
+                stringRequest6.setRetryPolicy(policy);
+                requestQueue6.add(stringRequest6);
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 3 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("XS")) {
+                String Url = connect_web_service.url+"check_stock_3.php";
+                final int finalI = i;
+                StringRequest stringRequest7 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_xs") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue7 = Volley.newRequestQueue(this);
+                stringRequest7.setRetryPolicy(policy);
+                requestQueue7.add(stringRequest7);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 3 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("S")) {
+                String Url = connect_web_service.url+"check_stock_3.php";
+                final int finalI = i;
+                StringRequest stringRequest8 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_s") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue8 = Volley.newRequestQueue(this);
+                stringRequest8.setRetryPolicy(policy);
+                requestQueue8.add(stringRequest8);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 3 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("M")) {
+                String Url = connect_web_service.url+"check_stock_3.php";
+                final int finalI = i;
+                StringRequest stringRequest9 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_m") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue9 = Volley.newRequestQueue(this);
+                stringRequest9.setRetryPolicy(policy);
+                requestQueue9.add(stringRequest9);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 3 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("L")) {
+                String Url = connect_web_service.url+"check_stock_3.php";
+                final int finalI = i;
+                StringRequest stringRequest10 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_l") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue10 = Volley.newRequestQueue(this);
+                stringRequest10.setRetryPolicy(policy);
+                requestQueue10.add(stringRequest10);
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 3 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("XL")) {
+                String Url = connect_web_service.url+"check_stock_3.php";
+                final int finalI = i;
+                StringRequest stringRequest11 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_xl") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue11 = Volley.newRequestQueue(this);
+                stringRequest11.setRetryPolicy(policy);
+                requestQueue11.add(stringRequest11);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 3 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("XXL")) {
+                String Url = connect_web_service.url+"check_stock_3.php";
+                final int finalI = i;
+                StringRequest stringRequest12 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_xxl") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue12 = Volley.newRequestQueue(this);
+                stringRequest12.setRetryPolicy(policy);
+                requestQueue12.add(stringRequest12);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 4 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("S")) {
+                String Url = connect_web_service.url+"check_stock_4.php";
+                final int finalI = i;
+                StringRequest stringRequest13 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_s") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue13 = Volley.newRequestQueue(this);
+                stringRequest13.setRetryPolicy(policy);
+                requestQueue13.add(stringRequest13);
+
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 4 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("M")) {
+                String Url = connect_web_service.url+"check_stock_4.php";
+                final int finalI = i;
+                StringRequest stringRequest14 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_m") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue14 = Volley.newRequestQueue(this);
+                stringRequest14.setRetryPolicy(policy);
+                requestQueue14.add(stringRequest14);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 4 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("L")) {
+                String Url = connect_web_service.url+"check_stock_4.php";
+                final int finalI = i;
+                StringRequest stringRequest15 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_l") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue15 = Volley.newRequestQueue(this);
+                stringRequest15.setRetryPolicy(policy);
+                requestQueue15.add(stringRequest15);
+
+            }
+            else if (MainActivity.listBuy.get(i).getType() == 4 &&
+                    MainActivity.listBuy.get(i).getAccessoriesSize().equals("XL")) {
+                String Url = connect_web_service.url+"check_stock_4.php";
+                final int finalI = i;
+                StringRequest stringRequest16 = new StringRequest(Request.Method.POST, Url,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                try {
+                                    JSONArray jsonarray = new JSONArray(response);
+                                    JSONObject jsonResponse = jsonarray.getJSONObject(0);
+                                    if (jsonResponse.getInt("stock_xl") - MainActivity.listBuy.get(finalI).getAccessoriesNum() <0){
+                                        check = "NOT_OK";
+                                    }
+
+                                } catch (JSONException e) {
+
+                                }
+                            }
+                        },
+                        new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                            }
+                        }){
+                    @Override
+                    protected Map<String,String> getParams(){
+
+                        Map<String,String> params = new HashMap<String, String>();
+                        params.put("name_item", MainActivity.listBuy.get(finalI).getAccessoriesName());
+                        return params;
+                    }
+
+                };
+                RequestQueue requestQueue16 = Volley.newRequestQueue(this);
+                stringRequest16.setRetryPolicy(policy);
+                requestQueue16.add(stringRequest16);
+
+            }
+
+        }
+
 
     }
 

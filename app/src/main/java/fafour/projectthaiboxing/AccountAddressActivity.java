@@ -152,6 +152,7 @@ public class AccountAddressActivity extends AppCompatActivity{
         list1.add("BAHAMAS");
         list1.add("BAHRAIN");
         list1.add("BALERIC IS.");
+        list1.add("BANGLADESH");
         list1.add("BARBADOS");
         list1.add("BELARUS");
         list1.add("BELGIUM");
@@ -163,6 +164,8 @@ public class AccountAddressActivity extends AppCompatActivity{
         list1.add("BOSNIA & HERZEGOVINA");
         list1.add("BOTSWANA");
         list1.add("BRAZIL");
+        list1.add("BRITISH INDIAN OCEAN TERRITORY (U.K.)");
+        list1.add("BRITISH VIRGIN IS. (U.K.)");
         list1.add("BRUNEI");
         list1.add("BULGARIA");
         list1.add("BURKINA FASO");
@@ -214,7 +217,7 @@ public class AccountAddressActivity extends AppCompatActivity{
         list1.add("GERMANY");
         list1.add("GHANA");
         list1.add("GIBRALTAR");
-        list1.add("GREAT BRITAIN");
+        list1.add("GREAT BRITAIN & NORTHERN IRELANDS");
         list1.add("GREECE");
         list1.add("GREENLAND");
         list1.add("GRENADA");
@@ -331,7 +334,7 @@ public class AccountAddressActivity extends AppCompatActivity{
         list1.add("TAIWAN");
         list1.add("TAJIKISTAN");
         list1.add("TANZANIA");
-        list1.add("THAILANND");
+        list1.add("THAILAND");
         list1.add("TOGO");
         list1.add("TOKELAU");
         list1.add("TONGA");
@@ -352,7 +355,6 @@ public class AccountAddressActivity extends AppCompatActivity{
         list1.add("VATICAN");
         list1.add("VENEZUELA");
         list1.add("VIET NAM");
-        list1.add("VIRGIN IS. (U.K.)");
         list1.add("YEMEN");
         list1.add("YUGOSLAVIA");
         list1.add("ZAMBIA");
